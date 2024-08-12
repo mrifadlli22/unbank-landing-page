@@ -1,0 +1,186 @@
+/* Container untuk login form */
+/* Container untuk login form */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url('https://cdn.builder.io/api/v1/image/assets/TEMP/39acc383f04ade08aaaefa3f69897d41558cf3e59d7d7a034656db3c1488229c?apiKey=e3ddd6dd58b748b09fc1391939743920&&apiKey=e3ddd6dd58b748b09fc1391939743920');
+  background-size: cover; /* Memastikan gambar menutupi seluruh kontainer */
+  background-position: center; /* Memastikan gambar tetap terpusat */
+  background-repeat: no-repeat; /* Mencegah gambar terulang */
+}
+
+/* Forgot Password link styling */
+.forgot-password-link {
+  display: block;
+  text-align: right;
+  margin-bottom: 10px;
+  color: #007bff; /* Blue color for visibility and consistency with theme */
+  text-decoration: none; /* No underline to keep it clean */
+  transition: color 0.3s ease; /* Smooth color transition for hover */
+}
+
+.forgot-password-link:hover {
+  color: #0056b3; /* Darker blue on hover */
+  text-decoration: underline; /* Underline on hover for better visibility */
+}
+
+/* Wrapper untuk login form */
+.login-wrapper {
+  background: rgba(255, 255, 255, 0.534); /* Warna putih dengan transparansi */
+  backdrop-filter: blur(5px); /* Efek blur pada latar belakang */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 30px; /* Perbesar padding untuk login form */
+  max-width: 500px; /* Perbesar lebar maksimum wrapper */
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Logo */
+.logo {
+  display: block;
+  margin: 0 auto 10px auto;
+  max-width: 30%; /* Pastikan logo tidak melebihi lebar wrapper */
+  height: auto; /* Menjaga rasio aspek gambar */
+}
+
+/* Subtitle */
+.subtitle {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 18px; /* Ukuran font subtitle */
+  color: #333;
+  font-weight: bold; /* Membuat subtitle bold */
+}
+
+/* Form field styling */
+.form-field {
+  margin-bottom: 15px;
+}
+
+.form-field label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-field input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+/* Button styling */
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 10px 0;
+  transition: all 0.3s ease; /* Efek transisi untuk hover */
+}
+
+/* Flex properties for buttons */
+.btn i {
+  margin-right: 10px; /* Jarak antara ikon dan teks */
+  font-size: 18px; /* Ukuran ikon */
+}
+
+/* Button colors */
+.btn-google {
+  background-color: #4285f4;
+  color: white;
+}
+
+.btn-apple {
+  background-color: #000;
+  color: white;
+}
+
+/* Hover effect */
+.btn:hover {
+  transform: scale(1.05); /* Membuat tombol sedikit lebih besar saat dihover */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Menambahkan bayangan saat dihover */
+}
+
+/* Link styling */
+/* Link styling */
+.register-link {
+  display: block;
+  text-align: center;
+  margin-top: 15px;
+  color: #007bff; /* Warna teks default */
+  text-decoration: none; /* Menghapus garis bawah default */
+  transition: color 0.3s ease, text-decoration 0.3s ease; /* Efek transisi untuk hover */
+}
+
+/* Efek hover untuk link */
+.register-link:hover {
+  color: #0056b3; /* Warna teks saat hover */
+  text-decoration: underline; /* Menambahkan garis bawah saat hover */
+}
+
+.btn-login {
+  background-color: #28a745; /* Warna hijau untuk tombol login */
+  color: white;
+  margin-top: 15px; /* Jarak antara tombol ini dengan elemen di atasnya */
+}
+
+.btn-login:hover {
+  background-color: #218838; /* Warna hijau lebih gelap saat dihover */
+}
+
+/* Divider "or" styling */
+.divider {
+  text-align: center;
+  margin: 20px 0; /* Spasi di sekitar divider */
+  font-weight: bold;
+  color: #888; /* Warna teks divider */
+  font-size: 14px; /* Ukuran font divider */
+  position: relative;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  display: block;
+  width: 40%; /* Lebar garis kiri dan kanan */
+  height: 1px;
+  background-color: #ccc;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.divider::before {
+  left: 0;
+}
+
+.divider::after {
+  right: 0;
+}
+
+
+
+/* Media queries untuk responsivitas */
+@media (max-width: 768px) {
+  .login-wrapper {
+    padding: 20px; /* Sesuaikan padding untuk layar kecil */
+  }
+  .forgot-password-link {
+    text-align: center; /* Center align on smaller screens for better aesthetics */
+  }
+}
+
+@media (max-width: 480px) {
+  .subtitle {
+    font-size: 16px; /* Ukuran font subtitle untuk layar ekstra kecil */
+  }
+}
