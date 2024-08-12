@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./GetStarted.module.css";
 import Button from "./Button/Button";
+import { useNavigate } from "react-router-dom";
 
 function AssetManagementStep({ number, title, description }) {
   return (
@@ -13,6 +14,13 @@ function AssetManagementStep({ number, title, description }) {
 }
 
 function AssetManagement() {
+
+  const navigate = useNavigate();
+
+  const handleSignUpClick = () => {
+    navigate('/register');
+  };
+
   const steps = [
     {
       number: "1",
@@ -45,7 +53,7 @@ function AssetManagement() {
           </div>
         ))}
       </div>
-      <Button variant="primary" className={styles.ctaButton}>
+      <Button onClick={handleSignUpClick} variant="primary" className={styles.ctaButton}>
         Open Account
       </Button>
     </section>

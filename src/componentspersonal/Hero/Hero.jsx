@@ -4,8 +4,17 @@
 import React from "react";
 import styles from "./Hero.module.css";
 import Button from "../Button/Button";
+import { useNavigate, useLocation } from 'react-router-dom';
+
 
 const Hero = () => {
+
+  const navigate = useNavigate();
+
+  const handleSignUpClick = () => {
+    navigate('/register');
+  };
+
   return (
     <section className={styles.hero}>
       <div className={styles.heroContent}>
@@ -17,7 +26,7 @@ const Hero = () => {
             Be empowered to send, spend, and manage your digital assets <br />{" "}
             anytime, anywhere.
           </p>
-          <Button variant="primary" className={styles.ctaButton}>
+          <Button variant="primary" onClick={handleSignUpClick} className={styles.ctaButton}>
             Open Account
           </Button>
         </div>

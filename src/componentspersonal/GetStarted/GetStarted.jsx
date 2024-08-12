@@ -1,8 +1,15 @@
 import React from "react";
 import styles from "./GetStarted.module.css";
 import Button from "../Button/Button";
+import { useNavigate } from 'react-router-dom';
 
 const GetStarted = () => {
+
+  const navigate = useNavigate();
+
+  const handleSignUpClick = () => {
+    navigate('/register');
+  };
   const steps = [
     { number: "1", text: "Open a swissmoney private or business account" },
     {
@@ -27,7 +34,7 @@ const GetStarted = () => {
           </div>
         ))}
       </div>
-      <Button variant="primary" className={styles.ctaButton}>
+      <Button variant="primary" onClick={handleSignUpClick} className={styles.ctaButton}>
         Open Account
       </Button>
     </section>

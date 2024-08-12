@@ -3,6 +3,7 @@
  */
 import React from "react";
 import styles from "./BusinessPage.module.css";
+import { useNavigate } from "react-router-dom";
 
 function FeatureItem({ iconSrc, text }) {
   return (
@@ -14,6 +15,13 @@ function FeatureItem({ iconSrc, text }) {
 }
 
 function GlobalFinancialGateway() {
+
+  const navigate = useNavigate();
+
+  const handleSignUpClick = () => {
+    navigate('/register');
+  };
+
   const features = [
     {
       iconSrc:
@@ -48,7 +56,7 @@ function GlobalFinancialGateway() {
           {features.map((feature, index) => (
             <FeatureItem key={index} {...feature} />
           ))}
-          <button className={styles.ctaButton}>Open Account</button>
+          <button onClick={handleSignUpClick} className={styles.ctaButton}>Open Account</button>
         </div>
         <img style={{marginTop:"56px"}}
           src="https://cdn.builder.io/api/v1/image/assets/TEMP/cbe169da819092e25b07ac616821bcf5c43aef9e1de712b16498d9ee3bdfedef?placeholderIfAbsent=true&apiKey=e3ddd6dd58b748b09fc1391939743920"

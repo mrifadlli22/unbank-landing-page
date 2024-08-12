@@ -3,8 +3,16 @@
  */
 import React from "react";
 import styles from "./BusinessPage.module.css";
+import { useNavigate } from "react-router-dom";
 
 function Hero() {
+
+  const navigate = useNavigate();
+
+  const handleSignUpClick = () => {
+    navigate('/register');
+  };
+
   return (
     <section className={styles.heroSection}>
       <div className={styles.heroContent}>
@@ -17,7 +25,7 @@ function Hero() {
           Enabling businesses to save time and money, seize new <br />
           opportunities, and scale operations to a Tennet quality standard.
         </p>
-        <button className={styles.ctaButton}>Open Account</button>
+        <button onClick={handleSignUpClick} className={styles.ctaButton}>Open Account</button>
       </div>
       <div className={styles.heroImageContainer}>
         <img

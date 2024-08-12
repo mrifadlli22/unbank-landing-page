@@ -2,8 +2,11 @@
 import React from "react";
 import styles from "./ProductSection.module.css";
 import Button from "../Button/Button";
+import { useNavigate } from 'react-router-dom';
 
 const ProductSection = ({
+
+  
   title,
   description,
   features,
@@ -13,6 +16,13 @@ const ProductSection = ({
   reverse,
   id, // Tambahkan properti id
 }) => {
+
+  const navigate = useNavigate();
+
+  const handleSignUpClick = () => {
+    navigate('/register');
+  };
+  
   return (
     <section
       id={id} // Tambahkan id disini
@@ -30,7 +40,7 @@ const ProductSection = ({
               </li>
             ))}
           </ul>
-          <Button variant="primary" className={styles.ctaButton}>
+          <Button variant="primary" onClick={handleSignUpClick} className={styles.ctaButton}>
             {buttonText}
           </Button>
         </div>
