@@ -30,6 +30,11 @@ const Header = () => {
     }
   };
 
+  const handleLogoClick = () => {
+    navigate('/businesspage', { replace: true });
+    window.location.reload();
+  };
+
   const handleLoginClick = () => {
     navigate('/login');
   };
@@ -70,7 +75,7 @@ const Header = () => {
     <header className={styles.header}>
       <div className={styles.headerContent}>
         <div className={styles.leftGroup}>
-          <Logo />
+          <Logo onClick={handleLogoClick} />  {/* Pass handleLogoClick as onClick prop */}
           <div className={`${styles.toggleGroup} ${styles.toggleGroupDesktop}`}>
             <button
               className={`${styles.toggleButton} ${activeToggle === 'personal' ? styles.active : ''}`}
