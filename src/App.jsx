@@ -4,6 +4,7 @@ import LoginForm from './componentslogin/LoginForm';
 import RegisterForm from './componentsregister/RegisterForm';
 import BusinessPage from './componentsbusiness/BusinessPage/BusinessPage';
 import ForgotPassword from './componentslogin/ForgotPassword';
+import TablePage from './componentstablepage/tablepages';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/login" element={<LoginForm />} /> 
           <Route path="/register" element={<RegisterForm />} /> 
           <Route path="/forgotpassword" element={<ForgotPassword />} /> 
+          <Route path='/tablepage' element={<TablePage />} /> 
         </Routes>
       </BrowserRouter>
     </div>

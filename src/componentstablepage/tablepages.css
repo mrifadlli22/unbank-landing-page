@@ -1,0 +1,134 @@
+.table-container {
+    margin: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    overflow-x: auto; /* Ensures table is scrollable horizontally on smaller screens */
+    background-color: #ffffff; /* Light background as in the design */
+    color: #333333; /* Dark text for readability */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.search-container input[type="text"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    flex: 1;
+    background-color: #f3f4f6;
+}
+
+.dropdown-container {
+    position: relative;
+}
+
+.dropdown-button, .date-filter-button {
+    background-color: #5855ec;
+    color: #ffffff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 5px;
+    min-width: 120px; /* Ensures consistent button width */
+    text-align: center;
+}
+
+.date-filter-button.active {
+    background-color: #4a47cc;
+    color: #fff;
+}
+
+.date-filter-container {
+    display: flex; /* Flexbox for horizontal alignment */
+    gap: 1px; /* Space between the buttons */
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 10px;
+    padding: 15px;
+    z-index: 1;
+    transition: all 0.3s ease-in-out;
+    width: 300px;
+    max-height: 300px;
+    overflow-y: auto; /* Allows scrolling if content is too long */
+}
+
+.dropdown-content.open {
+    display: block; /* Show dropdown when open */
+}
+
+.dropdown-content label {
+    display: block;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.dropdown-content label input {
+    margin-right: 10px;
+}
+
+.clear-button {
+    background-color: #ff4d4d;
+    color: #ffffff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 2px;
+}
+
+.clear-button:hover {
+    background-color: #ff6666; /* Slightly lighter shade on hover */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px; /* Sets a minimum width for the table */
+}
+
+th, td {
+    border-bottom: 1px solid #eeeeee; /* Light border color */
+    padding: 12px 15px; /* Slightly larger padding for a more spacious feel */
+    text-align: left;
+}
+
+th {
+    background-color: #f9f9f9; /* Light background for headers */
+    font-weight: bold; /* Bold font for headers */
+}
+
+tr:hover {
+    background-color: #f1f1f1; /* Lighter background on hover */
+}
+
+@media (max-width: 768px) {
+    .table-container {
+        padding: 10px;
+    }
+
+    th, td {
+        font-size: 14px; /* Smaller font size for better readability on small devices */
+    }
+}
