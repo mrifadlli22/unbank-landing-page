@@ -25,34 +25,34 @@ const FAQItem = ({ question, answer }) => {
 function FAQ() {
   const faqData = [
     {
-      question: "How can I apply for a swissmoney business account online?",
+      question: "How can I apply for a Unbank business account online?",
       answer:
-        "Answer to how to apply for a swissmoney business account online.",
+        "Answer to how to apply for a Unbank business account online.",
     },
     {
       question:
-        "What kind of services will I get with my swissmoney business account?",
+        "What kind of services will I get with my Unbank business account?",
       answer:
-        "Description of services provided with a swissmoney business account.",
+        "Description of services provided with a Unbank business account.",
     },
     {
       question: "What types of businesses are accepted?",
       answer:
-        "Information about the types of businesses accepted by swissmoney.",
+        "Information about the types of businesses accepted by Unbank.",
     },
     {
       question: "What currencies will I be able to use?",
-      answer: "List of currencies supported by swissmoney business accounts.",
+      answer: "List of currencies supported by Unbank business accounts.",
     },
     {
       question: "What cryptocurrencies will I be able to use?",
       answer:
-        "Information about cryptocurrency support in swissmoney accounts.",
+        "Information about cryptocurrency support in Unbank accounts.",
     },
     {
       question: "How can I be sure that my account and my funds are secure?",
       answer:
-        "Details about security measures for swissmoney accounts and funds.",
+        "Details about security measures for Unbank accounts and funds.",
     },
     {
       question: "How does the onboarding process work?",
@@ -61,16 +61,16 @@ function FAQ() {
     },
     {
       question: "How fast can you onboard a company?",
-      answer: "Timeframe for company onboarding with swissmoney.",
+      answer: "Timeframe for company onboarding with Unbank.",
     },
     {
-      question: "What are the swissmoney business account fees?",
-      answer: "Overview of fees associated with swissmoney business accounts.",
+      question: "What are the Unbank business account fees?",
+      answer: "Overview of fees associated with Unbank business accounts.",
     },
     {
       question: "Do you provide OTC services?",
       answer:
-        "Information about OTC (Over-The-Counter) services provided by swissmoney.",
+        "Information about OTC (Over-The-Counter) services provided by Unbank.",
     },
   ];
 

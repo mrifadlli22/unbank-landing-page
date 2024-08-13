@@ -170,20 +170,19 @@
   display: block;
   width: 100%;
   padding: 10px;
-  border: none;
-  border-radius: 4px;
+   border-radius: 4px;
   cursor: pointer;
   margin: 10px 0;
   transition: all 0.3s ease; /* Efek transisi untuk hover */
 }
 
 .btn-personal {
-  background-color: #4285f4;
+  background-color: #333333;
   color: white;
 }
 
 .btn-business {
-  background-color: #000;
+  background-color: #333333;
   color: white;
 }
 
@@ -194,18 +193,18 @@
 }
 
 /* Link styling */
-.login-link {
+.register-link {
   display: block;
   text-align: center;
   margin-top: 15px;
-  color: #007bff;
+  color: #333333;
   text-decoration: none;
   transition: color 0.3s ease, text-decoration 0.3s ease; /* Efek transisi untuk hover */
 }
 
 /* Efek hover untuk link */
-.login-link:hover {
-  color: #0056b3;
+.register-link:hover {
+  color: #333333;
   text-decoration: underline;
 }
 

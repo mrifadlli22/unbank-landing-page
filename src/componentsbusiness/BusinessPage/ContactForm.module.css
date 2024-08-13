@@ -95,5 +95,7 @@
 }
 
 .submitButton:hover {
-  background-color: rgba(6, 46, 68, 0.621);
+  background-color: transparent;
+  color: black;
+  border: 1px solid black
 }

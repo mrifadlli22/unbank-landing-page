@@ -14,7 +14,7 @@ const ForgotPassword = () => {
   return (
     <div className="forgot-password-container">
       <div className="forgot-password-wrapper">
-        <img src="./Images/BVNK (1).png" alt="Logo" className="logo" />
+        <img src="./Images/Asset 12.png" alt="Logo" className="logo" />
         <div className="subtitle">Forgot Password</div>
         {!isSubmitted ? (
           <form onSubmit={handleSubmit}>

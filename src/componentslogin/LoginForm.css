@@ -16,13 +16,13 @@
   display: block;
   text-align: right;
   margin-bottom: 10px;
-  color: #007bff; /* Blue color for visibility and consistency with theme */
+  color: #333333; /* Blue color for visibility and consistency with theme */
   text-decoration: none; /* No underline to keep it clean */
   transition: color 0.3s ease; /* Smooth color transition for hover */
 }
 
 .forgot-password-link:hover {
-  color: #0056b3; /* Darker blue on hover */
+  color: #333333; /* Darker blue on hover */
   text-decoration: underline; /* Underline on hover for better visibility */
 }
 
@@ -95,13 +95,17 @@
 
 /* Button colors */
 .btn-google {
-  background-color: #4285f4;
-  color: white;
+  background-color: transparent;
+  color: black;
+  border-radius: 8px;
+  border: 1px solid black;
 }
 
 .btn-apple {
-  background-color: #000;
-  color: white;
+  background-color: transparent;
+  color: black;
+  border-radius: 8px;
+  border: 1px solid black;
 }
 
 /* Hover effect */
@@ -110,32 +114,28 @@
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Menambahkan bayangan saat dihover */
 }
 
-/* Link styling */
-/* Link styling */
-.register-link {
+ /* Link styling */
+.login-link {
   display: block;
   text-align: center;
   margin-top: 15px;
-  color: #007bff; /* Warna teks default */
+  color: #333333; /* Warna teks default */
   text-decoration: none; /* Menghapus garis bawah default */
   transition: color 0.3s ease, text-decoration 0.3s ease; /* Efek transisi untuk hover */
 }
 
 /* Efek hover untuk link */
-.register-link:hover {
-  color: #0056b3; /* Warna teks saat hover */
+.login-link:hover {
+  color: #333333; /* Warna teks saat hover */
   text-decoration: underline; /* Menambahkan garis bawah saat hover */
 }
 
 .btn-login {
-  background-color: #28a745; /* Warna hijau untuk tombol login */
+  background-color: #333333; /* Warna hijau untuk tombol login */
   color: white;
   margin-top: 15px; /* Jarak antara tombol ini dengan elemen di atasnya */
 }
 
-.btn-login:hover {
-  background-color: #218838; /* Warna hijau lebih gelap saat dihover */
-}
 
 /* Divider "or" styling */
 .divider {

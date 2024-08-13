@@ -51,7 +51,7 @@ const ContactForm = () => {
     <section className={styles.contactForm}>
       <h2 className={styles.title}>Contact Us</h2>
       <p className={styles.subtitle}>
-        All your questions about Bvnk answered.
+        All your questions about Unbank answered.
       </p>
       <form onSubmit={handleSubmit} className={styles.form}>
       <label htmlFor="fullName" className={styles.label}>

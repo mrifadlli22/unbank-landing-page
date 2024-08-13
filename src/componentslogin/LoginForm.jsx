@@ -1,6 +1,8 @@
 import React from 'react';
 import './LoginForm.css';
 import useStore from './store'; // Sesuaikan path jika file store berada di lokasi lain
+import '@fortawesome/fontawesome-free/css/all.min.css';
+
 
 
 const LoginForm = () => {
