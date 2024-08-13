@@ -1,4 +1,4 @@
-import create from 'zustand'; //library store global
+import {create} from 'zustand'; //library store global
 
 const useStore = create(set => ({
   username: '',
