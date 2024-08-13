@@ -1,0 +1,101 @@
+.contactForm {
+  background-color: transparent; /* Warna latar belakang transparan */
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 10px 8px rgba(0, 0, 0, 0.1); /* Memberikan sedikit bayangan */
+  max-width: 600px;
+  margin: auto; /* Memusatkan formulir */
+  margin-top: 90px;
+  margin-bottom: 30px;
+ 
+
+}
+
+
+.title {
+  text-align: center;
+  color: #333333;
+  font-size: 28px;
+  margin-bottom: 16px;
+}
+
+.subtitle {
+  text-align: center;
+  color: #333333 ;
+  font-size: 18px;
+  margin-bottom: 32px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.radioGroup {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 24px;
+}
+
+.radioLabel {
+  margin-right: 20px; /* Tambahkan jarak antara radio button */
+  color: #333333;
+  font-size: 16px;
+}
+
+
+.inputGroup {
+  margin-bottom: 24px;
+}
+
+.label {
+  display: block;
+  margin-bottom: 8px;
+  color: #333333;
+  font-weight: 600;
+}
+
+.input,
+.textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  font-size: 16px;
+  color: #495057;
+  background-color: #fff;
+}
+
+.input:focus,
+.textarea:focus {
+  border-color: #333333;
+  box-shadow: 0 0 0 4px rgba(13, 52, 80, 0.1);
+}
+
+.phoneInput {
+  display: flex;
+  align-items: center;
+}
+
+.phoneIcon {
+  margin-right: 8px;
+  width: 24px; /* Atur sesuai kebutuhan */
+
+}
+
+.submitButton {
+  background-color: #333333;
+  color: #fff;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submitButton:hover {
+  background-color: transparent;
+  color: black;
+  border: 1px solid black
+}
