@@ -16,6 +16,14 @@
  
 }
 
+.status-tag {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 20px;
+    text-align: center;
+  }
+
+  
 .entries-container {
     display: flex;
     align-items: center;
@@ -92,7 +100,7 @@
     padding: 10px 15px;
     border-radius: 4px;
     cursor: pointer;
-    margin-right: 5px;
+    margin-right: 3px;
     min-width: 120px; /* Ensures consistent button width */
     text-align: center;
 }
@@ -214,12 +222,24 @@ tr:hover {
 }
 
 @media (max-width: 768px) {
+    .table-header, .entries-container, .search-container, .dropdown-container, .date-filter-container {
+        flex-direction: column; /* Stack elements vertically on smaller screens */
+        align-items: stretch; /* Stretch elements to fill the width */
+    }
 
-    .table-container {
+    .search-container input[type="text"], .entries-select, .dropdown-button, .date-filter-button, .clear-button {
+        width: 100%; /* Full width for inputs and buttons on small screens */
+        margin-top: 5px; /* Add margin top for vertical stacking */
+        margin-bottom: 5px;
+    }
+
+    .pagination {
         padding: 10px;
     }
 
-    th, td {
-        font-size: 14px; /* Smaller font size for better readability on small devices */
+    .pagination button {
+        flex-grow: 1; /* Allow buttons to expand to fill the available space */
+        margin: 2px;
+        padding: 5px 10px; /* Increase padding for better touch target size */
     }
 }
