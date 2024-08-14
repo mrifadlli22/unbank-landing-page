@@ -5,6 +5,8 @@ import RegisterForm from './componentsregister/RegisterForm';
 import BusinessPage from './componentsbusiness/BusinessPage/BusinessPage';
 import ForgotPassword from './componentslogin/ForgotPassword';
 import TablePage from './componentstablepage/tablepages';
+import OrderTable from './componentstablepage2/OrderTable';
+
 
 function App() {
   return (
@@ -19,6 +21,7 @@ function App() {
           <Route path="/register" element={<RegisterForm />} /> 
           <Route path="/forgotpassword" element={<ForgotPassword />} /> 
           <Route path='/tablepage' element={<TablePage />} /> 
+          <Route path='/tablepage2' element={<OrderTable />} /> 
         </Routes>
       </BrowserRouter>
     </div>

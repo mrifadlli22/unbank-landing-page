@@ -13,6 +13,57 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
+ 
+}
+
+.entries-container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-right: 10px;
+}
+
+
+.search-container input[type="text"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    flex: 1;
+    background-color: #f3f4f6;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+ }
+
+.pagination button {
+    background-color: #ffffff;
+    color: #333333;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    margin: 0 4px;
+    cursor: pointer;
+    border-radius: 8px;
+
+}
+
+.pagination button.active {
+    background-color: #333333;
+    color: #ffffff;
+}
+
+.pagination button:disabled {
+    color: #ccc;
+    cursor: not-allowed;
+}
+
+.entries-select {
+    padding: 5px 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    background-color: #f3f4f6;
 }
 
 .search-container {
@@ -34,8 +85,8 @@
     position: relative;
 }
 
-.dropdown-button, .date-filter-button {
-    background-color: #5855ec;
+.dropdown-button, .date-filter-button, .clear-button {
+    background-color: #333333;
     color: #ffffff;
     border: none;
     padding: 10px 15px;
@@ -47,7 +98,7 @@
 }
 
 .date-filter-button.active {
-    background-color: #4a47cc;
+    background-color: #333333;
     color: #fff;
 }
 
@@ -57,7 +108,9 @@
 }
 
 .dropdown-content {
-    display: none;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
     position: absolute;
     right: 0;
     top: 100%;
@@ -75,18 +128,27 @@
 }
 
 .dropdown-content.open {
-    display: block; /* Show dropdown when open */
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
 }
 
 .dropdown-content label {
     display: block;
     margin-bottom: 10px;
     cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.dropdown-content label:hover {
+    background-color: #f3f4f6;
+    color: #333333;
 }
 
 .dropdown-content label input {
     margin-right: 10px;
 }
+
 
 .clear-button {
     background-color: #ff4d4d;
@@ -104,19 +166,47 @@
 
 table {
     width: 100%;
-    border-collapse: collapse;
-    min-width: 600px; /* Sets a minimum width for the table */
+    border-collapse: separate; /* Ubah dari 'collapse' ke 'separate' untuk memungkinkan border-radius */
+    border-spacing: 0; /* Hilangkan jarak antar sel */
+    min-width: 100%; /* Pastikan tabel mengambil lebar penuh di layar kecil */
+    background-color: #ffffff; /* Warna latar belakang tabel */
+    border: 1px solid #dddddd; /* Border di sekitar tabel */
+    border-radius: 8px; /* Border radius untuk tabel */
+    overflow: hidden; /* Pastikan konten tidak keluar dari border radius */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sedikit bayangan untuk memberi kesan depth */
 }
 
 th, td {
-    border-bottom: 1px solid #eeeeee; /* Light border color */
-    padding: 12px 15px; /* Slightly larger padding for a more spacious feel */
+    padding: 12px 15px;
     text-align: left;
+    border-bottom: 1px solid #dddddd; /* Garis bawah antar baris */
+    border-right: 1px solid #dddddd; /* Garis pembatas antar kolom */
 }
 
-th {
-    background-color: #f9f9f9; /* Light background for headers */
-    font-weight: bold; /* Bold font for headers */
+th:last-child, td:last-child {
+    border-right: none; /* Hilangkan garis di kolom terakhir */
+}
+
+thead th {
+    background-color: #333333; /* Background header */
+    color: #ffffff; /* Warna teks header */
+    text-transform: uppercase; /* Teks header dalam huruf besar */
+}
+
+tbody tr:hover {
+    background-color: #f1f1f1; /* Warna background baris saat dihover */
+}
+
+tbody tr:last-child td {
+    border-bottom: none; /* Hilangkan border pada baris terakhir */
+}
+
+tbody td:first-child, thead th:first-child {
+    border-left: none; /* Hilangkan garis kiri pada kolom pertama */
+}
+
+tbody td:last-child, thead th:last-child {
+    border-right: none; /* Hilangkan garis kanan pada kolom terakhir */
 }
 
 tr:hover {
@@ -124,6 +214,7 @@ tr:hover {
 }
 
 @media (max-width: 768px) {
+
     .table-container {
         padding: 10px;
     }
