@@ -3,7 +3,7 @@ body, .app, main {
   width: 100vw; /* Use viewport width to ensure full coverage */
   overflow-x: hidden; /* Prevent horizontal scrolling due to overflow */
   box-sizing: border-box; /* Include padding and borders in width calculations */
-  padding-top: 60px;
+  padding-top: 30px;
 
 }
 

@@ -87,10 +87,10 @@ const Footer = () => {
         <div className={styles.bottomSection}>
           <h3 className={styles.disclaimerTitle}>Disclaimer</h3>
           <p className={styles.disclaimerText}>
-            Unbank is a brand of Decentralized Finance Limited. Decentralized Finance Limited is affiliated with d'Organisme de Surveillance pour Intermédiaires Financiers & Trustees ("SO-FIT") (affiliation No.: 1179). SO-FIT is a self-regulatory organization approved by the Swiss Federal Financial Markets Supervisory Authority (FINMA) for the supervision of financial intermediaries referred to in article 2 al. 3 of the Swiss federal law on the fight against money laundering and the financing of terrorism (MLA).
+            Unbank is a brand of Decentralized Finance Limited. Decentralized Finance Limited is affiliated with d'Organisme de Surveillance pour Intermédiaires Financiers & Trustees ("SO-FIT") (affiliation No.: 1179). SO-FIT is a self-regulatory organization approved by the Indonesia Federal Financial Markets Supervisory Authority (FINMA) for the supervision of financial intermediaries referred to in article 2 al. 3 of the Indonesia federal law on the fight against money laundering and the financing of terrorism (MLA).
           </p>
           <p className={styles.disclaimerText}>
-            Decentralized Finance Limited is registered with the registered address at Millenium Centennial Center Lantai 2 Jl. Jend. Sudirman Kav.25. DKI Jakarta.
+            Decentralized Finance Limited is registered with the registered address at Millenium Centennial Center Floor 4th, Jl. Jend. Sudirman Kav.25. DKI Jakarta.
           </p>
           <p className={styles.copyright}>
             Copyright © 2024 Decentralized Finance Limited. All Right Reserved.

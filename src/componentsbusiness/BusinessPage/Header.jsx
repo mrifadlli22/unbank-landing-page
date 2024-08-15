@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styles from "./Header.module.css";
 import Logo from "./Logo/Logo";
 import NavLinks from './NavLinks/NavLinks';
@@ -10,6 +10,7 @@ const Header = () => {
   const location = useLocation();
   const [activeToggle, setActiveToggle] = useState('personal');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const menuRef = useRef(null); // Ref untuk menu dropdown
 
   useEffect(() => {
     if (location.pathname === '/personalpage') {
@@ -31,7 +32,7 @@ const Header = () => {
   };
 
   const handleLogoClick = () => {
-    navigate('/businesspage', { replace: true });
+    navigate('/personalpage', { replace: true });
     window.location.reload();
   };
 
@@ -58,12 +59,21 @@ const Header = () => {
     }
   };
 
+  const handleClickOutside = (event) => {
+    if (menuRef.current && !menuRef.current.contains(event.target)) {
+      setIsMenuOpen(false);
+    }
+  };
+
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('resize', handleResize);
+    document.addEventListener('mousedown', handleClickOutside);
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', handleResize);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [isMenuOpen]);
 
@@ -75,7 +85,7 @@ const Header = () => {
     <header className={styles.header}>
       <div className={styles.headerContent}>
         <div className={styles.leftGroup}>
-          <Logo onClick={handleLogoClick} />  {/* Pass handleLogoClick as onClick prop */}
+          <Logo onClick={handleLogoClick} />
           <div className={`${styles.toggleGroup} ${styles.toggleGroupDesktop}`}>
             <button
               className={`${styles.toggleButton} ${activeToggle === 'personal' ? styles.active : ''}`}
@@ -104,7 +114,7 @@ const Header = () => {
           <span className={styles.burgerIcon}></span>
         </button>
       </div>
-      <div className={`${styles.dropdownMenu} ${isMenuOpen ? styles.open : ''}`}>
+      <div ref={menuRef} className={`${styles.dropdownMenu} ${isMenuOpen ? styles.open : ''}`}>
         <div className={styles.toggleGroupMobile}>
           <button
             className={`${styles.toggleButton} ${activeToggle === 'personal' ? styles.active : ''}`}

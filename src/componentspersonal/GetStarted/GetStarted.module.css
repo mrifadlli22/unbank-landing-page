@@ -70,7 +70,7 @@
 
 @media (max-width: 991px) {
   .getStarted {
-    padding: 60px 20px;
+    padding: 40px 20px 60px 20px;
     width: 100%; /* Footer elements also take full width */
   }
 
