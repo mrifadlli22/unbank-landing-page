@@ -90,6 +90,8 @@
 @media (max-width: 991px) {
   .productSection {
     padding: 40px 20px;
+    width: 100%; /* Footer elements also take full width */
+
   }
 
   .content {
