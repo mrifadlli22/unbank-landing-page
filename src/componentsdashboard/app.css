@@ -454,7 +454,7 @@
 /* Style untuk currency card dan tombol tambah */
 .currency-card, .add-card {
     flex: 0 0 auto; /* Mencegah elemen menyusut atau tumbuh */
-    width: 498px; /* Lebar tetap seperti yang diinginkan */
+    width: 449px; /* Lebar tetap seperti yang diinginkan */
     height: 250px; /* Tinggi tetap seperti yang diinginkan */
     margin-bottom: 0px;
  }
