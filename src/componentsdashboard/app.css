@@ -640,8 +640,9 @@
 }
 
 .Digital-label {
-  font-size: 16px; /* Font size for currency label */
-  color: #666; /* Color for text */
+  margin-left: 5px;
+  font-size: 1.2em; /* Ukuran font yang lebih kecil dari jumlah */
+  color: #666; /* Warna font untuk keterangan */
   margin-top: 4px; /* Adjust top margin for alignment */
   margin-bottom: 150px;
 }
