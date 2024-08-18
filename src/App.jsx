@@ -7,6 +7,7 @@ import ForgotPassword from './componentslogin/ForgotPassword';
 import TablePage from './componentstablepage/tablepages';
 import OrderTable from './componentstablepage2/OrderTable';
 import USDTChart from './componentschart/USDTRate';
+import UnbankDashboard from './componentsdashboard/unbankDashboard';
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
           <Route path='/tablepage' element={<TablePage />} /> 
           <Route path='/tablepage2' element={<OrderTable />} /> 
           <Route path='/chart' element={<USDTChart />} /> 
+          <Route path='/Dashboard' element={<UnbankDashboard />} /> 
 
         </Routes>
       </BrowserRouter>

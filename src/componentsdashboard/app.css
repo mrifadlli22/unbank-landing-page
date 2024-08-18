@@ -1,0 +1,705 @@
+/* Sidebar default (active) */
+.sidebar {
+    width: 200px;
+    height: 100vh;
+    background-color: #111;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    transition: width 0.3s ease, left 0.3s ease;
+    overflow-y: auto; /* Ensure content scrolls if it exceeds the viewport height */
+    z-index: 1100; /* Pastikan sidebar berada di depan elemen lain */
+
+  }
+
+  .divider {
+    height: 2px;
+    background-color: #CCCCCC;
+    width: 100%;
+    margin: 10px 0;
+  }
+  
+  .sidebar.hidden {
+    left: -200px;
+  }
+  
+  .sidebar.active {
+    left: 0;
+  }
+  
+  /* Burger menu button in sidebar */
+  .sidebar-burger-menu {
+    position: absolute;
+    bottom: 20px;
+    cursor: pointer;
+    font-size: 24px;
+    color: #fff;
+  }
+  
+  /* Sidebar ketika dalam keadaan terlipat (collapsed) */
+  .sidebar.collapsed {
+    width: 80px; /* Adjust this width as needed */
+  }
+  
+  /* Logo */
+  .logo-items img {
+    width: 150px;
+    transition: width 0.3s ease;
+  }
+  
+  .sidebar.collapsed .logo-items img {
+    width: 50px; /* Adjust this width as needed */
+  }
+  
+  /* Menu items */
+  .menu-item {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 10px 20px;
+    color: #aaa;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background-color 0.3s, color 0.3s, padding 0.3s;
+  }
+  
+  .sidebar.collapsed .menu-item {
+    justify-content: center;
+    padding: 10px;
+  }
+  
+  .menu-item:hover, .menu-item.active {
+    background-color: #333;
+    color: #fff;
+  }
+  
+  .menu-item .icon {
+    margin-right: 10px;
+    font-size: 20px;
+  }
+  
+  .sidebar.collapsed .menu-item .icon {
+    margin-right: 10px;
+  }
+  
+  /* Burger menu icon in header */
+  .burger-menu-icon {
+    display: none; /* Hide by default */
+    cursor: pointer;
+    font-size: 24px;
+    color: #000;
+  }
+  
+  /* Header */
+  .header {
+     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 16px;
+    background-color: #fff;
+    border-bottom: 1px solid #ccc;
+    z-index: 1000;
+    height: 90px; /* Adjust header height */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: add shadow for better visibility */
+   }
+  
+   
+  /* User info */
+  .user-info {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc; /* Border for the wrapper */
+    border-radius: 8px; /* Optional: rounded corners */
+    padding: 4px; /* Reduce padding */
+    background-color: #f9f9f9; /* Optional: background color */
+    max-width: 250px; /* Limit width to make it smaller */
+    overflow: hidden; /* Prevent overflow */
+  }
+  
+  .user-info .user-details {
+    display: flex;
+    flex-direction: column; /* Stack user-name and user-id vertically */
+    margin-left: 8px; /* Reduce space between icon and text */
+  }
+
+  .user-details{
+    margin-right: 50px;
+  }
+  
+  .user-icon {
+    width: 25px; /* Reduce icon size */
+    height: 25px; /* Reduce icon size */
+    border-radius: 50%;
+    margin-right: 8px; /* Reduce space between icon and text */
+    border: 1px solid #000; /* Border for the icon */
+  }
+  
+  .user-name {
+    display: block;
+    font-size: 12px; /* Adjust font size */
+    color: #333;
+    white-space: nowrap; /* Prevent text overflow */
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .user-id {
+    display: block;
+    font-size: 10px; /* Adjust font size */
+    color: #666;
+    white-space: nowrap; /* Prevent text overflow */
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .dropdown-icon {
+    font-size: 16px; /* Adjust icon size */
+  }
+  
+  /* Actions */
+  .actions {
+    display: flex;
+    align-items: center;
+  }
+  
+  .verify-btn, .logout-btn {
+    padding: 6px 12px;
+    margin-left: 8px;
+    border: none;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 12px; /* Adjust font size */
+    border-radius: 8px;
+    background-color: transparent;
+  }
+
+  .verify-btn{
+    margin-right: 10px;
+    border: 1px solid #dddbdb;
+  }
+  
+  .verify-btn:hover, .logout-btn:hover {
+    background-color: #e0e0e0;
+  }
+
+  /* Container for logout icon and text */
+.logout-container {
+  display: flex;
+  align-items: center; /* Align items vertically center */
+  cursor: pointer; /* Change cursor to pointer to indicate it’s clickable */
+}
+
+.logout-icon {
+  width: 20px; /* Adjust size as needed */
+  height: 20px; /* Adjust size as needed */
+  margin-right: 8px; /* Space between icon and text */
+}
+
+.logout-text {
+  font-size: 12px; /* Adjust font size as needed */
+  color: #333; /* Adjust text color as needed */
+}
+
+  
+  .logout-icon {
+    margin-right: 5px;
+  }
+  
+  /* Dashboard layout */
+  .dashboard {
+    display: flex;
+    height: 100vh;
+    margin-left: 80px; /* Initial margin to account for the full-width sidebar */
+    flex-direction: column;
+    transition: margin-left 0.3s ease; /* Smooth transition when sidebar collapses */
+  }
+
+  .dashboard .header {
+    margin-left: 0px;
+  }
+  
+  .content {
+    flex-grow: 1;
+    padding: 16px;
+    background-color: #f0f0f0;
+    overflow-y: auto; /* Ensure content scrolls if it exceeds the viewport height */
+    width: 100%;
+    height: calc(100vh - 60px); /* Adjust height to fill the remaining space, accounting for the header height */
+  }
+  
+  /* Default styles for header burger menu */
+  .header-burger-menu {
+    display: none; /* Hide by default */
+    cursor: pointer;
+ 
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+
+    .sidebar.collapsed {
+        width: 180px; /* Adjust this width as needed */
+      }
+
+    .sidebar.collapsed .logo-items img {
+        width: 150px; /* Adjust this width as needed */
+      }
+
+    .header-burger-menu {
+      display: block; /* Show burger menu on mobile */
+    }
+    
+    .burger-menu-icon {
+      display: none; /* Hide burger menu icon in sidebar on mobile */
+    }
+  
+    .sidebar {
+      width: 200px;
+      left: -200px; /* Hide sidebar by default on mobile */
+    }
+    
+    .sidebar.active {
+      left: 0; /* Show sidebar when active */
+    }
+
+    .header{
+      justify-content: flex-end;
+    }
+    
+    .dashboard {
+      margin-left: 0; /* Reset margin when sidebar is hidden */
+    }
+    
+    .content {
+      padding: 10px;
+    }
+  }
+
+  /* content */
+
+/* General Styles */
+
+/* Currency Rates Container */
+/* Currency Rates Container */
+.currency-rate-container {
+    display: flex;
+    flex-wrap: nowrap; /* Mengganti dari wrap ke nowrap untuk layar kecil */
+    gap: 10px;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+    width: 100%;
+    overflow-x: auto; /* Memungkinkan pengguliran horizontal */
+    box-sizing: border-box;
+    -webkit-overflow-scrolling: touch; /* Meningkatkan pengalaman scrolling pada iOS */
+  }
+  
+  /* Responsive adjustments for smaller screens */
+  @media (max-width: 768px) {
+    .currency-rate-box {
+      flex: 0 0 auto; /* Mencegah kotak menyusut atau tumbuh */
+      width: calc(50% - 10px); /* Lebar tetap untuk 2 kotak per baris */
+      min-width: 250px; /* Minimum lebar untuk memastikan konten dapat dibaca */
+    }
+  }
+  
+  
+.currency-rate-box, .overview-box, .currency-card {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    background-color: white;
+    padding: 15px;
+    margin-bottom: 10px;
+  }
+  
+  
+  .currency-rate-box {
+    flex: 1 1 calc(25% - 10px); /* Mengisi 4 dalam satu baris dengan memperhitungkan gap */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    background-color: #ecf8f8; /* Warna latar belakang biru muda */
+    border: 1px solid #b6e0dc; /* Border biru muda */    padding: 15px; /* Padding internal */
+    flex-direction: column; /* Anak-anak div disusun secara vertikal */
+    transition: box-shadow 0.3s ease; /* Transisi halus untuk perubahan box-shadow */
+
+    height: 150px
+
+  }
+
+  .ticker {
+    background-color: black;
+    color: white;
+    padding: 5px;
+    margin-top: 5px; /* Jarak dari konten di atasnya */
+    white-space: nowrap; /* Pastikan teks berjalan dalam satu baris */
+    overflow: hidden; /* Sembunyikan overflow teks */
+  }
+  
+  .currency-rate-box {
+  cursor: pointer; /* Membuat tahu pengguna bahwa kotak bisa diklik */
+ }
+
+.currency-rate-box:hover {
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2); /* Bayangan lebih besar saat hover */
+    z-index: 10; /* Memastikan kotak berada di atas kotak lain saat hover */
+}
+
+  .currency-rate-title {
+    color: #333; /* Warna teks gelap */
+    font-size: 16px; /* Ukuran font */
+    margin-bottom: 8px; /* Jarak antar teks */
+  }
+  
+  .currency-rate-percentage {
+    font-size: 32px; /* Ukuran font besar untuk persentase */
+    color: #25a18e; /* Warna hijau terang */
+    font-weight: bold; /* Tebal */
+  }
+  
+  .currency-rate-change {
+    color: #666; /* Warna teks lebih gelap */
+    font-size: 14px; /* Ukuran font lebih kecil */
+    margin-top: 8px; /* Jarak dari teks di atas */
+  }
+  
+  .currency-change-value {
+    color: green; /* Warna hijau untuk nilai positif */
+  }
+  
+  
+  /* Overview Box */
+  .overview-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #fff; /* Latar belakang putih */
+    border: 1px solid #ccc; /* Border tipis */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Bayangan untuk depth */
+    margin-bottom: 20px; /* Jarak dengan elemen berikutnya */
+  }
+  
+  .overview-icon {
+    color: red; /* Warna ikon merah */
+    margin-right: 20px; /* Jarak antara ikon dan teks */
+  }
+  
+  .overview-text {
+    flex-grow: 1; /* Mengambil ruang maksimum yang tersedia */
+  }
+  
+  .overview-title {
+    font-size: 18px; /* Ukuran font untuk judul */
+    font-weight: bold; /* Bold untuk judul */
+  }
+  
+  .overview-subtext {
+    font-size: 16px; /* Ukuran font lebih kecil untuk subteks */
+  }
+  
+.overview-button {
+  background-color: #000; /* Warna latar tombol */
+  color: #fff; /* Warna teks tombol */
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: bold;
+  outline: none;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Transition untuk smooth effect */
+}
+
+.overview-button:hover {
+  background-color: #333; /* Gelapkan tombol saat hover */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2); /* Tambahkan bayangan yang lebih menonjol */
+}
+
+  
+.currency-cards {
+    position: relative; /* Untuk menempatkan elemen avatar di posisi relatif */
+
+    display: flex;
+    flex-wrap: wrap; /* Membungkus kartu jika ruang tidak cukup */
+    gap: 30px; /* Jarak antara kartu */
+    justify-content: flex-start; /* Atur posisikan kartu ke kiri jika ada lebih dari satu baris */
+    margin: 20px 0; /* Jarak dari elemen di atas dan bawah */
+}
+
+ 
+.containers {
+    overflow-x: auto; /* Aktifkan scroll horizontal */
+    -webkit-overflow-scrolling: touch; /* Scrolling mulus di perangkat sentuh */
+    padding: 10px 0; /* Padding di sekitar konten */
+    display: flex; /* Atur kontainer sebagai flex container */
+    flex-wrap: nowrap; /* Mencegah pembungkusan elemen */
+}
+
+/* Kontainer untuk currency card dan tombol tambah */
+.currency-cards {
+    display: flex; /* Atur elemen di dalamnya secara horizontal */
+    flex-wrap: nowrap; /* Mencegah pembungkusan elemen */
+    align-items: center; /* Vertikal align tengah */
+}
+
+/* Style untuk currency card dan tombol tambah */
+.currency-card, .add-card {
+    flex: 0 0 auto; /* Mencegah elemen menyusut atau tumbuh */
+    width: 498px; /* Lebar tetap seperti yang diinginkan */
+    height: 250px; /* Tinggi tetap seperti yang diinginkan */
+    margin-bottom: 0px;
+ }
+
+ 
+/* Container untuk avatar */
+/* Container untuk avatar */
+.currency-avatars {
+  position: absolute; /* Posisi absolut di dalam currency-card */
+  bottom: 10px; /* Jarak dari bagian bawah */
+  left: 10px; /* Jarak dari bagian kiri */
+  display: flex; /* Menyusun gambar secara horizontal */
+  gap: 5px; /* Jarak antar gambar */
+}
+
+/* Gaya untuk gambar avatar */
+.avatar {
+  width: 30px; /* Ukuran gambar avatar */
+  height: 30px; /* Ukuran gambar avatar */
+  border-radius: 50%; /* Membuat gambar bulat */
+  object-fit: cover; /* Memastikan gambar tidak terdistorsi */
+}
+
+
+.currency-card:last-child {
+    border: 2px dashed #000; /* Border putus-putus */
+    background-color: #f0f0f0; /* Latar belakang yang sedikit berbeda */
+}
+
+.add-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+ 
+    background-color: #e0e0e0; /* Latar belakang abu-abu */
+    border: 2px dashed #000; /* Border putus-putus */
+    border-radius: 8px; /* Sudut membulat */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Bayangan */
+    position: relative;
+    cursor: pointer; /* Pointer cursor untuk menunjukkan interaktivitas */
+}
+
+.add-card::before {
+    content: '+';
+    font-size: 32px; /* Ukuran font untuk tanda "+" */
+    color: #333; /* Warna tanda "+" */
+    position: absolute;
+    top: 50%; /* Posisi vertikal di tengah */
+    left: 50%; /* Posisi horizontal di tengah */
+    transform: translate(-50%, -50%); /* Mengatur posisi secara pusat */
+}
+
+
+.currency-card:hover {
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2); /* Bayangan lebih besar saat hover */
+    z-index: 10; /* Pastikan kartu berada di atas yang lain saat hover */
+}
+
+/* Gaya untuk container currency card */
+.currency-card {
+  position: relative; /* Untuk menempatkan elemen avatar di posisi relatif */
+  background-color: #fff; /* Latar belakang putih */
+  border-radius: 8px; /* Sudut membulat */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Bayangan default */
+  padding: 10px; /* Padding di dalam kartu */
+  margin-right: 10px; /* Jarak antar kartu */
+  display: flex; /* Menyusun elemen secara horizontal */
+  align-items: center; /* Menyusun secara vertikal di tengah */
+  gap: 240px; /* Jarak antar elemen */
+  transition: box-shadow 0.3s ease; /* Transisi halus untuk perubahan box-shadow */
+}
+
+/* Container untuk detail mata uang */
+.currency-details {
+  display: flex;
+  flex-direction: column; /* Menyusun jumlah dan keterangan secara vertikal */
+  align-items: flex-start; /* Menyusun secara vertikal ke kiri */
+  margin-bottom: 180px;
+}
+
+/* Gaya untuk gambar bendera */
+.currency-flag {
+  width: 250px; /* Ukuran gambar bendera yang diperbesar */
+  height: 120px; /* Ukuran gambar bendera yang diperbesar */
+  object-fit: cover; /* Memastikan gambar tidak terdistorsi */
+  border-radius: 4px; /* Sudut membulat jika diperlukan */
+}
+
+ 
+/* Gaya untuk keterangan mata uang */
+.currency-label {
+  margin-left: 5px;
+  font-size: 1.2em; /* Ukuran font yang lebih kecil dari jumlah */
+  color: #666; /* Warna font untuk keterangan */
+}
+
+
+ 
+/* Gaya untuk jumlah mata uang */
+.currency-amount {
+  margin-top: 10px;
+  font-size: 28px; /* Ukuran font yang lebih besar jika diperlukan */
+  font-weight: bold; /* Membuat font lebih tebal */
+}
+
+.section {
+    margin-bottom: 20px; /* Jarak bawah dari section */
+}
+
+.section-header-container {
+    display: flex;
+    align-items: center; /* Vertikal center alignment */
+    width: 100%; /* Adjust width as needed */
+
+ }
+
+.section-header {
+    font-size: 20px; /* Ukuran font untuk header section */
+    font-weight: 500; /* Tebal */
+    color: #333; /* Warna teks */
+    margin-right: 20px; /* Jarak kanan dari header untuk memberi ruang bagi divider */
+    white-space: nowrap; /* Prevents text from wrapping */
+
+}
+
+.divider {
+    height: 2px; /* Tinggi divider */
+    background-color: #CCCCCC; /* Warna divider */
+    flex-grow: 1; /* Membuat divider memanjang sesuai dengan sisa ruang */
+}
+
+
+/* digital */
+
+/* General settings for digital cards container */
+.Digital-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Creates three columns, each fraction (fr) taking one part of the available space */
+  gap: 30px; /* This sets both row and column gaps */
+ }
+
+
+/* Specific style for each digital card */
+.Digital-card {
+  display: flex;
+  align-items: center; /* Center items vertically */
+  justify-content: flex-start; /* Align items to the start */
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  height: 250px; /* Adjust height as necessary */
+  transition: box-shadow 0.3s ease;
+}
+
+.Digital-card:hover {
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2); /* Bayangan lebih besar saat hover */
+  z-index: 10; /* Pastikan kartu berada di atas yang lain saat hover */
+}
+
+.Digital-details {
+  display: block;
+  align-items: center; /* Center details vertically */
+  justify-content: flex-start; /* Align details to the start */
+  width: 100%; /* Ensures details take full width of the card */
+  margin-bottom: 170px;
+}
+ 
+
+.Digital-flag {
+  width: 120px; /* Larger width */
+   margin-right: 30px; /* Space between flag and amount/label */
+  flex-shrink: 0; /* Prevent flag from shrinking */
+  
+}
+
+/* Adjust the font size and margin for proper alignment */
+.Digital-amount {
+  font-size: 28px; /* Ukuran font yang lebih besar jika diperlukan */
+  font-weight: bold; /* Membuat font lebih tebal */
+  margin-top: 280px; /* Adjust margin to fit design */
+  line-height: 1; /* Adjust line height to fit design */
+}
+
+.Digital-label {
+  font-size: 16px; /* Font size for currency label */
+  color: #666; /* Color for text */
+  margin-top: 4px; /* Adjust top margin for alignment */
+  margin-bottom: 150px;
+}
+
+.Digital-description {
+  font-size: 18px; /* Font size for currency label */
+  color: #666; /* Color for text */
+  font-weight: bold;
+  margin-top: 40px; /* Adjust top margin for alignment */
+  margin-bottom: 110px;
+}
+
+ 
+/* Media query for devices with a width less than 768px (tablets and phones) */
+@media (max-width: 768px) {
+
+  .Digital-amount {
+    font-size: 20px; /* Ukuran font yang lebih besar jika diperlukan */
+    font-weight: bold; /* Membuat font lebih tebal */
+    margin-top: 270px; /* Adjust margin to fit design */
+    line-height: 1; /* Adjust line height to fit design */
+  }
+
+  .Digital-cards {
+    display: flex; /* Change to flexbox for horizontal scrolling */
+    overflow-x: auto; /* Enable horizontal scrolling */
+    gap: 20px; /* Reduce gap if needed */
+    scroll-snap-type: x mandatory; /* Smooth scrolling */
+    padding: 10px; /* Padding to avoid clipping */
+  }
+
+  .Digital-cards::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for a cleaner look */
+  }
+
+  .Digital-card {
+    min-width: 300px; /* Adjust minimum width for mobile */
+  }
+
+  .overview-button {
+    background-color: #000; /* Warna latar tombol */
+    color: #fff; /* Warna teks tombol */
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+    outline: none;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Transition untuk smooth effect */
+    margin-left: 10px;
+  }
+}
+
+/* Media query for devices with a width less than 480px (phones) */
+@media (max-width: 480px) {
+  .Digital-card {
+    min-width: 250px; /* Adjust minimum width for very small screens */
+  }
+}
+ 
+ 
