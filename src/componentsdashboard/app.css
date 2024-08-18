@@ -606,6 +606,7 @@
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  width: 449px;
   height: 250px; /* Adjust height as necessary */
   transition: box-shadow 0.3s ease;
 }
