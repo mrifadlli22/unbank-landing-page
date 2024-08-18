@@ -430,7 +430,7 @@
 
     display: flex;
     flex-wrap: wrap; /* Membungkus kartu jika ruang tidak cukup */
-    gap: 30px; /* Jarak antara kartu */
+    gap: 20px; /* Jarak antara kartu */
     justify-content: flex-start; /* Atur posisikan kartu ke kiri jika ada lebih dari satu baris */
     margin: 20px 0; /* Jarak dari elemen di atas dan bawah */
 }
