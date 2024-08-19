@@ -24,7 +24,7 @@ function App() {
           <Route path="/forgotpassword" element={<ForgotPassword />} /> 
           <Route path='/tablepage' element={<TablePage />} /> 
           <Route path='/tablepage2' element={<OrderTable />} /> 
-          <Route path='/chart' element={<USDTChart />} /> 
+          <Route path='/dashboard' element={<UnbankDashboard />} /> 
 
         </Routes>
       </BrowserRouter>

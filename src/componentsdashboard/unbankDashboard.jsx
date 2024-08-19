@@ -11,20 +11,6 @@ function Ticker({ message }) {
   );
 }
 
-function CurrencyRateBox({ title, rate, change, changeType, onBoxClick }) {
-  return (
-    <div className="currency-rate-box" onClick={onBoxClick}>
-      <div className="currency-rate-title">{title}</div>
-      <div className="currency-rate-main">
-        <span className="currency-rate-percentage">{rate}</span>
-      </div>
-      <div className="currency-rate-change">
-        from last week → <span className={`currency-change-value ${changeType}`}>{change}</span>
-      </div>
-    </div>
-  );
-}
-
 function OverviewBox() {
   return (
     <div className="overview-box">
@@ -61,6 +47,26 @@ function CurrencyCard({ amount, currency, flag, avatars }) {
     );
   }
 
+  function Currency({ amountDig, currencyDig, flagDig, descDig}) {
+    return (
+      <div className="Digital-card">
+        <div className="Digital-details">
+          <div className="Digital-amount">{amountDig}</div>
+          <div className="Digital-label">{currencyDig}</div>
+          <div className="Digital-description">
+        {descDig}
+    </div> {/* Keterangan mata uang */}
+        </div>
+        <img src={flagDig} alt={currencyDig} className="Digital-flag" /> {/* Gambar bendera */}
+        <div className="currency-avatars">
+          {avatars && avatars.map((avatar, index) => (
+            <img key={index} src={avatar.src} alt={avatar.alt} className="avatar" />
+          ))}
+        </div>
+      </div>
+    );
+  }
+
   function Digital({ amountDig, currencyDig, flagDig, descDig}) {
     return (
       <div className="Digital-card">
@@ -77,6 +83,21 @@ function CurrencyCard({ amount, currency, flag, avatars }) {
     );
   }
  
+  function Bank({ Username, NoRek, bankCard, cardDig}) {
+    return (
+      <div className="Digital-card">
+        <div className="Digital-details">
+          <div className="Digital-amount">{Username}</div>
+          <div className="Digital-label">{NoRek}</div>
+          <div className="Digital-description">
+        {cardDig}
+    </div> {/* Keterangan mata uang */}
+        </div>
+        <img src={bankCard} alt={NoRek} className="card-flag" /> {/* Gambar bendera */}
+
+      </div>
+    );
+  }
   
   
   
@@ -84,7 +105,7 @@ function CurrencyCard({ amount, currency, flag, avatars }) {
 
 function UnbankDashboard() {
   const [isMobileMenuActive, setIsMobileMenuActive] = useState(false);
-  const [selectedInfo, setSelectedInfo] = useState("Default message before any box is clicked.");
+  const [selectedInfo, setSelectedInfo] = useState("You can see general information right here");
 
   function handleBoxClick(info) {
     setSelectedInfo(info);
@@ -111,39 +132,10 @@ function UnbankDashboard() {
       <Header toggleSidebar={toggleSidebar} isMobileMenuActive={isMobileMenuActive} />
       <Sidebar isMobileMenuActive={isMobileMenuActive} toggleSidebar={toggleSidebar} />
       <div className="main">
-        <div className="content">
-          <div className="currency-rate-container">
-            <CurrencyRateBox 
-              title="USDT to IDR Rate" 
-              rate="85%" 
-              change="+7.85%" 
-              changeType="positive"
-              onBoxClick={() => handleBoxClick("Information related to USDT to IDR Rate")} 
-            />
-            <CurrencyRateBox 
-              title="IDR to USDT Rate" 
-              rate="30%" 
-              change="-7.85%" 
-              changeType="negative"
-              onBoxClick={() => handleBoxClick("Information related to IDR to USDT Rate")} 
-            />
-            <CurrencyRateBox 
-              title="BTC to IDR Rate" 
-              rate="20%" 
-              change="+5.00%" 
-              changeType="positive"
-              onBoxClick={() => handleBoxClick("Information related to BTC to IDR Rate")} 
-            />
-            <CurrencyRateBox 
-              title="BTC to USD Rate" 
-              rate="10%" 
-              change="-2.30%" 
-              changeType="negative"
-              onBoxClick={() => handleBoxClick("Information related to BTC to USD Rate")} 
-            />
-          </div>
-
-          <Ticker message={selectedInfo} />
+      <div className="ticker">
+        <Ticker message={selectedInfo} />
+      </div>
+        <div  style={{paddingTop:"0px"}} className="content">
 
           <h2>Overview</h2>
           <OverviewBox />
@@ -158,7 +150,7 @@ function UnbankDashboard() {
             <div  className="containers">
               <div style={{marginTop:"0px"}} className="currency-cards">
                 <CurrencyCard 
-                  amount="€0.00" 
+                  amount="Rp.0,00" 
                   currency="IDR" 
                   flag="./Images/indoflag.png" 
                   avatars={[
@@ -167,8 +159,8 @@ function UnbankDashboard() {
                     { src: "https://cdn.builder.io/api/v1/image/assets/TEMP/d914da3aec1dab3600769687b602e1d4c74056d5a2cd1b33b073f4e6805f9b0c?placeholderIfAbsent=true&apiKey=e3ddd6dd58b748b09fc1391939743920", alt: "Avatar 3" }
                   ]}
                 />
-                <CurrencyCard 
-                  amount="€0.00" 
+                 <CurrencyCard 
+                  amount="USD.0,00" 
                   currency="USD" 
                   flag="./Images/usd.png" 
                   avatars={[
@@ -177,9 +169,14 @@ function UnbankDashboard() {
                     { src: "https://cdn.builder.io/api/v1/image/assets/TEMP/d914da3aec1dab3600769687b602e1d4c74056d5a2cd1b33b073f4e6805f9b0c?placeholderIfAbsent=true&apiKey=e3ddd6dd58b748b09fc1391939743920", alt: "Avatar 3" }
                   ]}
                 />
-                <div className="add-card" onClick={() => alert('Add new card')}>
-                  <div style={{ marginTop: "50px" }}>Add currency</div>
+                <div   className="add-card" onClick={() => alert('Add new card')}>
+                <div style={{ marginTop: "90px", textAlign: "center" }}>
+                <p style={{ marginBottom: "0px" }}>Add Currency</p>
+                <p style={{ marginTop: "0px" }}>More Currency Will be Added Soon...</p>
+              </div>
+
                 </div>
+                
               </div>
             </div>
           </div>
@@ -191,13 +188,48 @@ function UnbankDashboard() {
   <p>You haven't added any currencies yet. Once you add them, they will be displayed here for your convenience.</p>
   <div className="containers">
     <div className="Digital-cards">
-      <Digital amountDig="0.00000000 USDC" currencyDig="€0.00" flagDig="./Images/T.png" descDig="Tether" />
-      <Digital amountDig="0.00000000 USDT" currencyDig="€0.00" flagDig="./Images/S.png" descDig="USD Coin" />
-      <Digital amountDig="0.00000000 ETH" currencyDig="€0.00" flagDig="./Images/E.png" descDig="Enthereum" />
-      <Digital amountDig="0.00000000 BTC" currencyDig="€0.00" flagDig="./Images/B.png" descDig="Bitcoin"/>
-      <Digital amountDig="0.00000000 TRX" currencyDig="€0.00" flagDig="./Images/V.png" descDig="Tron" />
+      <Digital amountDig="0.00000000 USDC" currencyDig="$0.00" flagDig="./Images/T.png" descDig="Tether" />
+      <Digital amountDig="0.00000000 USDT" currencyDig="$0.00" flagDig="./Images/S.png" descDig="USD Coin" />
+      <Digital amountDig="0.00000000 TRX" currencyDig="$0.00" flagDig="./Images/V.png" descDig="Tron" />
+      <Digital amountDig="0.00000000 BTC" currencyDig="$0.00" flagDig="./Images/B.png" descDig="Bitcoin"/>
+      <Digital amountDig="0.00000000 ETH" currencyDig="$0.00" flagDig="./Images/E.png" descDig="Enthereum" />
       <div className="add-card" onClick={() => alert('Add new card')}>
-        <div style={{ marginTop: "50px" }}>Add currency</div>
+        <div style={{ marginTop: "50px" }}>Add Digital Assets</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div className="section">
+  <div className="section-header-container">
+    <div className="section-header">Bank Accounts</div>
+    <div className="divider"></div>
+  </div>
+  <p>You haven't added any currencies yet. Once you add them, they will be displayed here for your convenience.</p>
+  <div className="containers">
+    <div className="Digital-cards">
+      <Bank Username="Leideovico" NoRek="0000 0000 0000 0000 000" bankCard="./Images/mandiri.png" cardDig="Bank Mandiri" />
+      <Bank Username="Anrico" NoRek="0000 0000 0000 0000 000" bankCard="./Images/bca.png" cardDig="Bank BCA" />
+      <div className="add-card" onClick={() => alert('Add new card')}>
+        <div style={{ marginTop: "50px" }}>Add Digital Assets</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div className="section">
+  <div className="section-header-container">
+    <div className="section-header">Recent Transactions</div>
+    <div className="divider"></div>
+    <button className="see-all-transactions-btn">See All Transactions</button>
+  </div>
+
+  <div className="containers2">
+    <div className="no-transactions">
+      <div className="no-transactions-icon">
+        <i className="icon-info"></i>
+      </div>
+      <div className="no-transactions-text">
+        <h3>No transactions yet</h3>
+        <p>You haven't made any transactions yet, but don't worry! Once you start making transactions, they will be displayed here.</p>
       </div>
     </div>
   </div>
