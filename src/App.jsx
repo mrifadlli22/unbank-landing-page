@@ -24,7 +24,7 @@ function App() {
           <Route path='/tablepage' element={<TablePage />} /> 
           <Route path='/tablepage2' element={<OrderTable />} /> 
           <Route path='/chart' element={<USDTChart />} /> 
-
+          <Route path='/dashboard' element={<USDTChart />} /> 
         </Routes>
       </BrowserRouter>
     </div>
