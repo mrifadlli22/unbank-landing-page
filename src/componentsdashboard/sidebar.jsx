@@ -1,40 +1,35 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import './app.css';
-import { FaTachometerAlt, FaExchangeAlt, FaShieldAlt, FaHistory, FaBell, FaLock, FaQuestionCircle, FaCog, FaBars } from 'react-icons/fa';
+import { FaTachometerAlt, FaExchangeAlt, FaShieldAlt, FaHistory, FaQuestionCircle, FaCog, FaBars } from 'react-icons/fa';
 
 function Sidebar({ isMobileMenuActive, toggleSidebar }) {
   return (
     <div className={`sidebar ${isMobileMenuActive ? 'active' : ''}`}>
       <div className="logo-items">
         <img src="./Images/unbank.jpeg" alt="Unbank Logo" />
-        <div className="divider"></div> {/* Divider di bawah logo */}
+        <div className="divider2"></div> {/* Divider di bawah logo */}
       </div>
       <div className="menu">
-        <a href="#dashboard" className="menu-item active">
+        <NavLink to="/dashboard" className="menu-item" activeClassName="active">
           <FaTachometerAlt className="icon" />{'Dashboard'}
-        </a>
-        <a href="#swap" className="menu-item">
+        </NavLink>
+        <NavLink to="/swap" className="menu-item" activeClassName="active">
           <FaExchangeAlt className="icon" />{'Swap'}
-        </a>
-        <a href="#xcrow" className="menu-item">
+        </NavLink>
+        <NavLink to="/xcrow" className="menu-item" activeClassName="active">
           <FaShieldAlt className="icon" />{'Xcrow'}
-        </a>
-        <a href="#history" className="menu-item">
+        </NavLink>
+        <NavLink to="/history" className="menu-item" activeClassName="active">
           <FaHistory className="icon" />{'History'}
-        </a>
-        {/* <a href="#notifications" className="menu-item">
-          <FaBell className="icon" />{'Notification'}
-        </a>
-        <a href="#securities" className="menu-item">
-          <FaLock className="icon" />{'Securities'}
-        </a> */}
-        <div className="divider"></div> {/* Divider di bawah Securities */}
-        <a href="#help" className="menu-item">
+        </NavLink>
+        <div className="divider2"></div> {/* Divider di bawah Securities */}
+        <NavLink to="/help" className="menu-item" activeClassName="active">
           <FaQuestionCircle className="icon" />{'Help'}
-        </a>
-        <a href="#settings" className="menu-item">
+        </NavLink>
+        <NavLink to="/settings" className="menu-item" activeClassName="active">
           <FaCog className="icon" />{'Settings'}
-        </a>
+        </NavLink>
       </div>
       <div className="burger-menu sidebar-burger-menu" onClick={toggleSidebar}>
         <FaBars />

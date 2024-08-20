@@ -17,7 +17,7 @@
   z-index: 1100; /* Pastikan sidebar berada di depan elemen lain */
 }
 
-.divider {
+.divider2 {
   height: 2px;
   background-color: #CCCCCC;
   width: 100%;
@@ -217,20 +217,29 @@
   margin-left: 0px;
 }
 
-.main{
-  padding-top: 90px;
+.main {
+  padding-top: 90px; /* Adjust to match header height */
+  overflow-y: auto;
+  flex-grow: 1;
 }
 
 .content {
   flex-grow: 1;
   padding-top: 90px;
   padding: 16px;
-  padding-left: 285px;
-  padding-right: 75px;
+  /* padding-left: 285px; */
+  padding-right: 0px;
+  padding-top: 0px;
   background-color: #F4F6F9;
   overflow-y: auto; /* Ensure content scrolls if it exceeds the viewport height */
   width: 100%;
   height: 100vh; /* Adjust height to fill the remaining space, accounting for the header height */
+}
+
+.contentdash {
+  padding-left: 285px;
+  padding-right: 59px;
+
 }
 
 /* Responsive adjustments */
@@ -243,6 +252,11 @@
     bottom: 20px;
     font-size: 24px;
     color: #fff;
+  }
+
+  .contentdash{
+    padding-left: 0px;
+    padding-right: 0px;
   }
 
   .sidebar.collapsed {
@@ -347,16 +361,19 @@
   }
 
   .ticker {
-    background-color: black;
-    color: white;
-    padding: 5px;
-    margin-top: 0px; /* Jarak dari konten di atasnya */
-    white-space: nowrap; /* Pastikan teks berjalan dalam satu baris */
-    overflow: hidden; /* Sembunyikan overflow teks */
     width: 100%;
-    position: relative;
+    background-color: #000; /* Sesuaikan dengan tema */
+    color: white; /* Sesuaikan dengan tema */
+    padding: 10px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
   }
-
+  
+  .ticker marquee {
+    font-size: 16px; /* Ukuran teks */
+    font-weight: bold;
+  }
+  
   
   
   .currency-rate-box {
@@ -483,6 +500,12 @@
   gap: 5px; /* Jarak antar gambar */
 }
 
+.digital-avatars {
+  display: flex; /* Menyusun gambar secara horizontal */
+  gap: 5px; /* Jarak antar gambar */
+  margin-top:75px;
+}
+
 /* Gaya untuk gambar avatar */
 .avatar {
   width: 30px; /* Ukuran gambar avatar */
@@ -597,15 +620,15 @@
     font-size: 20px; /* Ukuran font untuk header section */
     font-weight: 500; /* Tebal */
     color: #333; /* Warna teks */
-    margin-right: 20px; /* Jarak kanan dari header untuk memberi ruang bagi divider */
+    margin-right: 20px; /* Jarak kanan dari header untuk memberi ruang bagi divider2 */
     white-space: nowrap; /* Prevents text from wrapping */
 
 }
 
-.divider {
-    height: 2px; /* Tinggi divider */
-    background-color: #CCCCCC; /* Warna divider */
-    flex-grow: 1; /* Membuat divider memanjang sesuai dengan sisa ruang */
+.divider2 {
+    height: 2px; /* Tinggi divider2 */
+    background-color: #CCCCCC; /* Warna divider2 */
+    flex-grow: 1; /* Membuat divider2 memanjang sesuai dengan sisa ruang */
 }
 
 
@@ -644,9 +667,52 @@
   align-items: center; /* Center details vertically */
   justify-content: flex-start; /* Align details to the start */
   width: 100%; /* Ensures details take full width of the card */
-  margin-bottom: 170px;
-}
+  height: 160px;
+ }
  
+/* Adjust the font size and margin for proper alignment */
+.Digital-amount {
+  margin-top: 5px;
+  font-size: 14px; /* Ukuran font yang lebih besar jika diperlukan */
+  font-weight: bold; /* Membuat font lebih tebal */
+   line-height: 1; /* Adjust line height to fit design */
+ }
+
+.Digital-label {
+  margin-top:5px;
+  font-size: 0.8em; /* Ukuran font yang lebih kecil dari jumlah */
+  color: #666; /* Warna font untuk keterangan */
+  margin-top: 4px; /* Adjust top margin for alignment */
+ }
+
+.Digital-description {
+  font-size: 15px; /* Font size for currency label */
+  color: #666; /* Color for text */
+  font-weight: bold;
+  margin-top: 0px; /* Adjust top margin for alignment */
+ }
+
+/* Adjust the font size and margin for proper alignment */
+.bank-amount {
+  font-size: 18px; /* Ukuran font yang lebih besar jika diperlukan */
+  font-weight: bold; /* Membuat font lebih tebal */
+   line-height: 1; /* Adjust line height to fit design */
+ }
+
+.bank-label {
+  margin-top:5px;
+  font-size: 0.8em; /* Ukuran font yang lebih kecil dari jumlah */
+  color: #666; /* Warna font untuk keterangan */
+  margin-top: 4px; /* Adjust top margin for alignment */
+ }
+
+.bank-description {
+  font-size: 15px; /* Font size for currency label */
+  color: #666; /* Color for text */
+  font-weight: bold;
+  margin-top: 105px; /* Adjust top margin for alignment */
+ }
+
 
 .Digital-flag {
   width: 75px;
@@ -667,29 +733,7 @@
   margin-right: 0px;
 }
 
-/* Adjust the font size and margin for proper alignment */
-.Digital-amount {
-  font-size: 18px; /* Ukuran font yang lebih besar jika diperlukan */
-  font-weight: bold; /* Membuat font lebih tebal */
-  margin-top: 399px; /* Adjust margin to fit design */
-  line-height: 1; /* Adjust line height to fit design */
- }
 
-.Digital-label {
-  margin-top:5px;
-  font-size: 0.8em; /* Ukuran font yang lebih kecil dari jumlah */
-  color: #666; /* Warna font untuk keterangan */
-  margin-top: 4px; /* Adjust top margin for alignment */
-  margin-bottom: 105px;
-}
-
-.Digital-description {
-  font-size: 15px; /* Font size for currency label */
-  color: #666; /* Color for text */
-  font-weight: bold;
-  margin-top: 0px; /* Adjust top margin for alignment */
-  margin-bottom: 225px;
-}
  
  /* Transaction */
 

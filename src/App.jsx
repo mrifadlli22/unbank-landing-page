@@ -6,8 +6,13 @@ import BusinessPage from './componentsbusiness/BusinessPage/BusinessPage';
 import ForgotPassword from './componentslogin/ForgotPassword';
 import TablePage from './componentstablepage/tablepages';
 import OrderTable from './componentstablepage2/OrderTable';
-import USDTChart from './componentschart/USDTRate';
+// import USDTChart from './componentschart/USDTRate';
 import UnbankDashboard from './componentsdashboard/unbankDashboard';
+import Settings from './componentsdashboard/settings';
+import Swap from './componentsdashboard/swap';
+import Xcrow from './componentsdashboard/xcrow';
+import History from './componentsdashboard/history';
+import Help from './componentsdashboard/help';
 
 
 function App() {
@@ -25,7 +30,11 @@ function App() {
           <Route path='/tablepage' element={<TablePage />} /> 
           <Route path='/tablepage2' element={<OrderTable />} /> 
           <Route path='/dashboard' element={<UnbankDashboard />} /> 
-
+          <Route path='/settings' element={<Settings />} /> 
+          <Route path='/swap' element={<Swap />} /> 
+          <Route path='/xcrow' element={<Xcrow />} /> 
+          <Route path='/history' element={<History />} /> 
+          <Route path='/help' element={<Help />} /> 
         </Routes>
       </BrowserRouter>
     </div>

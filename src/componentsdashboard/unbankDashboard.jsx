@@ -3,14 +3,17 @@ import Sidebar from './sidebar';
 import Header from './header';
 import './app.css';
 
-function Ticker({ message }) {
+
+function Ticker() {
   return (
     <div className="ticker">
-      <marquee behavior="scroll" direction="left">{message}</marquee>
+      <marquee behavior="scroll" direction="left">
+        You can see general information right here!
+      </marquee>
     </div>
   );
 }
-
+ 
 function OverviewBox() {
   return (
     <div className="overview-box">
@@ -47,35 +50,21 @@ function CurrencyCard({ amount, currency, flag, avatars }) {
     );
   }
 
-  function Currency({ amountDig, currencyDig, flagDig, descDig}) {
+  function Digital({ amountDig, currencyDig, flagDig, descDig, avatars}) {
     return (
       <div className="Digital-card">
         <div className="Digital-details">
+        <div className="Digital-description">
+        {descDig}
+    </div>
           <div className="Digital-amount">{amountDig}</div>
           <div className="Digital-label">{currencyDig}</div>
-          <div className="Digital-description">
-        {descDig}
-    </div> {/* Keterangan mata uang */}
-        </div>
-        <img src={flagDig} alt={currencyDig} className="Digital-flag" /> {/* Gambar bendera */}
-        <div className="currency-avatars">
+          <div className="digital-avatars">
           {avatars && avatars.map((avatar, index) => (
             <img key={index} src={avatar.src} alt={avatar.alt} className="avatar" />
           ))}
         </div>
-      </div>
-    );
-  }
-
-  function Digital({ amountDig, currencyDig, flagDig, descDig}) {
-    return (
-      <div className="Digital-card">
-        <div className="Digital-details">
-          <div className="Digital-amount">{amountDig}</div>
-          <div className="Digital-label">{currencyDig}</div>
-          <div className="Digital-description">
-        {descDig}
-    </div> {/* Keterangan mata uang */}
+        {/* Keterangan mata uang */}
         </div>
         <img src={flagDig} alt={currencyDig} className="Digital-flag" /> {/* Gambar bendera */}
 
@@ -87,9 +76,9 @@ function CurrencyCard({ amount, currency, flag, avatars }) {
     return (
       <div className="Digital-card">
         <div className="Digital-details">
-          <div className="Digital-amount">{Username}</div>
-          <div className="Digital-label">{NoRek}</div>
-          <div className="Digital-description">
+          <div className="bank-amount">{Username}</div>
+          <div className="bank-label">{NoRek}</div>
+          <div className="bank-description">
         {cardDig}
     </div> {/* Keterangan mata uang */}
         </div>
@@ -127,23 +116,22 @@ function UnbankDashboard() {
     };
   }, []);
 
+  
   return (
     <div className="dashboard">
       <Header toggleSidebar={toggleSidebar} isMobileMenuActive={isMobileMenuActive} />
       <Sidebar isMobileMenuActive={isMobileMenuActive} toggleSidebar={toggleSidebar} />
       <div className="main">
-      <div className="ticker">
-        <Ticker message={selectedInfo} />
-      </div>
-        <div  style={{paddingTop:"0px"}} className="content">
-
+          <div className="content">
+          <Ticker /> {/* Tambahkan ticker di sini */}
+          <div className='contentdash'>
           <h2>Overview</h2>
           <OverviewBox />
 
           <div className="section">
             <div className="section-header-container">
               <div className="section-header">Currencies</div>
-              <div className="divider"></div>
+              <div className="divider2"></div>
             </div>
             <p>You haven't added any currencies yet. Once you add them, they will be displayed here for your convenience.</p>
 
@@ -183,16 +171,61 @@ function UnbankDashboard() {
           <div className="section">
   <div className="section-header-container">
     <div className="section-header">Digital Assets</div>
-    <div className="divider"></div>
+    <div className="divider2"></div>
   </div>
   <p>You haven't added any currencies yet. Once you add them, they will be displayed here for your convenience.</p>
   <div className="containers">
     <div className="Digital-cards">
-      <Digital amountDig="0.00000000 USDC" currencyDig="$0.00" flagDig="./Images/T.png" descDig="Tether" />
-      <Digital amountDig="0.00000000 USDT" currencyDig="$0.00" flagDig="./Images/S.png" descDig="USD Coin" />
-      <Digital amountDig="0.00000000 TRX" currencyDig="$0.00" flagDig="./Images/V.png" descDig="Tron" />
-      <Digital amountDig="0.00000000 BTC" currencyDig="$0.00" flagDig="./Images/B.png" descDig="Bitcoin"/>
-      <Digital amountDig="0.00000000 ETH" currencyDig="$0.00" flagDig="./Images/E.png" descDig="Enthereum" />
+      <Digital 
+      amountDig="0.00000000 USDC" 
+      currencyDig="$0.00" 
+      flagDig="./Images/T.png" 
+      descDig="Tether"
+      avatars={[
+        { src: "https://cdn.builder.io/api/v1/image/assets/TEMP/9acaf09f47c7f5999602ea0112056b80cfc0cb39b6567051c0b20f5eda626c2f?placeholderIfAbsent=true&apiKey=e3ddd6dd58b748b09fc1391939743920", alt: "Avatar 1" },
+        { src: "https://cdn.builder.io/api/v1/image/assets/TEMP/9006f4ffc40aa5929124465b5d2770f98124c3a291173ae6a518a0036b5aec45?placeholderIfAbsent=true&apiKey=e3ddd6dd58b748b09fc1391939743920", alt: "Avatar 2" },
+        { src: "https://cdn.builder.io/api/v1/image/assets/TEMP/d914da3aec1dab3600769687b602e1d4c74056d5a2cd1b33b073f4e6805f9b0c?placeholderIfAbsent=true&apiKey=e3ddd6dd58b748b09fc1391939743920", alt: "Avatar 3" }
+      ]} />
+      <Digital 
+      amountDig="0.00000000 USDT" 
+      currencyDig="$0.00" 
+      flagDig="./Images/S.png" 
+      descDig="USD Coin"
+      avatars={[
+        { src: "https://cdn.builder.io/api/v1/image/assets/TEMP/9acaf09f47c7f5999602ea0112056b80cfc0cb39b6567051c0b20f5eda626c2f?placeholderIfAbsent=true&apiKey=e3ddd6dd58b748b09fc1391939743920", alt: "Avatar 1" },
+        { src: "https://cdn.builder.io/api/v1/image/assets/TEMP/9006f4ffc40aa5929124465b5d2770f98124c3a291173ae6a518a0036b5aec45?placeholderIfAbsent=true&apiKey=e3ddd6dd58b748b09fc1391939743920", alt: "Avatar 2" },
+        { src: "https://cdn.builder.io/api/v1/image/assets/TEMP/d914da3aec1dab3600769687b602e1d4c74056d5a2cd1b33b073f4e6805f9b0c?placeholderIfAbsent=true&apiKey=e3ddd6dd58b748b09fc1391939743920", alt: "Avatar 3" }
+      ]} />
+      <Digital 
+      amountDig="0.00000000 TRX" 
+      currencyDig="$0.00" 
+      flagDig="./Images/V.png" 
+      descDig="Tron"
+      avatars={[
+        { src: "https://cdn.builder.io/api/v1/image/assets/TEMP/9acaf09f47c7f5999602ea0112056b80cfc0cb39b6567051c0b20f5eda626c2f?placeholderIfAbsent=true&apiKey=e3ddd6dd58b748b09fc1391939743920", alt: "Avatar 1" },
+        { src: "https://cdn.builder.io/api/v1/image/assets/TEMP/9006f4ffc40aa5929124465b5d2770f98124c3a291173ae6a518a0036b5aec45?placeholderIfAbsent=true&apiKey=e3ddd6dd58b748b09fc1391939743920", alt: "Avatar 2" },
+        { src: "https://cdn.builder.io/api/v1/image/assets/TEMP/d914da3aec1dab3600769687b602e1d4c74056d5a2cd1b33b073f4e6805f9b0c?placeholderIfAbsent=true&apiKey=e3ddd6dd58b748b09fc1391939743920", alt: "Avatar 3" }
+      ]} />
+      <Digital 
+      amountDig="0.00000000 BTC" 
+      currencyDig="$0.00" 
+      flagDig="./Images/B.png" 
+      descDig="Bitcoin"
+      avatars={[
+        { src: "https://cdn.builder.io/api/v1/image/assets/TEMP/9acaf09f47c7f5999602ea0112056b80cfc0cb39b6567051c0b20f5eda626c2f?placeholderIfAbsent=true&apiKey=e3ddd6dd58b748b09fc1391939743920", alt: "Avatar 1" },
+        { src: "https://cdn.builder.io/api/v1/image/assets/TEMP/9006f4ffc40aa5929124465b5d2770f98124c3a291173ae6a518a0036b5aec45?placeholderIfAbsent=true&apiKey=e3ddd6dd58b748b09fc1391939743920", alt: "Avatar 2" },
+        { src: "https://cdn.builder.io/api/v1/image/assets/TEMP/d914da3aec1dab3600769687b602e1d4c74056d5a2cd1b33b073f4e6805f9b0c?placeholderIfAbsent=true&apiKey=e3ddd6dd58b748b09fc1391939743920", alt: "Avatar 3" }
+      ]}/>
+      <Digital 
+      amountDig="0.00000000 ETH" 
+      currencyDig="$0.00" 
+      flagDig="./Images/E.png" 
+      descDig="Enthereum"
+      avatars={[
+        { src: "https://cdn.builder.io/api/v1/image/assets/TEMP/9acaf09f47c7f5999602ea0112056b80cfc0cb39b6567051c0b20f5eda626c2f?placeholderIfAbsent=true&apiKey=e3ddd6dd58b748b09fc1391939743920", alt: "Avatar 1" },
+        { src: "https://cdn.builder.io/api/v1/image/assets/TEMP/9006f4ffc40aa5929124465b5d2770f98124c3a291173ae6a518a0036b5aec45?placeholderIfAbsent=true&apiKey=e3ddd6dd58b748b09fc1391939743920", alt: "Avatar 2" },
+        { src: "https://cdn.builder.io/api/v1/image/assets/TEMP/d914da3aec1dab3600769687b602e1d4c74056d5a2cd1b33b073f4e6805f9b0c?placeholderIfAbsent=true&apiKey=e3ddd6dd58b748b09fc1391939743920", alt: "Avatar 3" }
+      ]} />
       <div className="add-card" onClick={() => alert('Add new card')}>
         <div style={{ marginTop: "50px" }}>Add Digital Assets</div>
       </div>
@@ -202,15 +235,15 @@ function UnbankDashboard() {
 <div className="section">
   <div className="section-header-container">
     <div className="section-header">Bank Accounts</div>
-    <div className="divider"></div>
+    <div className="divider2"></div>
   </div>
   <p>You haven't added any currencies yet. Once you add them, they will be displayed here for your convenience.</p>
   <div className="containers">
     <div className="Digital-cards">
       <Bank Username="Leideovico" NoRek="0000 0000 0000 0000 000" bankCard="./Images/mandiri.png" cardDig="Bank Mandiri" />
-      <Bank Username="Anrico" NoRek="0000 0000 0000 0000 000" bankCard="./Images/bca.png" cardDig="Bank BCA" />
+      <Bank Username="Leideovico" NoRek="0000 0000 0000 0000 000" bankCard="./Images/bca.png" cardDig="Bank BCA" />
       <div className="add-card" onClick={() => alert('Add new card')}>
-        <div style={{ marginTop: "50px" }}>Add Digital Assets</div>
+        <div style={{ marginTop: "50px" }}>Add Bank Card</div>
       </div>
     </div>
   </div>
@@ -218,7 +251,7 @@ function UnbankDashboard() {
 <div className="section">
   <div className="section-header-container">
     <div className="section-header">Recent Transactions</div>
-    <div className="divider"></div>
+    <div className="divider2"></div>
     <button className="see-all-transactions-btn">See All Transactions</button>
   </div>
 
@@ -234,7 +267,7 @@ function UnbankDashboard() {
     </div>
   </div>
 </div>
-
+</div>
         </div>
       </div>
     </div>

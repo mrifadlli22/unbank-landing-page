@@ -2,12 +2,16 @@ import React from 'react';
 import './LoginForm.css';
 import useStore from './store'; // Sesuaikan path jika file store berada di lokasi lain
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
+
 
 
 
 const LoginForm = () => {
 
   const { username, password, setUsername, setPassword } = useStore();
+  const navigate = useNavigate(); // Gunakan useNavigate untuk navigasi
+
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -20,7 +24,10 @@ const LoginForm = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log("Logging in with:", username, password);
-    // Proses login akan dilakukan di sini
+
+    // Proses login dilakukan di sini
+    // Jika login berhasil, arahkan ke dashboard
+    navigate('/dashboard');
   };
 
   return (
