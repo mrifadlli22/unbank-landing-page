@@ -31,6 +31,9 @@ function App() {
           <Route path='/tablepage2' element={<OrderTable />} /> 
           <Route path='/dashboard' element={<UnbankDashboard />} /> 
           <Route path='/settings' element={<Settings />} /> 
+          <Route path='/profile' element={<Settings />} /> 
+          <Route path='/support' element={<Settings />} /> 
+          <Route path='/security' element={<Settings />} /> 
           <Route path='/swap' element={<Swap />} /> 
           <Route path='/xcrow' element={<Xcrow />} /> 
           <Route path='/history' element={<History />} /> 

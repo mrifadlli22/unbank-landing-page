@@ -145,6 +145,64 @@
   font-size: 16px; /* Adjust icon size */
 }
 
+/* Dropdown menu */
+
+/* Container for user info and dropdown menu */
+.user-info-container {
+  position: relative; /* Positioning context for dropdown menu */
+  display: inline-block;
+}
+
+/* User Info Styles */
+.user-info {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  background-color: #f9f9f9; /* Optional: background color */
+  border-radius: 8px; /* Optional: rounded corners */
+  cursor: pointer;
+}
+
+/* Dropdown Menu Styles */
+.dropdown-menu {
+  display: none; /* Hide by default */
+  position: absolute;
+  top: 100%; /* Position it directly below the user-info container */
+  left: 0; /* Align it to the left edge of the user-info container */
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  min-width: 150px; /* Adjust width as needed */
+  padding: 8px;
+  opacity: 0; /* Start with hidden dropdown */
+  transform: scaleY(0); /* Start with a scale of 0 for smooth appearance */
+  transform-origin: top; /* Scale from the top */
+  transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth transition */
+  z-index: 1001; /* Ensure it is above other elements */
+  font-size: 12px;
+}
+
+.dropdown-menu.show {
+  display: block; /* Show the menu when toggled */
+  opacity: 1; /* Fade in */
+  transform: scaleY(1); /* Scale to full size */
+  width: 216px
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 8px 16px;
+  color: #333;
+  text-decoration: none;
+}
+
+.dropdown-menu a:hover {
+  background-color: #f0f0f0;
+}
+
+
+
 /* Actions */
 .actions {
   display: flex;
@@ -788,4 +846,274 @@
   margin-top: 5px;
   max-width: 400px;
   line-height: 1.5;
+}
+
+
+/* Settings */
+
+.settings-container {
+  padding: 20px;
+}
+
+.settings-header {
+  display: flex;
+  justify-content: flex-start;
+  border-bottom: 1px solid #e0e0e0;
+  margin-bottom: 20px;
+}
+
+.settings-tabs {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+}
+
+.settings-tabs li {
+  margin-right: 20px;
+  padding-bottom: 10px;
+  cursor: pointer;
+}
+
+.settings-tabs .active-tab {
+  border-bottom: 2px solid #000;
+}
+
+/* Profile Section */
+.profile-section {
+  margin-top: 20px;
+}
+
+.profile-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.profile-card {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.profile-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 0; /* More padding for spacing */
+  border-bottom: 1px solid #e0e0e0;
+  align-items: center;
+}
+
+.profile-row:last-child {
+  border-bottom: none;
+}
+
+.profile-label {
+  font-weight: bold;
+  color: #757575; /* Gray color for the labels */
+}
+
+.profile-value {
+  font-weight: normal;
+  display: flex;
+  align-items: center; /* Ensures text and icons are aligned */
+  color: #212121; /* Darker color for values */
+}
+
+.flag-icon {
+  width: 24px; /* Increased size for better visibility */
+  height: 24px;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.status-icon {
+  width: 12px; /* Slightly larger for better visibility */
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.not-verified {
+  background-color: #f44336; /* Red color for 'Not verified' status */
+}
+
+.user-id {
+  display: flex;
+  align-items: center;
+}
+
+.user-id .copy-icon {
+  margin-left: 5px;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+
+.user-id .copy-icon:hover {
+  opacity: 1;
+}
+
+/* Shared Sections */
+.profile-section, .support-section, .security-section {
+  margin-top: 20px;
+}
+
+.profile-title, .support-title, .security-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.profile-card, .support-card, .security-cards, .device-section {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.profile-row, .security-card {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.profile-row:last-child, .security-card:last-child {
+  border-bottom: none;
+}
+
+.profile-label, .security-label {
+  font-weight: bold;
+}
+
+.profile-value, .security-value {
+  font-weight: normal;
+}
+
+.status-icon, .info-icon, .warning-icon {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.not-verified {
+  background-color: orange;
+}
+
+.flag-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.support-notice {
+  display: flex;
+  align-items: center;
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.support-notice p {
+  margin: 0;
+  padding-left: 10px;
+}
+
+.view-archived-btn {
+  float: right;
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.support-card {
+  display: flex;
+  align-items: center;
+}
+
+.support-image {
+  width: 150px;
+  height: 150px;
+}
+
+.support-content {
+  margin-left: 20px;
+}
+
+.support-button {
+  background-color: #1b1b1b;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.security-alert {
+  display: flex;
+  align-items: center;
+  background-color: #ffe0e0;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.security-alert p {
+  margin: 0;
+  padding-left: 10px;
+}
+
+.verify2-btn, .change-btn, .phone-verification-btn {
+  background-color: #007bff;
+  color: #ffffff;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.device-section {
+  margin-top: 30px;
+}
+
+.device-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.device-table th, .device-table td {
+  border: 1px solid #e0e0e0;
+  padding: 10px;
+  text-align: left;
+}
+
+.deactivate-section {
+  margin-top: 20px;
+  text-align: right;
+}
+
+.deactivate-btn {
+  background-color: #ff0000;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.contentsettings {
+  padding-left: 285px;
+  padding-right: 59px;
 }
