@@ -316,6 +316,7 @@
     padding-left: 0px;
     padding-right: 0px;
   }
+  
 
   .sidebar.collapsed {
     width: 180px; /* Adjust this width as needed */
@@ -362,13 +363,6 @@
   }
   
 }
-
-
-  /* content */
-
-/* General Styles */
-
-/* Currency Rates Container */
 /* Currency Rates Container */
 .currency-rate-container {
     display: flex;
@@ -853,6 +847,8 @@
 
 .settings-container {
   padding: 20px;
+  padding-left: 35px;
+  padding-right: 35px
 }
 
 .settings-header {
@@ -867,17 +863,37 @@
   padding: 0;
   margin: 0;
   display: flex;
+  position: relative;
 }
 
 .settings-tabs li {
   margin-right: 20px;
   padding-bottom: 10px;
   cursor: pointer;
+  position: relative;
+  transition: color 0.3s ease; /* Optional: smooth color transition */
 }
 
 .settings-tabs .active-tab {
-  border-bottom: 2px solid #000;
+  color: #000; /* Ensures active tab has the correct color */
 }
+
+.settings-tabs li::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background-color: transparent; /* Default to transparent when not active */
+  transition: background-color 0.3s ease, width 0.3s ease; /* Smooth transition */
+}
+
+.settings-tabs li.active-tab::after {
+  background-color: #000; /* Border color for active tab */
+  width: 100%;
+}
+
 
 /* Profile Section */
 .profile-section {
@@ -922,9 +938,11 @@
 }
 
 .profile-value {
-  font-weight: normal;
-  color: #212121; /* Darker color for values */
+  display: flex;  /* Aligns children inline */
+  align-items: center;  /* Centers children vertically */
+  color: #212121;  /* Darker color for values */
 }
+
 
 .profile-row > div {
   flex: 1; /* Ensures flex containers within rows take up equal space */
@@ -987,6 +1005,117 @@
   margin-bottom: 20px;
 }
 
+.first-section {
+  display: flex;
+  gap: 20px; /* Add spacing between the columns */
+}
+
+.security-cards {
+  flex: 1; /* Ensures equal width */
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.security-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #e0e0e0;
+  gap:15px
+}
+
+.security-card:last-child {
+  border-bottom: none; /* Remove border for last item */
+}
+
+.security-card p {
+  font-size: 16px;
+  font-weight: normal;
+  color: #333;
+}
+
+.note {
+   color: #333;
+}
+
+/* changes */
+.verify-btn, .change-btn {
+  background-color: #f5f5f5;
+  color: #333;
+  padding: 8px 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.verify-btn:hover, .change-btn:hover {
+  background-color: #e0e0e0;
+}
+
+.security-info {
+  text-align: center;
+}
+
+.security-info h3 {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.security-icon img {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 10px;
+}
+
+.security-description {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.verification-btn {
+  background-color: #001f3f;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.verification-btn:hover {
+  background-color: #001a34;
+}
+
+
+.support-image {
+  width: 100%;
+  height: auto;
+}
+
+.support-content {
+margin-left: 20px;
+}
+
+.support-button {
+  background-color: #1b1b1b;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+
+
 .profile-card, .support-card, .security-cards, .device-section {
   background: #fff;
   border: 1px solid #e0e0e0;
@@ -998,8 +1127,9 @@
 .profile-row, .security-card {
   display: flex;
   justify-content: space-between;
-  padding: 10px 0;
-  border-bottom: 1px solid #e0e0e0;
+  padding: 20px 0;
+  padding-bottom: 20px;
+   border-bottom: 1px solid #e0e0e0;
 }
 
 .profile-row:last-child, .security-card:last-child {
@@ -1033,19 +1163,29 @@
   vertical-align: middle;
 }
 
+/* Styles for support notice */
 .support-notice {
   display: flex;
-  align-items: center;
-  background-color: #f0f0f0;
+  align-items: center; /* Vertically align items */
+  background-color: #ffffff;
   padding: 10px;
   border-radius: 5px;
   margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+
+}
+
+.info-icon img {
+  width: 24px; /* Adjust size as needed */
+  height: 24px;
+  margin-right: 20px; /* Space between image and text */
+  margin-top: 5px;
 }
 
 .support-notice p {
   margin: 0;
-  padding-left: 10px;
 }
+
 
 .view-archived-btn {
    background-color: #ffffff;
@@ -1076,63 +1216,144 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin-top: 10px;
-}
+ }
 
+/* Styles for security alert */
 .security-alert {
   display: flex;
-  align-items: center;
-  background-color: #ffe0e0;
+  align-items: center; /* Vertically align items */
+  background-color: #ffffff;
   padding: 10px;
   border-radius: 5px;
   margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+
+}
+
+.security-alert img {
+  width: 24px; /* Adjust size as needed */
+  height: 24px;
+  margin-right: 10px; /* Space between image and text */
+}
+
+.security-alert div {
+  display: block;
+  border-left: 2px solid #333333; /* Vertical divider */
+  padding-left: 10px; /* Space between divider and text */
 }
 
 .security-alert p {
   margin: 0;
-  padding-left: 10px;
 }
 
-.verify2-btn, .change-btn, .phone-verification-btn {
-  background-color: #007bff;
-  color: #ffffff;
+
+.verify2-btn,  .phone-verification-btn {
+  background-color: transparent;
+  color: #000;
   padding: 5px 10px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  border: 1px solid #000;
+  width: 150px; /* Set a fixed width */
+  text-align: center;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; /* Smooth transition */
+  cursor: pointer;
+  margin-left: 10px;
 }
+
+/* Hover effect */
+.verify2-btn:hover,  .phone-verification-btn:hover {
+  background-color: #000; /* Change background color on hover */
+  color: #fff; /* Change text color to white on hover */
+  border-color: #000; /* Keep the border black */
+}
+
+@media (max-width: 600px) {
+  .verify2-btn, .change-btn, .phone-verification-btn {
+    width: 100%; /* Set width to 100% for smaller screens */
+  }
+}
+
 
 .device-section {
   margin-top: 30px;
 }
 
+.device-table-container {
+  width: 100%;
+  overflow-x: auto; /* Enable horizontal scrolling */
+}
+
 .device-table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 10px;
+  min-width: 600px; /* Set a minimum width so that the table doesn't shrink too much */
 }
 
 .device-table th, .device-table td {
   border: 1px solid #e0e0e0;
   padding: 10px;
   text-align: left;
+  white-space: nowrap; /* Prevent text from wrapping in the cell */
+}
+
+
+/* Make sure each column has the same width */
+.device-table th, .device-table td {
+  width: 25%; /* Divide the width equally for four columns */
+}
+
+
+.deactivate-section-container {
+  background-color: #ffffff; /* White background for the container */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  margin-top: 20px; /* Add margin at the top to separate it from other content */
 }
 
 .deactivate-section {
-  margin-top: 20px;
-  text-align: right;
+  display: flex;
+  justify-content: space-between; /* Ensure the text and button are at opposite ends */
+  align-items: center; /* Vertically center align the text and button */
+}
+
+.deactivate-section p {
+  font-size: 16px;
+  color: #333;
+  margin-right: 20px; /* Add spacing between text and button */
+  flex: 1; /* Make the text take up the available space */
 }
 
 .deactivate-btn {
-  background-color: #ff0000;
-  color: #ffffff;
+  background-color: #E93948;
+  color: #fff;
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  white-space: nowrap; /* Prevent button text from wrapping */
 }
 
+.deactivate-btn:hover {
+  background-color: #e60000;
+}
+
+
+/* Set padding default untuk semua ukuran layar */
 .contentsettings {
   padding-left: 285px;
   padding-right: 59px;
 }
+
+
+
+/* Hapus padding ketika layar lebar minimal 769px */
+@media (min-width: 769px) {
+  .contentsettings {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
