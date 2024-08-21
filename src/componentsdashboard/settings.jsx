@@ -57,47 +57,52 @@ function Settings() {
 
                         {activeTab === 'profile' && (
     <div className="profile-section">
-        <h2 className="profile-title">Profile</h2>
-        <div className="profile-card">
-            <div className="profile-row">
+    <h2 className="profile-title">Profile</h2>
+    <div className="profile-card">
+        <div className="profile-row">
+            <div>
                 <div className="profile-label">Name</div>
                 <div className="profile-value">deo doo</div>
             </div>
-            <div className="profile-row">
+            <div>
                 <div className="profile-label">User ID</div>
                 <div className="profile-value user-id">
                     NNM1YF 
                     <img src="/images/copy-icon.png" alt="Copy ID" className="copy-icon" />
                 </div>
             </div>
-            <div className="profile-row">
+        </div>
+        <div className="profile-row">
+            <div>
                 <div className="profile-label">Email</div>
                 <div className="profile-value">leideoviko@gmail.com</div>
             </div>
-            <div className="profile-row">
+            <div>
                 <div className="profile-label">Account status</div>
                 <div className="profile-value">
                     <span className="status-icon not-verified"></span>Not verified
                 </div>
             </div>
-            <div className="profile-row">
+        </div>
+
+        <div className="profile-row">
+            <div>
                 <div className="profile-label">Language</div>
-                <div className="profile-value">
-                    <img src="/images/us-flag.png" alt="English" className="flag-icon" />English
-                </div>
+                <div className="profile-value">English</div>
             </div>
-            <div className="profile-row">
+            <div>
                 <div className="profile-label">Main currency</div>
-                <div className="profile-value">
-                    <img src="/images/eu-flag.png" alt="EUR" className="flag-icon" />EUR
-                </div>
+                <div className="profile-value">EUR</div>
             </div>
-            <div className="profile-row">
+        </div>
+        <div className="profile-row">
+            <div>
                 <div className="profile-label">Invited by</div>
                 <div className="profile-value">None</div>
             </div>
         </div>
     </div>
+</div>
 )}
 
 

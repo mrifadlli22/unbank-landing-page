@@ -104,17 +104,17 @@ function UnbankDashboard() {
     setIsMobileMenuActive(!isMobileMenuActive);
   };
 
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth > 768) {
-        setIsMobileMenuActive(false);
-      }
-    };
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
+    useEffect(() => {
+      const handleResize = () => {
+        if (window.innerWidth > 768) {
+          setIsMobileMenuActive(false);
+        }
+      };
+      window.addEventListener('resize', handleResize);
+      return () => {
+        window.removeEventListener('resize', handleResize);
+      };
+    }, []);
 
   
   return (
