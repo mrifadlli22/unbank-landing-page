@@ -1357,3 +1357,221 @@ margin-left: 20px;
   }
 }
 
+/* verification */
+
+.verification-container {
+  max-width: 1200px;
+  width: 1120px;
+   padding: 40px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  margin-top: 90px;
+  display: flex; /* Tambahkan flexbox */
+  justify-content: center; /* Pusatkan konten secara horizontal */
+  align-items: center; /* Pusatkan konten secara vertikal */
+  min-height: 500px; /* Tentukan tinggi minimum yang sama untuk kedua section */
+
+}
+
+.progress-bar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+
+.step {
+  flex: 1;
+  text-align: center;
+  position: relative;
+  color: #999;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Pusatkan ikon dan teks secara horizontal */
+}
+
+.step.completed {
+  color: #28a745;
+}
+
+.step::before {
+  content: '';
+  width: 12px;
+  height: 12px;
+  background-color: #999;
+  border-radius: 50%;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+.step.completed::before {
+  background-color: #28a745;
+}
+
+.step + .step::after {
+  content: '';
+  width: 100%;
+  height: 2px;
+  background-color: #999;
+  position: absolute;
+  top: 6px;
+  left: -50%;
+  z-index: -1;
+}
+
+.step.completed + .step::after {
+  background-color: #28a745;
+}
+
+.welcome-section,
+.phone-verification-section {
+  flex: 1; /* Membuat kedua section mengambil ruang yang sama */
+
+  text-align: center;
+}
+
+.welcome-content{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap:20px;
+  min-height: 200px; /* Tentukan tinggi minimum yang sama */
+  width: 100%; /* Pastikan kedua konten memiliki lebar yang sama */
+
+}
+
+.phone-verification-content {
+  display: block;
+  align-items: center;
+  justify-content: center;
+  gap:20px;
+  min-height: 200px; /* Tentukan tinggi minimum yang sama */
+  width: 100%; /* Pastikan kedua konten memiliki lebar yang sama */
+}
+
+.welcome-image {
+  width: 340px;
+}
+
+.welcome-text {
+  width: 330px;
+  text-align: left;
+  margin-right: 30px;
+}
+
+.welcome-text p {
+  margin-bottom: 20px;
+  font-size: 15px;
+}
+
+.btn {
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+   display: block;
+  width: 100%;
+}
+
+.start-verification-btn {
+  background-color: #001f3f;
+  color: #fff;
+  border: none;
+}
+
+.continue-later-btn {
+  background-color: #f5f5f5;
+  color: #333;
+  border: 1px solid #ddd;
+}
+
+.send-code-btn {
+  background-color: #6c757d;
+  color: #fff;
+  border: none;
+ }
+
+.phone-input-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.phone-flag {
+  padding: 10px;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 5px 0 0 5px;
+}
+
+.phone-input,
+.phone-number-input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 0 5px 5px 0;
+  outline: none;
+}
+
+.phone-input {
+  width: 80px;
+  background-color: #f5f5f5;
+  border-right: none;
+}
+
+.phone-number-input {
+  flex: 1;
+}
+
+.content2 {
+  flex-grow: 1;
+  padding-top: 90px;
+  padding: 16px;
+  /* padding-left: 285px; */
+  padding-right: 0px;
+  padding-top: 0px;
+  background-color: #F4F6F9;
+  overflow-y: auto; /* Ensure content scrolls if it exceeds the viewport height */
+  width: 100%;
+  height: 100vh; /* Adjust height to fill the remaining space, accounting for the header height */
+  height: 731px;
+}
+
+/* Untuk layar dengan lebar maksimum 768px (tablet dan ponsel) */
+@media (max-width: 768px) {
+  .verification-container {
+    width: 100%; /* Buat container menyesuaikan lebar layar */
+    padding: 20px; /* Kurangi padding agar sesuai dengan layar lebih kecil */
+    margin-top: 20px; /* Kurangi margin atas */
+  }
+
+  .phone-verification-content {
+    width: 100%; /* Buat konten sesuai dengan lebar container */
+    font-size: 14px; /* Sesuaikan ukuran font untuk layar kecil */
+  }
+
+  .welcome-content {
+    flex-direction: column; /* Susun gambar dan teks secara vertikal */
+    align-items: center; /* Pusatkan elemen secara horizontal */
+    text-align: center; /* Teks di tengah */
+    gap:10px;
+    max-width:100%;
+ 
+  }
+
+  .welcome-image, .welcome-text {
+    width: 100%; /* Buat elemen mengambil lebar penuh */
+    margin-right: 0; /* Hilangkan margin kanan */
+    margin-bottom: 20px; /* Tambahkan jarak di bawah gambar */
+  }
+
+  .btn {
+    font-size: 14px; /* Sesuaikan ukuran font tombol */
+    padding: 10px 20px; /* Sesuaikan padding tombol */
+  }
+
+ 
+
+ 
+}

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Sidebar from './sidebar';
 import Header from './header';
 import './app.css';
+import { useNavigate } from 'react-router-dom';
+
 
 
 function Ticker() {
@@ -15,6 +17,13 @@ function Ticker() {
 }
  
 function OverviewBox() {
+
+  const navigate = useNavigate(); // Inisialisasi navigate
+
+  const handleVerifyClick = () => {
+      navigate('/verification'); // Arahkan ke /verification saat tombol diklik
+  };
+
   return (
     <div className="overview-box">
       <div className="overview-icon">
@@ -24,7 +33,9 @@ function OverviewBox() {
         <div className="overview-title">Account verification not complete</div>
         <div className="overview-subtext">Please verify your account to unlock all features.</div>
       </div>
-      <button className="overview-button">Verify →</button>
+      <button className="overview-button" onClick={handleVerifyClick}>
+            Verify →
+        </button>
     </div>
   );
 }
@@ -115,6 +126,12 @@ function UnbankDashboard() {
         window.removeEventListener('resize', handleResize);
       };
     }, []);
+
+    const navigate = useNavigate(); // Inisialisasi navigate
+
+    const handleVerifyClick = () => {
+        navigate('/verification'); // Arahkan ke /verification saat tombol diklik
+    };
 
   
   return (

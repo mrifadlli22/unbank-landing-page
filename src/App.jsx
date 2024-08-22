@@ -13,6 +13,7 @@ import Swap from './componentsdashboard/swap';
 import Xcrow from './componentsdashboard/xcrow';
 import History from './componentsdashboard/history';
 import Help from './componentsdashboard/help';
+import Verification from './componentsdashboard/verification';
 
 
 function App() {
@@ -34,6 +35,9 @@ function App() {
           <Route path='/profile' element={<Settings />} /> 
           <Route path='/support' element={<Settings />} /> 
           <Route path='/security' element={<Settings />} /> 
+          <Route path='/verification' element={<Verification />} /> 
+          <Route path='/welcome' element={<Verification />} /> 
+          <Route path='/phoneverification' element={<Verification />} /> 
           <Route path='/swap' element={<Swap />} /> 
           <Route path='/xcrow' element={<Xcrow />} /> 
           <Route path='/history' element={<History />} /> 
