@@ -564,6 +564,21 @@
   height: 30px; /* Ukuran gambar avatar */
   border-radius: 50%; /* Membuat gambar bulat */
   object-fit: cover; /* Memastikan gambar tidak terdistorsi */
+  transition: box-shadow 0.3s ease, transform 0.3s ease; /* Smooth transition for hover effects */
+
+}
+
+.avatar:hover {
+  opacity: 0.8; /* Slight change on hover for all avatars */
+}
+
+.avatar-3 {
+  border: 2px solid #ccc; /* Optional: add a border for better visibility */
+}
+
+.avatar-3:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Add box shadow on hover */
+   cursor: pointer;
 }
 
 
@@ -1425,7 +1440,7 @@ margin-left: 20px;
 }
 
 .welcome-section,
-.phone-verification-section {
+.phone-verification-section, .identity-verification-section {
   flex: 1; /* Membuat kedua section mengambil ruang yang sama */
 
   text-align: center;
@@ -1449,6 +1464,16 @@ margin-left: 20px;
   min-height: 200px; /* Tentukan tinggi minimum yang sama */
   width: 100%; /* Pastikan kedua konten memiliki lebar yang sama */
 }
+
+.identity-verification-content {
+  display: block;
+  align-items: center;
+  justify-content: center;
+  gap:20px;
+  min-height: 200px; /* Tentukan tinggi minimum yang sama */
+  width: 100%; /* Pastikan kedua konten memiliki lebar yang sama */
+}
+
 
 .welcome-image {
   width: 340px;
@@ -1570,8 +1595,63 @@ margin-left: 20px;
     font-size: 14px; /* Sesuaikan ukuran font tombol */
     padding: 10px 20px; /* Sesuaikan padding tombol */
   }
-
  
+}
 
- 
+/* Transfer */
+
+/* transfer.css */
+.transfer-container {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.transfer-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.transfer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.transfer-flag {
+  margin-bottom: 20px;
+}
+
+.flag-image {
+  width: 100px;
+  height: 100px;
+}
+
+.transfer-form {
+  width: 100%;
+  max-width: 400px;
+}
+
+.transfer-form label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.transfer-form input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.transfer-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.transfer-button:hover {
+  background-color: #0056b3;
 }

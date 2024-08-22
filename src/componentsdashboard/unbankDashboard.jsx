@@ -41,25 +41,38 @@ function OverviewBox() {
 }
 
 function CurrencyCard({ amount, currency, flag, avatars }) {
-    return (
-      <div className="currency-card">
-        <div className="currency-details">
-          <div className="currency-amount">{amount}</div>
-          <div className="currency-label">{currency}</div> {/* Keterangan mata uang */}
-        </div>
-        <img src={flag} alt={currency} className="currency-flag" /> {/* Gambar bendera */}
-        <div className="currency-actions">
-          {/* Action icons here */}
-        </div>
-        {/* Container for avatars */}
-        <div className="currency-avatars">
-          {avatars && avatars.map((avatar, index) => (
-            <img key={index} src={avatar.src} alt={avatar.alt} className="avatar" />
-          ))}
-        </div>
+  const navigate = useNavigate();
+
+  const handleAvatarClick = (flag) => {
+    navigate('/transfer', { state: { flag } });
+  };
+
+  return (
+    <div className="currency-card">
+      <div className="currency-details">
+        <div className="currency-amount">{amount}</div>
+        <div className="currency-label">{currency}</div>
       </div>
-    );
-  }
+      <img src={flag} alt={currency} className="currency-flag" />
+      <div className="currency-actions">
+        {/* Action icons here */}
+      </div>
+      <div className="currency-avatars">
+        {avatars && avatars.map((avatar, index) => (
+          <img
+            key={index}
+            src={avatar.src}
+            alt={avatar.alt}
+            className={`avatar ${index === 2 ? 'avatar-3' : ''}`} // Apply unique class for the third avatar
+            onClick={() => index === 2 && handleAvatarClick(flag)} // Handle click for Avatar 3
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+
 
   function Digital({ amountDig, currencyDig, flagDig, descDig, avatars}) {
     return (

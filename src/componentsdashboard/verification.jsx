@@ -8,6 +8,8 @@ import './app.css';
 function Verification() {
     const [isMobileMenuActive, setIsMobileMenuActive] = useState(false);
     const [currentStep, setCurrentStep] = useState('welcome');
+    const [phoneNumber, setPhoneNumber] = useState('');
+    const [otp, setOtp] = useState('');  // For storing OTP entered by the user
     const navigate = useNavigate(); // Inisialisasi navigate
 
     const handleStartVerification = () => {
@@ -22,6 +24,23 @@ function Verification() {
     const toggleSidebar = () => {
         setIsMobileMenuActive(!isMobileMenuActive);
     };
+
+    const handleSendCode = () => {
+        // Simulate sending the code and receiving an OTP
+        setCurrentStep('identityVerification');
+        // Optionally, you could also set a state for the received OTP (if it's part of the simulation)
+    };
+
+    const handleOtpChange = (e) => {
+        setOtp(e.target.value);
+    };
+
+    const handleOtpSubmit = () => {
+        // Here, you would validate the OTP
+        console.log('OTP entered:', otp);  // For demonstration
+        // Proceed to the next step or show error
+    };
+
 
     useEffect(() => {
         const handleResize = () => {
@@ -81,11 +100,43 @@ function Verification() {
         <input type="text" className="phone-input" value="+62" readOnly style={{ width: '60px', padding: '8px' }} />
         <input type="text" className="phone-number-input" placeholder="Enter your phone number" style={{ flex: 1, padding: '8px', fontSize: '14px' }} />
       </div>
-      <button className="btn send-code-btn" style={{ fontSize: '14px', padding: '10px 20px', marginBottom: '10px' }}>Send Code</button>
-      <button className="btn continue-later-btn" onClick={handleContinueLater}>Continue Later</button>
+      <button className="btn send-code-btn" style={{ fontSize: '14px', padding: '10px 20px', marginBottom: '10px' }} onClick={handleSendCode}>Send Code</button>
+      <button className="btn continue-later-btn" style={{ fontSize: '14px', padding: '10px 20px', marginBottom: '10px' }} onClick={handleContinueLater}>Continue Later</button>
       </div>
   </div>
 )}
+
+{currentStep === 'identityVerification' && (
+    <div className="phone-verification-section">
+    <div className="progress-bar">
+      <div className="step completed">Welcome</div>
+      <div className="step completed">Phone Verification</div>
+      <div className="step completed">Identity Verification</div>
+      <div className="step">Know Your Customer</div>
+    </div>
+    <h1>Identity Verification</h1>
+    <div className="phone-verification-content" style={{ padding: '10px', maxWidth: '400px', margin: '0 auto' }}>
+  
+      <p>Please enter the OTP you received:</p>
+      <input style={{ fontSize: '14px', padding: '10px 20px', marginBottom: '10px' }} type="text" value={otp} onChange={handleOtpChange} placeholder="Enter OTP" className="otp-input" />
+      <button style={{ fontSize: '14px', padding: '10px 20px', marginBottom: '10px' }} className="btn" onClick={handleOtpSubmit}>Verify OTP</button>      </div>
+  </div>
+    // <div className="identity-verification-section">
+    //     <div className="progress-bar">
+    //         <div className="step completed">Welcome</div>
+    //         <div className="step completed">Phone Verification</div>
+    //         <div className="step completed">Identity Verification</div>
+    //         <div className="step">Know Your Customer</div>
+    //     </div>
+    //     <h1>Identity Verification</h1>
+    //     <div className="identity-verification-content">
+    //         <p>Please enter the OTP you received:</p>
+    //         <input style={{ fontSize: '14px', padding: '10px 20px', marginBottom: '10px' }} type="text" value={otp} onChange={handleOtpChange} placeholder="Enter OTP" className="otp-input" />
+    //         <button style={{ fontSize: '14px', padding: '10px 20px', marginBottom: '10px', width: '150px' }} className="btn" onClick={handleOtpSubmit}>Verify OTP</button>
+    //     </div>
+    // </div>
+)}
+
 
               </div>
 

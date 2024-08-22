@@ -14,6 +14,7 @@ import Xcrow from './componentsdashboard/xcrow';
 import History from './componentsdashboard/history';
 import Help from './componentsdashboard/help';
 import Verification from './componentsdashboard/verification';
+import Transfer from './componentsdashboard/transfer';
 
 
 function App() {
@@ -42,6 +43,8 @@ function App() {
           <Route path='/xcrow' element={<Xcrow />} /> 
           <Route path='/history' element={<History />} /> 
           <Route path='/help' element={<Help />} /> 
+          <Route path='/transfer' element={<Transfer />} /> 
+
         </Routes>
       </BrowserRouter>
     </div>
