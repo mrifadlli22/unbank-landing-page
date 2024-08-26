@@ -1600,58 +1600,423 @@ margin-left: 20px;
 
 /* Transfer */
 
-/* transfer.css */
 .transfer-container {
+  margin-top: 30px;
+  background-color: #fff;
+  border-radius: 8px;
   padding: 20px;
-  font-family: Arial, sans-serif;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .transfer-header {
-  text-align: center;
-  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+   text-align: center;
 }
+
 
 .transfer-content {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  gap: 10px;
 }
 
-.transfer-flag {
-  margin-bottom: 20px;
+.transfer-info {
+  margin-left:38px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 
 .flag-image {
   width: 100px;
   height: 100px;
+  border-radius: 50%;
 }
 
-.transfer-form {
-  width: 100%;
-  max-width: 400px;
+.balance-info {
+
+  display: flex;
+  flex-direction: column;
+  font-size: 20px;
+  gap: 5px;
 }
 
-.transfer-form label {
-  display: block;
-  margin-bottom: 10px;
+ .equivalent, .label {
+  font-size: 14px;
+  color: #666;
 }
 
-.transfer-form input {
-  width: 100%;
-  padding: 10px;
+.balance span, .equivalent span, .label span {
+  color: #333;
+}
+
+.settingsTransfer-container {
+  padding: 20px;
+  padding-left: 35px;
+  padding-right: 35px
+}
+
+.settingsTransfer-header {
+  display: flex;
+  justify-content: flex-start;
+  border-bottom: 1px solid #e0e0e0;
   margin-bottom: 20px;
 }
 
-.transfer-button {
+.settingsTransfer-tabs {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  position: relative;
+  gap:15px;
+}
+
+.settingsTransfer-tabs li {
+  cursor: pointer;
+  padding: 10px;
+  font-size: 16px;
+  color: #666;
+  transition: color 0.3s;
+}
+
+.settingsTransfer-tabs li.active-tab {
+  color: #333333;
+  border-bottom: 2px solid #333333;
+}
+
+.settingsTransfer-tabs li:hover {
+  color: #333333;
+}
+
+.receive-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.receive-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch; /* Ensure both sides stretch to the same height */
+}
+
+.left-section{
+  gap: 20px;
+}
+
+.left-section,
+.right-section {
+  flex: 1; /* Ensure both sections take equal space */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Distribute content evenly within the section */
+}
+
+.vertical-divider {
+  width: 1px;
+  background-color: #ccc;
+  margin: 0 20px; /* Space around the divider */
+}
+
+.qr-codes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1; /* Ensure the QR code section takes the full height */
+}
+
+.qr-codes img {
+  width: 250px;
+  height: 250px;
+  margin-bottom: 10px;
+}
+
+.qr-codes p {
+  text-align: center;
+  font-size: 14px;
+  color: #333;
+  margin-top: 0;
+}
+
+
+/* send content */
+
+.send-section {
+  margin-top: 20px;
+}
+
+.send-content {
+  display: flex;
+  justify-content: left; /* Center the left section */
+  align-items: flex-start;
+}
+
+.left-section {
+  flex: 1;
+  width: 100%; /* Set a maximum width for better alignment */
+}
+
+.vertical-divider {
+  width: 1px;
+  background-color: #ccc;
+  margin: 0 20px; /* Space around the divider */
+}
+
+.qr-code {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1; /* Ensure the QR code section takes the full height */
+}
+
+.qr-code img {
+  max-width: 150px;
+  max-height: 150px;
+  margin-bottom: 10px;
+}
+
+.qr-code p {
+  text-align: center;
+  font-size: 14px;
+  color: #333;
+  margin-top: 0;
+}
+
+.wallet-address .address-info input,
+.amount-send .amount-info input {
   width: 100%;
   padding: 10px;
-  background-color: #007bff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.send-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.send-button {
+  padding: 10px 20px;
+  background-color: #333333;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.send-button:hover {
+  background-color: #000;
+}
+
+
+/* Custom select styles */
+.custom-select {
+  position: relative;
+  font-family: Arial;
+  width: 100%;
   cursor: pointer;
 }
 
-.transfer-button:hover {
-  background-color: #0056b3;
+.select-selected {
+  background-color: #f9f9f9;
+  color: #333;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
+
+.select-selected:after {
+  content: "";
+  position: absolute;
+  top: 16px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-color: #333 transparent transparent transparent;
+}
+
+.select-arrow-active:after {
+  border-color: transparent transparent #333 transparent;
+  top: 10px;
+}
+
+.select-items {
+  position: absolute;
+  background-color: #fff;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 99;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.select-items div {
+  color: #333;
+  padding: 10px;
+  cursor: pointer;
+  background-color: #fff;
+  border-bottom: 1px solid #eee;
+}
+
+.select-items div:hover {
+  background-color: #f1f1f1;
+}
+
+.same-as-selected {
+  background-color: #e6f7ff;
+}
+
+ 
+
+
+
+
+.wallet-address .address-info {
+  display: flex;
+  gap: 10px;
+}
+
+.wallet-address input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.wallet-address button {
+  padding: 10px;
+  background-color: #333333;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.wallet-address button:hover {
+  background-color: #333333;
+}
+
+.qr-code {
+  text-align: center;
+}
+
+.qr-code img {
+  width: 150px;
+  height: 150px;
+  margin-top: 10px;
+}
+
+.address-note {
+  background-color: #f8f9fa;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #666;
+  border-left: 4px solid #333333;
+ }
+
+.address-note ul {
+  padding-left: 20px;
+  list-style-type: disc; /* Default bullet point style */
+  color: #333;
+}
+
+.address-note ul li {
+  margin-bottom: 10px; /* Space between bullet points */
+  font-size: 16px; /* Adjust text size as needed */
+  line-height: 1.5;
+}
+
+/* trade section */
+/* Trade Section Styles */
+.trade-section {
+  margin-top: 20px;
+}
+
+.trade-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f5f7fa;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  padding: 15px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.trade-option:hover {
+  background-color: #e6f7ff;
+}
+
+.trade-option.active {
+  background-color: #e6f7ff;
+  border-left: 3px solid #1e90ff;
+}
+
+.trade-details {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.trade-title {
+  display: flex;
+  flex-direction: column;
+}
+
+.trade-title span:first-child {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.trade-title span:last-child {
+  font-size: 14px;
+  color: #888;
+}
+
+.trade-icon {
+  display: flex;
+  align-items: center;
+}
+
+.trade-icon img {
+  width: 24px;
+  height: 24px;
+  transition: transform 0.3s ease;
+}
+
+.trade-option:hover .trade-icon img {
+  transform: translateX(5px); /* Move icon to the right on hover */
+}
+
+
+@media screen and (max-width: 768px) {
+  .transfer-info {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .settingsTransfer-tabs {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+

@@ -15,6 +15,7 @@ import History from './componentsdashboard/history';
 import Help from './componentsdashboard/help';
 import Verification from './componentsdashboard/verification';
 import Transfer from './componentsdashboard/transfer';
+import TransferDigital from './componentsdashboard/transferdigital';
 
 
 function App() {
@@ -44,7 +45,7 @@ function App() {
           <Route path='/history' element={<History />} /> 
           <Route path='/help' element={<Help />} /> 
           <Route path='/transfer' element={<Transfer />} /> 
-
+          <Route path='/transfer-crypto' element={<TransferDigital />} /> 
         </Routes>
       </BrowserRouter>
     </div>

@@ -4,12 +4,12 @@ import Header from './header';
 import './app.css';
 import { useLocation } from 'react-router-dom';
 
-function Transfer() {
+function TransferDigital() {
   const location = useLocation();
 
   const [isMobileMenuActive, setIsMobileMenuActive] = useState(false);
-  const [activeTab, setActiveTab] = useState("topup"); // Set active tab based on query string
-  const { flag, currency, amount } = location.state || {}; // Get flag, currency, and amount from navigation state
+  const [activeTab, setActiveTab] = useState("receive"); // Set active tab based on query string
+  const { flagDig, currencyDig, amountDig, descDig } = location.state || {}; // Get flag, currency, and amount from navigation state
   const [selectedNetwork, setSelectedNetwork] = useState("Ethereum (ERC-20)"); // Default option
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -40,15 +40,15 @@ function Transfer() {
           <div className="contentdash">
             <div className="transfer-container">
               <div className="transfer-header">
-                <h1>{currency}</h1>
+                <h1>{descDig}</h1>
               </div>
               <div className="transfer-content">
                 <div className="transfer-info">
-                  <img src={flag} alt="Currency Flag" className="flag-image" />
+                  <img src={flagDig} alt="Digital Flag" className="flag-image" />
                   <div className="balance-info">
                     <div className="balance">
                       <span>Balance: </span>
-                      <span>{amount}</span>
+                      <span>{amountDig}</span>
                     </div>
                     <div className="equivalent">
                       <span>Equivalent: </span>
@@ -63,19 +63,19 @@ function Transfer() {
                 <div className="settingsTransfer-container">
                   <div className="settingsTransfer-header">
                     <ul className="settingsTransfer-tabs">
-                      <li className={activeTab === "topup" ? "active-tab" : ""} onClick={() => setActiveTab("topup")}>
-                        Top-Up
+                      <li className={activeTab === "receive" ? "active-tab" : ""} onClick={() => setActiveTab("receive")}>
+                        Receive
                       </li>
-                      <li className={activeTab === "exchange" ? "active-tab" : ""} onClick={() => setActiveTab("exchange")}>
-                        Exchange
+                      <li className={activeTab === "send" ? "active-tab" : ""} onClick={() => setActiveTab("send")}>
+                        Send
                       </li>
-                      <li className={activeTab === "transfer" ? "active-tab" : ""} onClick={() => setActiveTab("transfer")}>
-                        Transfer
+                      <li className={activeTab === "trade" ? "active-tab" : ""} onClick={() => setActiveTab("trade")}>
+                        Trade
                       </li>
                     </ul>
                   </div>
 
-                  {activeTab === "topup" && (
+                  {activeTab === "receive" && (
   <div className="receive-section">
     <div className="receive-content">
       <div className="left-section">
@@ -120,68 +120,73 @@ function Transfer() {
       <div className="right-section">
         <div className="qr-codes">
           <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/0b49fd22c9c3e25246a9bc6687ae8b09d4ed999de7c9825f1b5b548b3fd1bde5" alt="QR Code" /> {/* Replace with actual QR code image */}
-          <p>Your {currency} ({networkType}) Address</p> {/* Dynamic QR code description */}
+          <p>Your {currencyDig} ({networkType}) Address</p> {/* Dynamic QR code description */}
         </div>
       </div>
     </div>
   </div>
 )}
-                  {activeTab === "exchange" && (
-                <div className="support-section">
-                  <div className="security-alert">
-                    <span>
-                      <img style={{ marginLeft: "5px" }} src="./Images/i.png" />
-                    </span>
-                    <div>
-                      <p>
-                        We're experiencing high volumes of inquiries, resulting
-                        in longer response times than we'd hoped for. We aim to
-                        reply to you within 2 working days.
-                      </p>
-                    </div>
+
+{activeTab === "send" && (
+  <div className="send-section">
+    <div className="send-content">
+      <div className="left-section">
+        <div className="network-selection">
+          <label>Blockchain Network</label>
+          <div className="custom-select" onClick={handleDropdownClick}>
+            <div className={`select-selected ${isDropdownOpen ? "select-arrow-active" : ""}`}>
+              {selectedNetwork}
+            </div>
+            {isDropdownOpen && (
+              <div className="select-items select-hide">
+                {networkoptions.map((option, index) => (
+                  <div
+                    key={index}
+                    className={option === selectedNetwork ? "same-as-selected" : ""}
+                    onClick={() => handleOptionClick(option)}
+                  >
+                    {option}
                   </div>
-                  <div className="section">
-                    <div
-                      style={{ marginBottom: "25px" }}
-                      className="section-header-container"
-                    >
-                      <div className="section-header">Active Transactions</div>
-                      <div className="divider2"></div>
-                      <button className="see-all-transactions-btn">
-                        View Archived
-                      </button>
-                    </div>
-                    <div className="support-card">
-                      <img
-                        style={{ width: "245px" }}
-                        src="./Images/Image.png"
-                        alt="Contact Support"
-                        className="support-image"
-                      />
-                      <div className="support-content">
-                        <h3 style={{ marginTop: "0px" }}>
-                          Contact Our Support
-                        </h3>
-                        <p>
-                          In case you encounter any issues or require assistance
-                          with your account, please don't hesitate to contact
-                          us.
-                        </p>
-                        <button className="support-button">
-                          Contact Our Support
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )}
-             {activeTab === "transfer" && (
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+        <div className="wallet-address">
+          <label>Recipient Wallet Address</label>
+          <div className="address-info">
+            <input type="text" placeholder="Enter recipient's wallet address" />
+            <button onClick={() => navigator.clipboard.writeText("Recipient Address Copied!")}>Copy</button>
+          </div>
+        </div>
+        <div className="amount-send">
+          <label>Amount to Send</label>
+          <div className="amount-info">
+            <input type="text" placeholder={`Enter amount in ${currencyDig}`} />
+          </div>
+        </div>
+        <div className="address-note">
+          <ul>
+            <li>Ensure the recipient's wallet address is correct before sending.</li>
+            <li>Minimum transfer amount is 10 {currencyDig}. Lower amounts will be declined.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div className="send-actions">
+      <button className="send-button">Send {currencyDig}</button>
+    </div>
+  </div>
+)}
+
+
+             {activeTab === "trade" && (
   <div className="trade-section">
     <div className="trade-option">
       <div className="trade-details">
         <div className="trade-title">
-          <span>To your {currency} bank account</span>
-          <span>SEPA Transfer in {currency}</span>
+          <span>Buy USDT</span>
+          <span>Fiat to crypto conversion.</span>
         </div>
         <div className="trade-icon">
           <i className="fas fa-chevron-right"></i>
@@ -191,8 +196,19 @@ function Transfer() {
     <div className="trade-option">
       <div className="trade-details">
         <div className="trade-title">
-          <span>To another unbank user account</span>
-          <span>Internal Transfer in {currency}</span>
+          <span>Sell USDT</span>
+          <span>Crypto to fiat conversion.</span>
+        </div>
+        <div className="trade-icon">
+          <i className="fas fa-chevron-right"></i>
+        </div>
+      </div>
+    </div>
+    <div className="trade-option">
+      <div className="trade-details">
+        <div className="trade-title">
+          <span>Exchange USDT</span>
+          <span>Crypto to crypto conversion.</span>
         </div>
         <div className="trade-icon">
           <i className="fas fa-chevron-right"></i>
@@ -213,4 +229,4 @@ function Transfer() {
   );
 }
 
-export default Transfer;
+export default TransferDigital;

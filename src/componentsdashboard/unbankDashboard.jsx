@@ -43,8 +43,8 @@ function OverviewBox() {
 function CurrencyCard({ amount, currency, flag, avatars }) {
   const navigate = useNavigate();
 
-  const handleAvatarClick = (flag) => {
-    navigate('/transfer', { state: { flag } });
+  const handleAvatarClick = (amount, flag, currency) => {
+    navigate('/transfer', { state: { amount, flag, currency } });
   };
 
   return (
@@ -64,7 +64,7 @@ function CurrencyCard({ amount, currency, flag, avatars }) {
             src={avatar.src}
             alt={avatar.alt}
             className={`avatar ${index === 2 ? 'avatar-3' : ''}`} // Apply unique class for the third avatar
-            onClick={() => index === 2 && handleAvatarClick(flag)} // Handle click for Avatar 3
+            onClick={() => index === 2 && handleAvatarClick(amount, flag, currency)} // Pass currency to handleAvatarClick
           />
         ))}
       </div>
@@ -74,7 +74,15 @@ function CurrencyCard({ amount, currency, flag, avatars }) {
 
 
 
+
   function Digital({ amountDig, currencyDig, flagDig, descDig, avatars}) {
+
+    const navigate = useNavigate();
+
+    const handleAvatarClickCrypto = (amountDig, flagDig, currencyDig, descDig) => {
+      navigate('/transfer-crypto', { state: { amountDig, flagDig, currencyDig, descDig } });
+    };
+
     return (
       <div className="Digital-card">
         <div className="Digital-details">
@@ -84,12 +92,17 @@ function CurrencyCard({ amount, currency, flag, avatars }) {
           <div className="Digital-amount">{amountDig}</div>
           <div className="Digital-label">{currencyDig}</div>
           <div className="digital-avatars">
-          {avatars && avatars.map((avatar, index) => (
-            <img key={index} src={avatar.src} alt={avatar.alt} className="avatar" />
-          ))}
-        </div>
-        {/* Keterangan mata uang */}
-        </div>
+        {avatars && avatars.map((avatar, index) => (
+          <img
+            key={index}
+            src={avatar.src}
+            alt={avatar.alt}
+            className={`avatar ${index === 2 ? 'avatar-3' : ''}`} // Apply unique class for the third avatar
+            onClick={() => index === 2 && handleAvatarClickCrypto(amountDig, flagDig, currencyDig, descDig)} // Pass currency to handleAvatarClick
+          />
+        ))}
+      </div>
+    </div>
         <img src={flagDig} alt={currencyDig} className="Digital-flag" /> {/* Gambar bendera */}
 
       </div>
@@ -277,7 +290,7 @@ function UnbankDashboard() {
       </div>
     </div>
   </div>
-</div>
+</div> 
 <div className="section">
   <div className="section-header-container">
     <div className="section-header">Recent Transactions</div>
