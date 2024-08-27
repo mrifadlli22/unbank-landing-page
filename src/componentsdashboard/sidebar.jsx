@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import './app.css'; // Pastikan nama file yang benar
-import { FaTachometerAlt, FaExchangeAlt, FaShieldAlt, FaHistory, FaQuestionCircle, FaCog, FaBars, FaCaretDown, FaCaretUp } from 'react-icons/fa';
+import { FaTachometerAlt, FaExchangeAlt, FaShieldAlt, FaHistory, FaQuestionCircle, FaCog, FaBars, FaCaretDown, FaCaretUp, FaCaretRight } from 'react-icons/fa';
 
 function Sidebar({ isMobileMenuActive, toggleSidebar }) {
   const [openDropdown, setOpenDropdown] = useState(null);
@@ -19,12 +19,15 @@ function Sidebar({ isMobileMenuActive, toggleSidebar }) {
       <div className="menu">
         {/* Account Information Dropdown */}
         <div className="dropdown">
-          <button className="dropdown-btn" onClick={() => handleDropdownToggle(1)}>
+          <button
+            className={`dropdown-btn ${openDropdown === 1 ? 'active' : ''}`}
+            onClick={() => handleDropdownToggle(1)}
+          >
             <FaTachometerAlt className="icon" />{'Account Information'}
-            {openDropdown === 1 ? <FaCaretUp className="dropdown-icon" /> : <FaCaretDown className="dropdown-icon" />}
+            {openDropdown === 1 ? <FaCaretDown className="dropdown-icon" /> : <FaCaretRight className="dropdown-icon" />}
           </button>
           <div className={`dropdown-container ${openDropdown === 1 ? 'show' : ''}`}>
-            <NavLink to="/dashboard" className="dropdown-item">Account Summary</NavLink>
+            <NavLink to="/account-summary" className="dropdown-item">Account Summary</NavLink>
             <NavLink to="/transaction-inquiry" className="dropdown-item">Transaction Inquiry</NavLink>
             <NavLink to="/account-statement" className="dropdown-item">Account Statement</NavLink>
             <NavLink to="/beneficiary" className="dropdown-item">Beneficiary</NavLink>
@@ -33,9 +36,12 @@ function Sidebar({ isMobileMenuActive, toggleSidebar }) {
 
         {/* Fiat Dropdown */}
         <div className="dropdown">
-          <button className="dropdown-btn" onClick={() => handleDropdownToggle(2)}>
+          <button
+            className={`dropdown-btn ${openDropdown === 2 ? 'active' : ''}`}
+            onClick={() => handleDropdownToggle(2)}
+          >
             <FaExchangeAlt className="icon" />{'Fiat'}
-            {openDropdown === 2 ? <FaCaretUp className="dropdown-icon" /> : <FaCaretDown className="dropdown-icon" />}
+            {openDropdown === 2 ? <FaCaretDown className="dropdown-icon" /> : <FaCaretRight className="dropdown-icon" />}
           </button>
           <div className={`dropdown-container ${openDropdown === 2 ? 'show' : ''}`}>
             <NavLink to="/topup" className="dropdown-item">Topup</NavLink>
@@ -46,9 +52,12 @@ function Sidebar({ isMobileMenuActive, toggleSidebar }) {
 
         {/* Digital Asset Dropdown */}
         <div className="dropdown">
-          <button className="dropdown-btn" onClick={() => handleDropdownToggle(3)}>
+          <button
+            className={`dropdown-btn ${openDropdown === 3 ? 'active' : ''}`}
+            onClick={() => handleDropdownToggle(3)}
+          >
             <FaShieldAlt className="icon" />{'Digital Asset'}
-            {openDropdown === 3 ? <FaCaretUp className="dropdown-icon" /> : <FaCaretDown className="dropdown-icon" />}
+            {openDropdown === 3 ? <FaCaretDown className="dropdown-icon" /> : <FaCaretRight className="dropdown-icon" />}
           </button>
           <div className={`dropdown-container ${openDropdown === 3 ? 'show' : ''}`}>
             <NavLink to="/received" className="dropdown-item">Received</NavLink>
@@ -61,15 +70,18 @@ function Sidebar({ isMobileMenuActive, toggleSidebar }) {
 
         {/* Product Dropdown */}
         <div className="dropdown">
-          <button className="dropdown-btn" onClick={() => handleDropdownToggle(4)}>
+          <button
+            className={`dropdown-btn ${openDropdown === 4 ? 'active' : ''}`}
+            onClick={() => handleDropdownToggle(4)}
+          >
             <FaHistory className="icon" />{'Product'}
-            {openDropdown === 4 ? <FaCaretUp className="dropdown-icon" /> : <FaCaretDown className="dropdown-icon" />}
+            {openDropdown === 4 ? <FaCaretDown className="dropdown-icon" /> : <FaCaretRight className="dropdown-icon" />}
           </button>
           <div className={`dropdown-container ${openDropdown === 4 ? 'show' : ''}`}>
             <NavLink to="/stacking" className="dropdown-item">Stacking</NavLink>
             <NavLink to="/guarantee" className="dropdown-item">Guarantee</NavLink>
-            <NavLink to="/escrow" className="dropdown-item">Escrow</NavLink>
-            <NavLink to="/lc" className="dropdown-item">L & C</NavLink>
+            <NavLink to="/xcrow" className="dropdown-item">Escrow</NavLink>
+            <NavLink to="/l-and-c" className="dropdown-item">L & C</NavLink>
           </div>
         </div>
 

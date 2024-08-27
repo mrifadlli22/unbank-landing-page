@@ -81,10 +81,6 @@ function CurrencyCard({ amount, currency, flag, avatars }) {
 }
 
 
-
-
-
-
 function Digital({ amountDig, currencyDig, flagDig, descDig, avatars }) {
   const navigate = useNavigate();
 
