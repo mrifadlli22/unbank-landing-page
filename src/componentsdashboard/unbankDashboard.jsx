@@ -43,8 +43,16 @@ function OverviewBox() {
 function CurrencyCard({ amount, currency, flag, avatars }) {
   const navigate = useNavigate();
 
-  const handleAvatarClick = (amount, flag, currency) => {
-    navigate('/transfer', { state: { amount, flag, currency } });
+  const handleAvatarClick = (index) => {
+    let tab;
+    if (index === 1) {
+      tab = 'topup'; // Redirect to 'topup' for Avatar 1
+    } else if (index === 2) {
+      tab = 'transfer'; // Redirect to 'transfer' for Avatar 2
+    } else if (index === 3) {
+      tab = 'exchange'; // Redirect to 'exchange' for Avatar 3
+    }
+    navigate('/transfer', { state: { amount, flag, currency, tab } });
   };
 
   return (
@@ -63,8 +71,8 @@ function CurrencyCard({ amount, currency, flag, avatars }) {
             key={index}
             src={avatar.src}
             alt={avatar.alt}
-            className={`avatar ${index === 2 ? 'avatar-3' : ''}`} // Apply unique class for the third avatar
-            onClick={() => index === 2 && handleAvatarClick(amount, flag, currency)} // Pass currency to handleAvatarClick
+            className={`avatar avatar-${index + 1}`} // Assign class avatar-1, avatar-2, avatar-3 based on index
+            onClick={() => handleAvatarClick(index + 1)} // Pass tab index to handleAvatarClick
           />
         ))}
       </div>
@@ -75,39 +83,47 @@ function CurrencyCard({ amount, currency, flag, avatars }) {
 
 
 
-  function Digital({ amountDig, currencyDig, flagDig, descDig, avatars}) {
 
-    const navigate = useNavigate();
 
-    const handleAvatarClickCrypto = (amountDig, flagDig, currencyDig, descDig) => {
-      navigate('/transfer-crypto', { state: { amountDig, flagDig, currencyDig, descDig } });
-    };
+function Digital({ amountDig, currencyDig, flagDig, descDig, avatars }) {
+  const navigate = useNavigate();
 
-    return (
-      <div className="Digital-card">
-        <div className="Digital-details">
-        <div className="Digital-description">
-        {descDig}
-    </div>
-          <div className="Digital-amount">{amountDig}</div>
-          <div className="Digital-label">{currencyDig}</div>
-          <div className="digital-avatars">
-        {avatars && avatars.map((avatar, index) => (
-          <img
-            key={index}
-            src={avatar.src}
-            alt={avatar.alt}
-            className={`avatar ${index === 2 ? 'avatar-3' : ''}`} // Apply unique class for the third avatar
-            onClick={() => index === 2 && handleAvatarClickCrypto(amountDig, flagDig, currencyDig, descDig)} // Pass currency to handleAvatarClick
-          />
-        ))}
+  const handleAvatarClickCrypto = (index) => {
+    let tab;
+    if (index === 1) {
+      tab = 'receive'; // Redirect to 'receive' for Avatar 1
+    } else if (index === 2) {
+      tab = 'send'; // Redirect to 'send' for Avatar 2
+    } else if (index === 3) {
+      tab = 'trade'; // Redirect to 'trade' for Avatar 3
+    }
+    navigate('/transfer-crypto', { state: { amountDig, flagDig, currencyDig, descDig, tab } });
+  };
+
+  return (
+    <div className="Digital-card">
+      <div className="Digital-details">
+        <div className="Digital-description">{descDig}</div>
+        <div className="Digital-amount">{amountDig}</div>
+        <div className="Digital-label">{currencyDig}</div>
+        <div className="digital-avatars">
+          {avatars &&
+            avatars.map((avatar, index) => (
+              <img
+                key={index}
+                src={avatar.src}
+                alt={avatar.alt}
+                className={`avatar avatar-${index + 1}`} // Assign class avatar-1, avatar-2, avatar-3 based on index
+                onClick={() => handleAvatarClickCrypto(index + 1)} // Pass tab index to handleAvatarClickCrypto
+              />
+            ))}
+        </div>
       </div>
+      <img src={flagDig} alt={currencyDig} className="Digital-flag" /> {/* Gambar bendera */}
     </div>
-        <img src={flagDig} alt={currencyDig} className="Digital-flag" /> {/* Gambar bendera */}
+  );
+}
 
-      </div>
-    );
-  }
  
   function Bank({ Username, NoRek, bankCard, cardDig}) {
     return (
@@ -186,8 +202,9 @@ function UnbankDashboard() {
                   flag="./Images/indoflag.png" 
                   avatars={[
                     { src: "https://cdn.builder.io/api/v1/image/assets/TEMP/9acaf09f47c7f5999602ea0112056b80cfc0cb39b6567051c0b20f5eda626c2f?placeholderIfAbsent=true&apiKey=e3ddd6dd58b748b09fc1391939743920", alt: "Avatar 1" },
+                    { src: "https://cdn.builder.io/api/v1/image/assets/TEMP/d914da3aec1dab3600769687b602e1d4c74056d5a2cd1b33b073f4e6805f9b0c?placeholderIfAbsent=true&apiKey=e3ddd6dd58b748b09fc1391939743920", alt: "Avatar 3" },
                     { src: "https://cdn.builder.io/api/v1/image/assets/TEMP/9006f4ffc40aa5929124465b5d2770f98124c3a291173ae6a518a0036b5aec45?placeholderIfAbsent=true&apiKey=e3ddd6dd58b748b09fc1391939743920", alt: "Avatar 2" },
-                    { src: "https://cdn.builder.io/api/v1/image/assets/TEMP/d914da3aec1dab3600769687b602e1d4c74056d5a2cd1b33b073f4e6805f9b0c?placeholderIfAbsent=true&apiKey=e3ddd6dd58b748b09fc1391939743920", alt: "Avatar 3" }
+
                   ]}
                 />
                  <CurrencyCard 
@@ -196,8 +213,8 @@ function UnbankDashboard() {
                   flag="./Images/usd.png" 
                   avatars={[
                     { src: "https://cdn.builder.io/api/v1/image/assets/TEMP/9acaf09f47c7f5999602ea0112056b80cfc0cb39b6567051c0b20f5eda626c2f?placeholderIfAbsent=true&apiKey=e3ddd6dd58b748b09fc1391939743920", alt: "Avatar 1" },
+                    { src: "https://cdn.builder.io/api/v1/image/assets/TEMP/d914da3aec1dab3600769687b602e1d4c74056d5a2cd1b33b073f4e6805f9b0c?placeholderIfAbsent=true&apiKey=e3ddd6dd58b748b09fc1391939743920", alt: "Avatar 3" },
                     { src: "https://cdn.builder.io/api/v1/image/assets/TEMP/9006f4ffc40aa5929124465b5d2770f98124c3a291173ae6a518a0036b5aec45?placeholderIfAbsent=true&apiKey=e3ddd6dd58b748b09fc1391939743920", alt: "Avatar 2" },
-                    { src: "https://cdn.builder.io/api/v1/image/assets/TEMP/d914da3aec1dab3600769687b602e1d4c74056d5a2cd1b33b073f4e6805f9b0c?placeholderIfAbsent=true&apiKey=e3ddd6dd58b748b09fc1391939743920", alt: "Avatar 3" }
                   ]}
                 />
                 <div   className="add-card" onClick={() => alert('Add new card')}>
@@ -220,7 +237,7 @@ function UnbankDashboard() {
   <div className="containers">
     <div className="Digital-cards">
       <Digital 
-      amountDig="0.00000000 USDC" 
+      amountDig="0.00000000 USDT" 
       currencyDig="$0.00" 
       flagDig="./Images/T.png" 
       descDig="Tether"
@@ -230,7 +247,7 @@ function UnbankDashboard() {
         { src: "https://cdn.builder.io/api/v1/image/assets/TEMP/d914da3aec1dab3600769687b602e1d4c74056d5a2cd1b33b073f4e6805f9b0c?placeholderIfAbsent=true&apiKey=e3ddd6dd58b748b09fc1391939743920", alt: "Avatar 3" }
       ]} />
       <Digital 
-      amountDig="0.00000000 USDT" 
+      amountDig="0.00000000 USDC" 
       currencyDig="$0.00" 
       flagDig="./Images/S.png" 
       descDig="USD Coin"

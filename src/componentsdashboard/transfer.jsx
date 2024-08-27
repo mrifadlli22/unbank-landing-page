@@ -8,8 +8,9 @@ function Transfer() {
   const location = useLocation();
 
   const [isMobileMenuActive, setIsMobileMenuActive] = useState(false);
-  const [activeTab, setActiveTab] = useState("topup"); // Set active tab based on query string
-  const { flag, currency, amount } = location.state || {}; // Get flag, currency, and amount from navigation state
+  const { flag, currency, amount, tab } = location.state || {}; // Get flag, currency, amount, and tab from navigation state
+  const [activeTab, setActiveTab] = useState(tab || "topup"); // Set active tab based on state
+
   const [selectedNetwork, setSelectedNetwork] = useState("Ethereum (ERC-20)"); // Default option
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -27,9 +28,6 @@ function Transfer() {
     setSelectedNetwork(option);
     setIsDropdownOpen(false);
   };
-
-  // Extract the network type (e.g., "ERC-20") from selectedNetwork
-  const networkType = selectedNetwork.split(" ")[1];
 
   return (
     <div className="dashboard">
@@ -66,138 +64,105 @@ function Transfer() {
                       <li className={activeTab === "topup" ? "active-tab" : ""} onClick={() => setActiveTab("topup")}>
                         Top-Up
                       </li>
-                      <li className={activeTab === "exchange" ? "active-tab" : ""} onClick={() => setActiveTab("exchange")}>
-                        Exchange
-                      </li>
                       <li className={activeTab === "transfer" ? "active-tab" : ""} onClick={() => setActiveTab("transfer")}>
                         Transfer
+                      </li>
+                      <li className={activeTab === "exchange" ? "active-tab" : ""} onClick={() => setActiveTab("exchange")}>
+                        Exchange
                       </li>
                     </ul>
                   </div>
 
                   {activeTab === "topup" && (
-  <div className="receive-section">
-    <div className="receive-content">
-      <div className="left-section">
-        <div className="network-selection">
-          <label>Blockchain Network</label>
-          <div className="custom-select" onClick={handleDropdownClick}>
-            <div className={`select-selected ${isDropdownOpen ? "select-arrow-active" : ""}`}>
-              {selectedNetwork}
+  <div className="topup-section">
+    <div className="topup-content">
+      <div className="payment-method-selection">
+        <label>Select Payment Method</label>
+        <div className="custom-select" onClick={handleDropdownClick}>
+          <div className={`select-selected ${isDropdownOpen ? "select-arrow-active" : ""}`}>
+            {selectedNetwork}
+          </div>
+          {isDropdownOpen && (
+            <div className="select-items select-hide">
+              {networkoptions.map((option, index) => (
+                <div
+                  key={index}
+                  className={option === selectedNetwork ? "same-as-selected" : ""}
+                  onClick={() => handleOptionClick(option)}
+                >
+                  {option}
+                </div>
+              ))}
             </div>
-            {isDropdownOpen && (
-              <div className="select-items select-hide">
-                {networkoptions.map((option, index) => (
-                  <div
-                    key={index}
-                    className={option === selectedNetwork ? "same-as-selected" : ""}
-                    onClick={() => handleOptionClick(option)}
-                  >
-                    {option}
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        </div>
-        <div className="wallet-address">
-          <label>Wallet address</label>
-          <div className="address-info">
-            <input type="text" value="0xE5b0a816C7E47..." readOnly />
-            <button onClick={() => navigator.clipboard.writeText("0xE5b0a816C7E47...")}>Copy</button>
-          </div>
-        </div>
-        <div className="address-note">
-          <ul>
-            <li>This wallet address only accepts tokens transferred by Ethereum (ERC-20) network. Tokens transferred through any other network will be lost.</li>
-            <li>The minimum transfer amount is 10 USDT. Lower amounts will be declined.</li>
-          </ul>
+          )}
         </div>
       </div>
+      <div className="amount-topup">
+        <label>Amount to Top-Up</label>
+        <div className="amount-info">
+          <input type="text" placeholder={`Enter amount in ${currency}`} />
+        </div>
+      </div>
+      <div className="address-note">
+        <ul>
+          <li>Ensure the payment method is correct before proceeding.</li>
+          <li>Minimum top-up amount is 10 {currency}. Lower amounts will be declined.</li>
+        </ul>
+      </div>
+      <div className="topup-actions">
+        <button className="topup-button">Proceed with Top-Up</button>
+      </div>
+    </div>
+  </div>
+)}
 
-      <div className="vertical-divider"></div>
 
-      <div className="right-section">
-        <div className="qr-codes">
-          <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/0b49fd22c9c3e25246a9bc6687ae8b09d4ed999de7c9825f1b5b548b3fd1bde5" alt="QR Code" /> {/* Replace with actual QR code image */}
-          <p>Your {currency} ({networkType}) Address</p> {/* Dynamic QR code description */}
+
+
+
+{activeTab === "transfer" && (
+  <div className="transfer-section">
+    <div className="transfer-option">
+      <div className="transfer-details">
+        <div className="transfer-title">
+          <span>Transfer to Your Bank Account</span>
+          <span>SEPA Transfer in {currency}</span>
+        </div>
+        <div className="transfer-icon">
+          <i className="fas fa-chevron-right"></i>
+        </div>
+      </div>
+    </div>
+    <div className="transfer-option">
+      <div className="transfer-details">
+        <div className="transfer-title">
+          <span>Transfer to Another Unbank User</span>
+          <span>Internal Transfer in {currency}</span>
+        </div>
+        <div className="transfer-icon">
+          <i className="fas fa-chevron-right"></i>
+        </div>
+      </div>
+    </div>
+    <div className="transfer-option">
+      <div className="transfer-details">
+        <div className="transfer-title">
+          <span>Transfer to External Crypto Wallet</span>
+          <span>Send {currency} to another wallet</span>
+        </div>
+        <div className="transfer-icon">
+          <i className="fas fa-chevron-right"></i>
         </div>
       </div>
     </div>
   </div>
 )}
-                  {activeTab === "exchange" && (
-                <div className="support-section">
-                  <div className="security-alert">
-                    <span>
-                      <img style={{ marginLeft: "5px" }} src="./Images/i.png" />
-                    </span>
-                    <div>
-                      <p>
-                        We're experiencing high volumes of inquiries, resulting
-                        in longer response times than we'd hoped for. We aim to
-                        reply to you within 2 working days.
-                      </p>
-                    </div>
-                  </div>
-                  <div className="section">
-                    <div
-                      style={{ marginBottom: "25px" }}
-                      className="section-header-container"
-                    >
-                      <div className="section-header">Active Transactions</div>
-                      <div className="divider2"></div>
-                      <button className="see-all-transactions-btn">
-                        View Archived
-                      </button>
-                    </div>
-                    <div className="support-card">
-                      <img
-                        style={{ width: "245px" }}
-                        src="./Images/Image.png"
-                        alt="Contact Support"
-                        className="support-image"
-                      />
-                      <div className="support-content">
-                        <h3 style={{ marginTop: "0px" }}>
-                          Contact Our Support
-                        </h3>
-                        <p>
-                          In case you encounter any issues or require assistance
-                          with your account, please don't hesitate to contact
-                          us.
-                        </p>
-                        <button className="support-button">
-                          Contact Our Support
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )}
-             {activeTab === "transfer" && (
-  <div className="trade-section">
-    <div className="trade-option">
-      <div className="trade-details">
-        <div className="trade-title">
-          <span>To your {currency} bank account</span>
-          <span>SEPA Transfer in {currency}</span>
-        </div>
-        <div className="trade-icon">
-          <i className="fas fa-chevron-right"></i>
-        </div>
-      </div>
-    </div>
-    <div className="trade-option">
-      <div className="trade-details">
-        <div className="trade-title">
-          <span>To another unbank user account</span>
-          <span>Internal Transfer in {currency}</span>
-        </div>
-        <div className="trade-icon">
-          <i className="fas fa-chevron-right"></i>
-        </div>
-      </div>
+
+{activeTab === "exchange" && (
+  <div className="coming-soon-section">
+    <div className="coming-soon-content">
+      <h2>Exchange Coming Soon</h2>
+      <p>Stay tuned for updates! The exchange feature will be available shortly.</p>
     </div>
   </div>
 )}

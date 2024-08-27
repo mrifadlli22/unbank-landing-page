@@ -4,12 +4,12 @@ import Header from './header';
 import './app.css';
 import { useLocation } from 'react-router-dom';
 
-function TransferDigital() {
+ function TransferDigital() {
   const location = useLocation();
 
   const [isMobileMenuActive, setIsMobileMenuActive] = useState(false);
-  const [activeTab, setActiveTab] = useState("receive"); // Set active tab based on query string
-  const { flagDig, currencyDig, amountDig, descDig } = location.state || {}; // Get flag, currency, and amount from navigation state
+  const { flagDig, currencyDig, amountDig, descDig, tab } = location.state || {}; // Get flag, currency, amount, and tab from navigation state
+  const [activeTab, setActiveTab] = useState(tab || "receive"); // Set active tab based on query string or state
   const [selectedNetwork, setSelectedNetwork] = useState("Ethereum (ERC-20)"); // Default option
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -109,8 +109,12 @@ function TransferDigital() {
         </div>
         <div className="address-note">
           <ul>
-            <li>This wallet address only accepts tokens transferred by Ethereum (ERC-20) network. Tokens transferred through any other network will be lost.</li>
+            <li>This wallet address only accepts tokens transferred by ({networkType}) network. Tokens transferred through any other network will be lost.</li>
             <li>The minimum transfer amount is 10 USDT. Lower amounts will be declined.</li>
+            <li>Address can be used repeatedly to deposit. (This is {descDig} / {networkType} address ) </li>
+            <li>Deposit will be shown in your balance after 20 confirmatin(s) </li>
+            <li>No Deposit fee</li>
+            <li>Sending tokens othen than USDT to aboce address will result in your tokens being lost</li>
           </ul>
         </div>
       </div>
@@ -156,7 +160,6 @@ function TransferDigital() {
           <label>Recipient Wallet Address</label>
           <div className="address-info">
             <input type="text" placeholder="Enter recipient's wallet address" />
-            <button onClick={() => navigator.clipboard.writeText("Recipient Address Copied!")}>Copy</button>
           </div>
         </div>
         <div className="amount-send">
@@ -166,9 +169,12 @@ function TransferDigital() {
           </div>
         </div>
         <div className="address-note">
+          <h2>USDT Info</h2>
           <ul>
-            <li>Ensure the recipient's wallet address is correct before sending.</li>
-            <li>Minimum transfer amount is 10 {currencyDig}. Lower amounts will be declined.</li>
+            <li>Daily limit for withdrawal is 70000 USDT per day. (to raise the limit, click here)</li>
+            <li>Minimum transaction is 0.1 USDT</li>
+            <li>Fee of 0 USDT will be deducted from withdrawal amount</li>
+            <li>USDT will be received in about 60 minutes.</li>
           </ul>
         </div>
       </div>
@@ -180,40 +186,11 @@ function TransferDigital() {
 )}
 
 
-             {activeTab === "trade" && (
-  <div className="trade-section">
-    <div className="trade-option">
-      <div className="trade-details">
-        <div className="trade-title">
-          <span>Buy USDT</span>
-          <span>Fiat to crypto conversion.</span>
-        </div>
-        <div className="trade-icon">
-          <i className="fas fa-chevron-right"></i>
-        </div>
-      </div>
-    </div>
-    <div className="trade-option">
-      <div className="trade-details">
-        <div className="trade-title">
-          <span>Sell USDT</span>
-          <span>Crypto to fiat conversion.</span>
-        </div>
-        <div className="trade-icon">
-          <i className="fas fa-chevron-right"></i>
-        </div>
-      </div>
-    </div>
-    <div className="trade-option">
-      <div className="trade-details">
-        <div className="trade-title">
-          <span>Exchange USDT</span>
-          <span>Crypto to crypto conversion.</span>
-        </div>
-        <div className="trade-icon">
-          <i className="fas fa-chevron-right"></i>
-        </div>
-      </div>
+{activeTab === "trade" && (
+  <div className="coming-soon-section">
+    <div className="coming-soon-content">
+      <h2>Trade Coming Soon</h2>
+      <p>Stay tuned for updates! The trade feature will be available shortly.</p>
     </div>
   </div>
 )}
