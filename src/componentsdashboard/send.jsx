@@ -78,8 +78,7 @@ function Send() {
                 <h2>Send Digital Assets</h2>
                 <div className="section">
                   <div className="section-header-container">
-                    <div className="divider2"></div>
-                  </div>
+                   </div>
                   <p>
                     You haven't added any currencies yet. Once you add them, they
                     will be displayed here for your convenience.

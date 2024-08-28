@@ -14,6 +14,7 @@ import ContactForm from "../ContactForm/ContactForm";
 import Footer from "../Footer/Footer";
 import styles from "./App.module.css";
 import { Routes, Route, Navigate } from 'react-router-dom';
+import FAQPersonal from "../FAQ/FAQ";
 
 
 const PersonalPage = () => {
@@ -110,7 +111,7 @@ const PersonalPage = () => {
           reverse
         />
         <GetStarted />
-        <FAQ />
+        <FAQPersonal />
         <ContactForm />
       </main>
       <Footer />

@@ -2417,3 +2417,179 @@ margin-left: 20px;
   padding: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
+/* app.css */
+
+.upgrade-transaction {
+  display: block;
+  align-items: center;
+  gap: 5px
+  }
+
+.submitup-btn {
+  margin-top: 5px;
+  background-color: #333333;
+  color: #fff;
+  border: none;
+  padding: 4px 10px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+  margin-left: 5px;
+}
+
+.submitup-btn:hover {
+  background-color: #333333;
+}
+
+/* Popup Overlay */
+.form-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+/* Popup Container */
+.form-container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+ 
+
+.limit-info {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.transaction-request-input {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.upgrade-btn, .cancel-btn {
+  background-color: #333;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+  margin-right: 10px;
+}
+
+.upgrade-btn:hover {
+  background-color: #333;
+}
+
+.cancel-btn {
+  background-color: #ccc;
+}
+
+.cancel-btn:hover {
+  background-color: #aaa;
+}
+
+ 
+
+.transaction-limit-input {
+  width: 100px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+ }
+
+.submitup-btn {
+  background-color: #333;
+  color: #fff;
+  border: none;
+  padding: 6px 16px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.submitup-btn:hover {
+  background-color: #333;
+}
+
+/* Popup Overlay */
+.form-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+/* Popup Container */
+.form-container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+ 
+
+.limit-info {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.transaction-request-input {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.upgrade-btn, .cancel-btn {
+  background-color: #333;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+  margin-right: 10px;
+}
+
+.upgrade-btn:hover {
+  background-color: #333;
+}
+
+.cancel-btn {
+  background-color: #ccc;
+}
+
+.cancel-btn:hover {
+  background-color: #aaa;
+}
+
+ 
+
+ 
+

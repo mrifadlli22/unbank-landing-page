@@ -22,7 +22,7 @@ const FAQItem = ({ question, answer }) => {
   );
 };
 
-const FAQ = () => {
+const FAQPersonal = () => {
   const faqData = [
     {
       question: "How can I apply for a personal Unbank account?",
@@ -52,4 +52,4 @@ const FAQ = () => {
   );
 };
 
-export default FAQ;
+export default FAQPersonal;

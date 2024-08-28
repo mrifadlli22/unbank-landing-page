@@ -1,21 +1,21 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { FlagIcon } from "react-flag-kit";
 import Sidebar from "./sidebar";
 import Header from "./header";
 import "./app.css";
 import "../componentstablepage/tablepagestransfer.css";
 
+
 function Beneficiary() {
   const [isMobileMenuActive, setIsMobileMenuActive] = useState(false);
   const [showForm, setShowForm] = useState(false); // State to handle form visibility
   const [newData, setNewData] = useState({}); // State to handle new data input
+  const [activeTab, setActiveTab] = useState("banktab");
 
-  // tab menu
   const location = useLocation();
   const navigate = useNavigate();
   const { tab } = location.state || {};
-
-  const [activeTab, setActiveTab] = useState(tab || "banktab");
 
   // table components
   const [searchTerm, setSearchTerm] = useState("");
@@ -30,7 +30,7 @@ function Beneficiary() {
     emailUnbank: "",
     username: "",
     walletAddress: "",
-    network: ""
+    network: "",
   });
   const [currentPage, setCurrentPage] = useState(1);
   const [entriesPerPage, setEntriesPerPage] = useState(5);
@@ -45,7 +45,7 @@ function Beneficiary() {
     emailUnbank: false,
     username: false,
     walletAddress: false,
-    network: false
+    network: false,
   });
 
   const dropdownRefs = {
@@ -59,7 +59,7 @@ function Beneficiary() {
     emailUnbank: useRef(null),
     username: useRef(null),
     walletAddress: useRef(null),
-    network: useRef(null)
+    network: useRef(null),
   };
 
   const toggleDropdown = (field) => {
@@ -81,7 +81,7 @@ function Beneficiary() {
       emailUnbank: "",
       username: "",
       walletAddress: "",
-      network: ""
+      network: "",
     });
     setSearchTerm("");
   };
@@ -117,7 +117,7 @@ function Beneficiary() {
       bankName: "Bank Central Asia (BCA)",
       branch: "Jakarta",
       accountNumber: "1234567890",
-      name: "John Doe"
+      name: "John Doe",
     },
     {
       id: 2,
@@ -126,8 +126,8 @@ function Beneficiary() {
       bankName: "Bank Mandiri",
       branch: "Surabaya",
       accountNumber: "0987654321",
-      name: "Jane Smith"
-    }
+      name: "Jane Smith",
+    },
   ]);
 
   // Dummy data for Unbank Account Table
@@ -135,13 +135,13 @@ function Beneficiary() {
     {
       id: 1,
       usernameUnbank: "unbank_user1",
-      emailUnbank: "user1@unbank.com"
+      emailUnbank: "user1@unbank.com",
     },
     {
       id: 2,
       usernameUnbank: "unbank_user2",
-      emailUnbank: "user2@unbank.com"
-    }
+      emailUnbank: "user2@unbank.com",
+    },
   ]);
 
   // Dummy data for External Crypto Wallet Table
@@ -150,15 +150,20 @@ function Beneficiary() {
       id: 1,
       username: "crypto_user1",
       walletAddress: "0x123...abc",
-      network: "Ethereum"
+      network: "Ethereum",
     },
     {
       id: 2,
       username: "crypto_user2",
       walletAddress: "1A1zP1...xyz",
-      network: "Bitcoin"
-    }
+      network: "Bitcoin",
+    },
   ]);
+
+  const accountNameMapping = {
+    "1234567890": "John Doe",
+    "0987654321": "Jane Smith",
+  };
 
   const getFilteredData = (data) => {
     return data.filter((item) => {
@@ -169,17 +174,33 @@ function Beneficiary() {
 
       return (
         searchTermCondition &&
-        (filters.paymentCountry === "" || (item.paymentCountry && item.paymentCountry.includes(filters.paymentCountry))) &&
-        (filters.receivingCurrency === "" || (item.receivingCurrency && item.receivingCurrency.includes(filters.receivingCurrency))) &&
-        (filters.bankName === "" || (item.bankName && item.bankName.includes(filters.bankName))) &&
-        (filters.branch === "" || (item.branch && item.branch.includes(filters.branch))) &&
-        (filters.accountNumber === "" || (item.accountNumber && item.accountNumber.includes(filters.accountNumber))) &&
-        (filters.name === "" || (item.name && item.name.includes(filters.name))) &&
-        (filters.usernameUnbank === "" || (item.usernameUnbank && item.usernameUnbank.includes(filters.usernameUnbank))) &&
-        (filters.emailUnbank === "" || (item.emailUnbank && item.emailUnbank.includes(filters.emailUnbank))) &&
-        (filters.username === "" || (item.username && item.username.includes(filters.username))) &&
-        (filters.walletAddress === "" || (item.walletAddress && item.walletAddress.includes(filters.walletAddress))) &&
-        (filters.network === "" || (item.network && item.network.includes(filters.network)))
+        (filters.paymentCountry === "" ||
+          (item.paymentCountry &&
+            item.paymentCountry.includes(filters.paymentCountry))) &&
+        (filters.receivingCurrency === "" ||
+          (item.receivingCurrency &&
+            item.receivingCurrency.includes(filters.receivingCurrency))) &&
+        (filters.bankName === "" ||
+          (item.bankName && item.bankName.includes(filters.bankName))) &&
+        (filters.branch === "" ||
+          (item.branch && item.branch.includes(filters.branch))) &&
+        (filters.accountNumber === "" ||
+          (item.accountNumber &&
+            item.accountNumber.includes(filters.accountNumber))) &&
+        (filters.name === "" ||
+          (item.name && item.name.includes(filters.name))) &&
+        (filters.usernameUnbank === "" ||
+          (item.usernameUnbank &&
+            item.usernameUnbank.includes(filters.usernameUnbank))) &&
+        (filters.emailUnbank === "" ||
+          (item.emailUnbank && item.emailUnbank.includes(filters.emailUnbank))) &&
+        (filters.username === "" ||
+          (item.username && item.username.includes(filters.username))) &&
+        (filters.walletAddress === "" ||
+          (item.walletAddress &&
+            item.walletAddress.includes(filters.walletAddress))) &&
+        (filters.network === "" ||
+          (item.network && item.network.includes(filters.network)))
       );
     });
   };
@@ -224,6 +245,15 @@ function Beneficiary() {
     setNewData({});
   };
 
+  const handleAccountNumberChange = (e) => {
+    const accountNumber = e.target.value;
+    setNewData((prev) => ({
+      ...prev,
+      accountNumber,
+      name: accountNameMapping[accountNumber] || "", // Auto-fill name based on account number
+    }));
+  };
+
   return (
     <div className="dashboard">
       <Header
@@ -263,39 +293,110 @@ function Beneficiary() {
             </div>
 
             {showForm && (
-              <div className="form-overlay">
-                <div className="form-container">
-                  <h2>Add New Data</h2>
-                  <form>
-                    {activeTab === "banktab" && (
-                      <>
-                        <input type="text" placeholder="Payment Country" value={newData.paymentCountry || ''} onChange={(e) => setNewData({ ...newData, paymentCountry: e.target.value })} />
-                        <input type="text" placeholder="Receiving Currency" value={newData.receivingCurrency || ''} onChange={(e) => setNewData({ ...newData, receivingCurrency: e.target.value })} />
-                        <input type="text" placeholder="Bank Name" value={newData.bankName || ''} onChange={(e) => setNewData({ ...newData, bankName: e.target.value })} />
-                        <input type="text" placeholder="Branch" value={newData.branch || ''} onChange={(e) => setNewData({ ...newData, branch: e.target.value })} />
-                        <input type="text" placeholder="Account Number" value={newData.accountNumber || ''} onChange={(e) => setNewData({ ...newData, accountNumber: e.target.value })} />
-                        <input type="text" placeholder="Name" value={newData.name || ''} onChange={(e) => setNewData({ ...newData, name: e.target.value })} />
-                      </>
-                    )}
-                    {activeTab === "unbanktab" && (
-                      <>
-                        <input type="text" placeholder="Username Unbank" value={newData.usernameUnbank || ''} onChange={(e) => setNewData({ ...newData, usernameUnbank: e.target.value })} />
-                        <input type="email" placeholder="Email Unbank" value={newData.emailUnbank || ''} onChange={(e) => setNewData({ ...newData, emailUnbank: e.target.value })} />
-                      </>
-                    )}
-                    {activeTab === "wallettab" && (
-                      <>
-                        <input type="text" placeholder="Username" value={newData.username || ''} onChange={(e) => setNewData({ ...newData, username: e.target.value })} />
-                        <input type="text" placeholder="Wallet Address" value={newData.walletAddress || ''} onChange={(e) => setNewData({ ...newData, walletAddress: e.target.value })} />
-                        <input type="text" placeholder="Network" value={newData.network || ''} onChange={(e) => setNewData({ ...newData, network: e.target.value })} />
-                      </>
-                    )}
-                    <button type="button" onClick={handleAddData}>Add Data</button>
-                    <button type="button" onClick={() => setShowForm(false)}>Cancel</button>
-                  </form>
-                </div>
-              </div>
-            )}
+  <div className="form-overlay">
+    <div className="form-container">
+      <h2>Add New Data</h2>
+      <form>
+        {activeTab === "banktab" && (
+          <>
+            {/* Payment Country Dropdown */}
+            <div className="form-group">
+              <label>Payment Country</label>
+              <select
+                value={newData.paymentCountry || ''}
+                onChange={(e) => setNewData({ ...newData, paymentCountry: e.target.value })}
+              >
+                <option value="">Select Country</option>
+                <option value="Indonesia">
+                  <FlagIcon code="ID" size={24} style={{ marginRight: '8px' }} /> Indonesia
+                </option>
+                <option value="United States">
+                  <FlagIcon code="US" size={24} style={{ marginRight: '8px' }} /> United States
+                </option>
+                <option value="United Kingdom">
+                  <FlagIcon code="GB" size={24} style={{ marginRight: '8px' }} /> United Kingdom
+                </option>
+                {/* Add more countries as needed */}
+              </select>
+            </div>
+
+            {/* Receiving Currency Dropdown */}
+            <div className="form-group">
+              <label>Receiving Currency</label>
+              <select
+                value={newData.receivingCurrency || ''}
+                onChange={(e) => setNewData({ ...newData, receivingCurrency: e.target.value })}
+              >
+                <option value="">Select Currency</option>
+                <option value="IDR">IDR</option>
+                <option value="USD">USD</option>
+                <option value="GBP">GBP</option>
+                {/* Add more currencies as needed */}
+              </select>
+            </div>
+
+            {/* Bank Name Dropdown */}
+            <div className="form-group">
+              <label>Bank Name</label>
+              <select
+                value={newData.bankName || ''}
+                onChange={(e) => setNewData({ ...newData, bankName: e.target.value })}
+              >
+                 <option value="">Select Bank</option>
+                <option value="Bank Central Asia (BCA)">Bank Central Asia (BCA)</option>
+                <option value="Bank Mandiri">Bank Mandiri</option>
+                <option value="HSBC">HSBC</option>
+                {/* Add more banks as needed */}
+              </select>
+            </div>
+
+            {/* Other input fields */}
+            <input type="text" placeholder="Branch" value={newData.branch || ''} onChange={(e) => setNewData({ ...newData, branch: e.target.value })} />
+            <input
+              type="text"
+              placeholder="Account Number"
+              value={newData.accountNumber || ''}
+              onChange={(e) => {
+                setNewData({ ...newData, accountNumber: e.target.value });
+                // Simulate auto-filling the name based on the account number
+                if (e.target.value === "1234567890") {
+                  setNewData((prev) => ({ ...prev, name: "John Doe" }));
+                } else {
+                  setNewData((prev) => ({ ...prev, name: "" }));
+                }
+              }}
+            />
+            <input
+              type="text"
+              placeholder="Name"
+              value={newData.name || ''}
+              disabled
+            />
+          </>
+        )}
+
+        {activeTab === "unbanktab" && (
+          <>
+            <input type="text" placeholder="Username Unbank" value={newData.usernameUnbank || ''} onChange={(e) => setNewData({ ...newData, usernameUnbank: e.target.value })} />
+            <input type="email" placeholder="Email Unbank" value={newData.emailUnbank || ''} onChange={(e) => setNewData({ ...newData, emailUnbank: e.target.value })} />
+          </>
+        )}
+
+        {activeTab === "wallettab" && (
+          <>
+            <input type="text" placeholder="Username" value={newData.username || ''} onChange={(e) => setNewData({ ...newData, username: e.target.value })} />
+            <input type="text" placeholder="Wallet Address" value={newData.walletAddress || ''} onChange={(e) => setNewData({ ...newData, walletAddress: e.target.value })} />
+            <input type="text" placeholder="Network" value={newData.network || ''} onChange={(e) => setNewData({ ...newData, network: e.target.value })} />
+          </>
+        )}
+
+        <button type="button" onClick={handleAddData}>Add Data</button>
+        <button type="button" onClick={() => setShowForm(false)}>Cancel</button>
+      </form>
+    </div>
+  </div>
+)}
+
 
             {activeTab === "banktab" && (
               <div className="banktab-section">
@@ -330,10 +431,17 @@ function Beneficiary() {
                     <table>
                       <thead>
                         <tr>
-                          {['paymentCountry', 'receivingCurrency', 'bankName', 'branch', 'accountNumber', 'name'].map((column) => (
+                          {[
+                            "paymentCountry",
+                            "receivingCurrency",
+                            "bankName",
+                            "branch",
+                            "accountNumber",
+                            "name",
+                          ].map((column) => (
                             <th key={column}>
                               <div className="th-container">
-                                <span>{column.replace(/([A-Z])/g, ' $1')}</span>
+                                <span>{column.replace(/([A-Z])/g, " $1")}</span>
                                 <span
                                   className="filter-icon"
                                   onClick={() => toggleDropdown(column)}
@@ -346,23 +454,21 @@ function Beneficiary() {
                                   ref={dropdownRefs[column]}
                                   className="dropdown-filter"
                                 >
-                                  {getUniqueValues(bankData, column).map(
-                                    (value) => (
-                                      <div
-                                        key={value}
-                                        className="dropdown-item"
-                                        onClick={() => {
-                                          setFilters({ ...filters, [column]: value });
-                                          setDropdownActive({
-                                            ...dropdownActive,
-                                            [column]: false,
-                                          });
-                                        }}
-                                      >
-                                        {value}
-                                      </div>
-                                    )
-                                  )}
+                                  {getUniqueValues(bankData, column).map((value) => (
+                                    <div
+                                      key={value}
+                                      className="dropdown-item"
+                                      onClick={() => {
+                                        setFilters({ ...filters, [column]: value });
+                                        setDropdownActive({
+                                          ...dropdownActive,
+                                          [column]: false,
+                                        });
+                                      }}
+                                    >
+                                      {value}
+                                    </div>
+                                  ))}
                                 </div>
                               )}
                             </th>
@@ -370,18 +476,16 @@ function Beneficiary() {
                         </tr>
                       </thead>
                       <tbody>
-                        {getPaginatedData(getFilteredData(bankData)).map(
-                          (row) => (
-                            <tr key={row.id}>
-                              <td>{row.paymentCountry}</td>
-                              <td>{row.receivingCurrency}</td>
-                              <td>{row.bankName}</td>
-                              <td>{row.branch}</td>
-                              <td>{row.accountNumber}</td>
-                              <td>{row.name}</td>
-                            </tr>
-                          )
-                        )}
+                        {getPaginatedData(getFilteredData(bankData)).map((row) => (
+                          <tr key={row.id}>
+                            <td>{row.paymentCountry}</td>
+                            <td>{row.receivingCurrency}</td>
+                            <td>{row.bankName}</td>
+                            <td>{row.branch}</td>
+                            <td>{row.accountNumber}</td>
+                            <td>{row.name}</td>
+                          </tr>
+                        ))}
                       </tbody>
                     </table>
                   )}
@@ -389,16 +493,12 @@ function Beneficiary() {
                   <div className="pagination">
                     <div className="entries-container">
                       <label htmlFor="numEntries">Show</label>
-                      <div
-                        className="dropdowntf-container"
-                        ref={dropdownRefs.date}
-                      >
+                      <div className="dropdowntf-container" ref={dropdownRefs.date}>
                         <button
                           className="dropdowntf-button"
                           onClick={() => toggleDropdown("entries")}
                         >
-                          {entriesPerPage}{" "}
-                          <span className="caret">&#9660;</span>
+                          {entriesPerPage} <span className="caret">&#9660;</span>
                         </button>
                         {dropdownActive.entries && (
                           <div className="dropdowntf-content open">
@@ -448,9 +548,7 @@ function Beneficiary() {
                       onClick={() => handlePageClick(currentPage + 1)}
                       disabled={
                         currentPage ===
-                        Math.ceil(
-                          getFilteredData(bankData).length / entriesPerPage
-                        )
+                        Math.ceil(getFilteredData(bankData).length / entriesPerPage)
                       }
                     >
                       Next
@@ -493,10 +591,10 @@ function Beneficiary() {
                     <table>
                       <thead>
                         <tr>
-                          {['usernameUnbank', 'emailUnbank'].map((column) => (
+                          {["usernameUnbank", "emailUnbank"].map((column) => (
                             <th key={column}>
                               <div className="th-container">
-                                <span>{column.replace(/([A-Z])/g, ' $1')}</span>
+                                <span>{column.replace(/([A-Z])/g, " $1")}</span>
                                 <span
                                   className="filter-icon"
                                   onClick={() => toggleDropdown(column)}
@@ -509,23 +607,21 @@ function Beneficiary() {
                                   ref={dropdownRefs[column]}
                                   className="dropdown-filter"
                                 >
-                                  {getUniqueValues(unbankData, column).map(
-                                    (value) => (
-                                      <div
-                                        key={value}
-                                        className="dropdown-item"
-                                        onClick={() => {
-                                          setFilters({ ...filters, [column]: value });
-                                          setDropdownActive({
-                                            ...dropdownActive,
-                                            [column]: false,
-                                          });
-                                        }}
-                                      >
-                                        {value}
-                                      </div>
-                                    )
-                                  )}
+                                  {getUniqueValues(unbankData, column).map((value) => (
+                                    <div
+                                      key={value}
+                                      className="dropdown-item"
+                                      onClick={() => {
+                                        setFilters({ ...filters, [column]: value });
+                                        setDropdownActive({
+                                          ...dropdownActive,
+                                          [column]: false,
+                                        });
+                                      }}
+                                    >
+                                      {value}
+                                    </div>
+                                  ))}
                                 </div>
                               )}
                             </th>
@@ -533,14 +629,12 @@ function Beneficiary() {
                         </tr>
                       </thead>
                       <tbody>
-                        {getPaginatedData(getFilteredData(unbankData)).map(
-                          (row) => (
-                            <tr key={row.id}>
-                              <td>{row.usernameUnbank}</td>
-                              <td>{row.emailUnbank}</td>
-                            </tr>
-                          )
-                        )}
+                        {getPaginatedData(getFilteredData(unbankData)).map((row) => (
+                          <tr key={row.id}>
+                            <td>{row.usernameUnbank}</td>
+                            <td>{row.emailUnbank}</td>
+                          </tr>
+                        ))}
                       </tbody>
                     </table>
                   )}
@@ -548,16 +642,12 @@ function Beneficiary() {
                   <div className="pagination">
                     <div className="entries-container">
                       <label htmlFor="numEntries">Show</label>
-                      <div
-                        className="dropdowntf-container"
-                        ref={dropdownRefs.date}
-                      >
+                      <div className="dropdowntf-container" ref={dropdownRefs.date}>
                         <button
                           className="dropdowntf-button"
                           onClick={() => toggleDropdown("entries")}
                         >
-                          {entriesPerPage}{" "}
-                          <span className="caret">&#9660;</span>
+                          {entriesPerPage} <span className="caret">&#9660;</span>
                         </button>
                         {dropdownActive.entries && (
                           <div className="dropdowntf-content open">
@@ -607,9 +697,7 @@ function Beneficiary() {
                       onClick={() => handlePageClick(currentPage + 1)}
                       disabled={
                         currentPage ===
-                        Math.ceil(
-                          getFilteredData(unbankData).length / entriesPerPage
-                        )
+                        Math.ceil(getFilteredData(unbankData).length / entriesPerPage)
                       }
                     >
                       Next
@@ -652,10 +740,10 @@ function Beneficiary() {
                     <table>
                       <thead>
                         <tr>
-                          {['username', 'walletAddress', 'network'].map((column) => (
+                          {["username", "walletAddress", "network"].map((column) => (
                             <th key={column}>
                               <div className="th-container">
-                                <span>{column.replace(/([A-Z])/g, ' $1')}</span>
+                                <span>{column.replace(/([A-Z])/g, " $1")}</span>
                                 <span
                                   className="filter-icon"
                                   onClick={() => toggleDropdown(column)}
@@ -668,23 +756,21 @@ function Beneficiary() {
                                   ref={dropdownRefs[column]}
                                   className="dropdown-filter"
                                 >
-                                  {getUniqueValues(cryptoWalletData, column).map(
-                                    (value) => (
-                                      <div
-                                        key={value}
-                                        className="dropdown-item"
-                                        onClick={() => {
-                                          setFilters({ ...filters, [column]: value });
-                                          setDropdownActive({
-                                            ...dropdownActive,
-                                            [column]: false,
-                                          });
-                                        }}
-                                      >
-                                        {value}
-                                      </div>
-                                    )
-                                  )}
+                                  {getUniqueValues(cryptoWalletData, column).map((value) => (
+                                    <div
+                                      key={value}
+                                      className="dropdown-item"
+                                      onClick={() => {
+                                        setFilters({ ...filters, [column]: value });
+                                        setDropdownActive({
+                                          ...dropdownActive,
+                                          [column]: false,
+                                        });
+                                      }}
+                                    >
+                                      {value}
+                                    </div>
+                                  ))}
                                 </div>
                               )}
                             </th>
@@ -692,15 +778,13 @@ function Beneficiary() {
                         </tr>
                       </thead>
                       <tbody>
-                        {getPaginatedData(getFilteredData(cryptoWalletData)).map(
-                          (row) => (
-                            <tr key={row.id}>
-                              <td>{row.username}</td>
-                              <td>{row.walletAddress}</td>
-                              <td>{row.network}</td>
-                            </tr>
-                          )
-                        )}
+                        {getPaginatedData(getFilteredData(cryptoWalletData)).map((row) => (
+                          <tr key={row.id}>
+                            <td>{row.username}</td>
+                            <td>{row.walletAddress}</td>
+                            <td>{row.network}</td>
+                          </tr>
+                        ))}
                       </tbody>
                     </table>
                   )}
@@ -708,16 +792,12 @@ function Beneficiary() {
                   <div className="pagination">
                     <div className="entries-container">
                       <label htmlFor="numEntries">Show</label>
-                      <div
-                        className="dropdowntf-container"
-                        ref={dropdownRefs.date}
-                      >
+                      <div className="dropdowntf-container" ref={dropdownRefs.date}>
                         <button
                           className="dropdowntf-button"
                           onClick={() => toggleDropdown("entries")}
                         >
-                          {entriesPerPage}{" "}
-                          <span className="caret">&#9660;</span>
+                          {entriesPerPage} <span className="caret">&#9660;</span>
                         </button>
                         {dropdownActive.entries && (
                           <div className="dropdowntf-content open">

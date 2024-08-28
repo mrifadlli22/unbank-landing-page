@@ -9,12 +9,32 @@ function Settings() {
   const navigate = useNavigate(); // Initialize useNavigate
   const queryParams = new URLSearchParams(location.search);
   const tab = queryParams.get("tab") || "profile"; // Get tab from query string or default to 'profile'
+  const [transactionLimit, setTransactionLimit] = useState(15000); // Current transaction limit
+  const [showUpgradeForm, setShowUpgradeForm] = useState(false); // State to control popup visibility
+  const [requestedLimit, setRequestedLimit] = useState(transactionLimit); 
+
 
   const [isMobileMenuActive, setIsMobileMenuActive] = useState(false);
   const [activeTab, setActiveTab] = useState(tab); // Set active tab based on query string
 
   const toggleSidebar = () => {
     setIsMobileMenuActive(!isMobileMenuActive);
+  };
+
+  const handleSubmitUpgrade = () => {
+    // You can add your logic for handling the submit action here
+    alert('Your request to upgrade limited transactions has been submitted.');
+  };
+
+
+  const handleUpgradeLimit = () => {
+    setShowUpgradeForm(true); // Show the popup form
+  };
+
+  const handleUpgradeRequest = () => {
+    setTransactionLimit(requestedLimit); // Update the transaction limit dynamically
+    alert(`Your request to upgrade your limit to USD ${requestedLimit} has been submitted.`);
+    setShowUpgradeForm(false); // Close the popup after submitting
   };
 
   useEffect(() => {
@@ -157,7 +177,55 @@ function Settings() {
                         <div className="profile-label">Invited by</div>
                         <div className="profile-value">None</div>
                       </div>
+                       {/* New feature: Upgrade limit transaction */}
+                    {/* Upgrade Limit Transaction Section */}
+                    <div className="upgrade-transaction">
+                      <div>
+                        <div className="profile-label">Your Limit Transaction</div>
+                      </div>
+                      <input
+                        type="number"
+                        value={transactionLimit}
+                        readOnly
+                        className="transaction-limit-input"
+                      />
+                      <button className="submitup-btn" onClick={handleUpgradeLimit}>
+                        Upgrade
+                      </button>
                     </div>
+                  </div>
+
+                  {/* Popup Form for Upgrading Limit */}
+                  {showUpgradeForm && (
+                    <div className="form-overlay">
+                      <div className="form-container">
+                        <h2>Upgrade Your Transaction Limit</h2>
+                        <form>
+                          <div className="form-group">
+                            <label>Current Limit</label>
+                            <div className="limit-info">USD {transactionLimit}</div>
+                          </div>
+                          <div className="form-group">
+                            <label>Request Limit</label>
+                            <input
+                              type="number"
+                              value={requestedLimit}
+                              onChange={(e) => setRequestedLimit(e.target.value)}
+                              className="transaction-request-input"
+                            />
+                          </div>
+                          <button type="button" className="upgrade-btn" onClick={handleUpgradeRequest}>
+                            Request Upgrade
+                          </button>
+                          <button type="button" className="cancel-btn" onClick={() => setShowUpgradeForm(false)}>
+                            Cancel
+                          </button>
+                        </form>
+                      </div>
+                    </div>
+                  )}
+
+
                   </div>
                   <div style={{ marginTop: "25px" }} className="section">
                     <div className="section-header-container">

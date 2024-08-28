@@ -12,6 +12,7 @@ import AssetManagement from "./AssetManagement";
 import FAQ from "./FAQ";
 import ContactForm from "./ContactForm";
 import Footer from "./Footer";
+import FAQBusiness from "./FAQ";
 
 function BusinessPage() {
   return (
@@ -24,7 +25,7 @@ function BusinessPage() {
         <GlobalFinancialGateway />
         <ECommerceSolutions />
         <AssetManagement />
-        <FAQ />
+        <FAQBusiness />
         <ContactForm />
         <Footer />
       </main>
