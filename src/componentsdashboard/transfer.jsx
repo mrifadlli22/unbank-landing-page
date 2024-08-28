@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Sidebar from './sidebar';
 import Header from './header';
 import './app.css';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 function Transfer() {
   const location = useLocation();
+  const navigate = useNavigate(); // useNavigate hook for navigation
 
   const [isMobileMenuActive, setIsMobileMenuActive] = useState(false);
   const { flag, currency, amount, tab } = location.state || {}; // Get flag, currency, amount, and tab from navigation state
@@ -27,6 +28,11 @@ function Transfer() {
   const handleOptionClick = (option) => {
     setSelectedNetwork(option);
     setIsDropdownOpen(false);
+  };
+
+  // Function to handle navigation to Beneficiary tab
+  const navigateToBeneficiary = (selectedTab) => {
+    navigate('/beneficiary', { state: { tab: selectedTab } });
   };
 
   return (
@@ -74,101 +80,96 @@ function Transfer() {
                   </div>
 
                   {activeTab === "topup" && (
-  <div className="topup-section">
-    <div className="topup-content">
-      <div className="payment-method-selection">
-        <label>Select Payment Method</label>
-        <div className="custom-select" onClick={handleDropdownClick}>
-          <div className={`select-selected ${isDropdownOpen ? "select-arrow-active" : ""}`}>
-            {selectedNetwork}
-          </div>
-          {isDropdownOpen && (
-            <div className="select-items select-hide">
-              {networkoptions.map((option, index) => (
-                <div
-                  key={index}
-                  className={option === selectedNetwork ? "same-as-selected" : ""}
-                  onClick={() => handleOptionClick(option)}
-                >
-                  {option}
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-      </div>
-      <div className="amount-topup">
-        <label>Amount to Top-Up</label>
-        <div className="amount-info">
-          <input type="text" placeholder={`Enter amount in ${currency}`} />
-        </div>
-      </div>
-      <div className="address-note">
-        <ul>
-          <li>Ensure the payment method is correct before proceeding.</li>
-          <li>Minimum top-up amount is 10 {currency}. Lower amounts will be declined.</li>
-        </ul>
-      </div>
-      <div className="topup-actions">
-        <button className="topup-button">Proceed with Top-Up</button>
-      </div>
-    </div>
-  </div>
-)}
+                    <div className="topup-section">
+                      <div className="topup-content">
+                        <div className="payment-method-selection">
+                          <label>Select Payment Method</label>
+                          <div className="custom-select" onClick={handleDropdownClick}>
+                            <div className={`select-selected ${isDropdownOpen ? "select-arrow-active" : ""}`}>
+                              {selectedNetwork}
+                            </div>
+                            {isDropdownOpen && (
+                              <div className="select-items select-hide">
+                                {networkoptions.map((option, index) => (
+                                  <div
+                                    key={index}
+                                    className={option === selectedNetwork ? "same-as-selected" : ""}
+                                    onClick={() => handleOptionClick(option)}
+                                  >
+                                    {option}
+                                  </div>
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                        <div className="amount-topup">
+                          <label>Amount to Top-Up</label>
+                          <div className="amount-info">
+                            <input type="text" placeholder={`Enter amount in ${currency}`} />
+                          </div>
+                        </div>
+                        <div className="address-note">
+                          <ul>
+                            <li>Ensure the payment method is correct before proceeding.</li>
+                            <li>Minimum top-up amount is 10 {currency}. Lower amounts will be declined.</li>
+                          </ul>
+                        </div>
+                        <div className="topup-actions">
+                          <button className="topup-button">Proceed with Top-Up</button>
+                        </div>
+                      </div>
+                    </div>
+                  )}
 
+                  {activeTab === "transfer" && (
+                    <div className="transfer-section">
+                      <div className="transfer-option" onClick={() => navigateToBeneficiary("banktab")}>
+                        <div className="transfer-details">
+                          <div className="transfer-title">
+                            <span>Transfer to Your Bank Account</span>
+                            <span>SEPA Transfer in {currency}</span>
+                          </div>
+                          <div className="transfer-icon">
+                            <i className="fas fa-chevron-right"></i>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="transfer-option" onClick={() => navigateToBeneficiary("unbanktab")}>
+                        <div className="transfer-details">
+                          <div className="transfer-title">
+                            <span>Transfer to Another Unbank User</span>
+                            <span>Internal Transfer in {currency}</span>
+                          </div>
+                          <div className="transfer-icon">
+                            <i className="fas fa-chevron-right"></i>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="transfer-option" onClick={() => navigateToBeneficiary("wallettab")}>
+                        <div className="transfer-details">
+                          <div className="transfer-title">
+                            <span>Transfer to External Crypto Wallet</span>
+                            <span>Send {currency} to another wallet</span>
+                          </div>
+                          <div className="transfer-icon">
+                            <i className="fas fa-chevron-right"></i>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
 
-
-
-
-{activeTab === "transfer" && (
-  <div className="transfer-section">
-    <div className="transfer-option">
-      <div className="transfer-details">
-        <div className="transfer-title">
-          <span>Transfer to Your Bank Account</span>
-          <span>SEPA Transfer in {currency}</span>
-        </div>
-        <div className="transfer-icon">
-          <i className="fas fa-chevron-right"></i>
-        </div>
-      </div>
-    </div>
-    <div className="transfer-option">
-      <div className="transfer-details">
-        <div className="transfer-title">
-          <span>Transfer to Another Unbank User</span>
-          <span>Internal Transfer in {currency}</span>
-        </div>
-        <div className="transfer-icon">
-          <i className="fas fa-chevron-right"></i>
-        </div>
-      </div>
-    </div>
-    <div className="transfer-option">
-      <div className="transfer-details">
-        <div className="transfer-title">
-          <span>Transfer to External Crypto Wallet</span>
-          <span>Send {currency} to another wallet</span>
-        </div>
-        <div className="transfer-icon">
-          <i className="fas fa-chevron-right"></i>
-        </div>
-      </div>
-    </div>
-  </div>
-)}
-
-{activeTab === "exchange" && (
-  <div className="coming-soon-section">
-    <div className="coming-soon-content">
-      <h2>Exchange Coming Soon</h2>
-      <p>Stay tuned for updates! The exchange feature will be available shortly.</p>
-    </div>
-  </div>
-)}
+                  {activeTab === "exchange" && (
+                    <div className="coming-soon-section">
+                      <div className="coming-soon-content">
+                        <h2>Exchange Coming Soon</h2>
+                        <p>Stay tuned for updates! The exchange feature will be available shortly.</p>
+                      </div>
+                    </div>
+                  )}
 
                 </div>
-                
               </div>
             </div>
           </div>

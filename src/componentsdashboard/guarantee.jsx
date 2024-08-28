@@ -28,6 +28,12 @@ function Guarantee() {
           <Sidebar isMobileMenuActive={isMobileMenuActive} toggleSidebar={toggleSidebar} />
           <div className="main">
               <div className="content">
+              <div className="contentdash">
+            <div className="coming-soon">
+              <h2 className="coming-soon-title">Coming Soon</h2>
+              <p className="coming-soon-text">We're working hard to bring you new content. Stay tuned!</p>
+            </div>
+          </div>
         </div>
         </div>
         </div>

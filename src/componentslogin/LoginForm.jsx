@@ -27,7 +27,7 @@ const LoginForm = () => {
 
     // Proses login dilakukan di sini
     // Jika login berhasil, arahkan ke dashboard
-    navigate('/dashboard');
+    navigate('/account-summary');
   };
 
   return (

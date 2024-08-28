@@ -221,15 +221,14 @@ tr:hover {
     background-color: #f1f1f1; /* Lighter background on hover */
 }
 
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
     .table-header, .entries-container, .search-container, .dropdown-container, .date-filter-container {
-        flex-direction: column; /* Stack elements vertically on smaller screens */
-        align-items: stretch; /* Stretch elements to fill the width */
+        flex-direction: column;  
+        align-items: stretch;  
     }
 
     .search-container input[type="text"], .entries-select, .dropdown-button, .date-filter-button, .clear-button {
-        width: 100%; /* Full width for inputs and buttons on small screens */
-        margin-top: 5px; /* Add margin top for vertical stacking */
+        width: 100%;  
         margin-bottom: 5px;
     }
 
@@ -238,8 +237,8 @@ tr:hover {
     }
 
     .pagination button {
-        flex-grow: 1; /* Allow buttons to expand to fill the available space */
+        flex-grow: 1;  
         margin: 2px;
-        padding: 5px 10px; /* Increase padding for better touch target size */
+        padding: 5px 10px;
     }
-}
+} */

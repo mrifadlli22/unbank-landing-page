@@ -2242,3 +2242,178 @@ margin-left: 20px;
   }
 }
 
+/* coming soon features */
+
+/* Coming soon section styling */
+.coming-soon {
+  padding: 20px;
+}
+
+.coming-soon-title {
+  font-size: 2.5em;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.coming-soon-text {
+  font-size: 1.2em;
+  color: #666;
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+ 
+
+  .coming-soon-title {
+    font-size: 2em;
+  }
+
+  .coming-soon-text {
+    font-size: 1em;
+  }
+}
+
+/* Tab Menu Table Iqr */
+
+.iqrTab-container {
+  padding: 20px;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-bottom: 0px;
+}
+
+.iqrTab-header {
+  display: flex;
+  justify-content: flex-start;
+  border-bottom: 1px solid #e0e0e0;
+  margin-bottom: 20px;
+}
+
+.iqrTab-tabs {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  position: relative;
+}
+
+.iqrTab-tabs li {
+  margin-right: 20px;
+  padding-bottom: 10px;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.3s ease; /* Optional: smooth color transition */
+}
+
+.iqrTab-tabs .active-tab {
+  color: #000; /* Ensures active tab has the correct color */
+}
+
+.iqrTab-tabs li::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background-color: transparent; /* Default to transparent when not active */
+  transition: background-color 0.3s ease, width 0.3s ease; /* Smooth transition */
+}
+
+.iqrTab-tabs li.active-tab::after {
+  background-color: #000; /* Border color for active tab */
+  width: 100%;
+}
+
+
+/* Tab Menu Table TF */
+
+.tfTab-container {
+  padding: 20px;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-bottom: 0px;
+}
+
+.tfTab-header {
+  display: flex;
+  justify-content: flex-start;
+  border-bottom: 1px solid #e0e0e0;
+  margin-bottom: 20px;
+}
+
+.tfTab-tabs {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  position: relative;
+}
+
+.tfTab-tabs li {
+  margin-right: 20px;
+  padding-bottom: 10px;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.3s ease; /* Optional: smooth color transition */
+}
+
+.tfTab-tabs .active-tab {
+  color: #000; /* Ensures active tab has the correct color */
+}
+
+.tfTab-tabs li::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background-color: transparent; /* Default to transparent when not active */
+  transition: background-color 0.3s ease, width 0.3s ease; /* Smooth transition */
+}
+
+.tfTab-tabs li.active-tab::after {
+  background-color: #000; /* Border color for active tab */
+  width: 100%;
+}
+
+/* Profile Section */
+.bank-section {
+  margin-top: 0px;
+}
+
+.banktab-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  margin-top: 0px;
+}
+
+.banktab-card {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Profile Section */
+.currencytab-section {
+  margin-top: 0px;
+}
+
+.currencytab-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  margin-top: 0px;
+}
+
+.currencytab-card {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
