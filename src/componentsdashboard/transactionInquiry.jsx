@@ -422,15 +422,17 @@ const getFilteredData = (data) => {
 
             {activeTab === "currencytab" && (
               <div className="currencytab-section">
-                <div className="currencytab-card">
-                  <h2 className="currencytab-title">Currency Table</h2>
+                                  <h2 className="currencytab-title">Currency Table</h2>
 
+                <div className="currencytab-card">
                   <div className="table-header">
                     <div className="search-container">
                       <div className="search-icon">
                         <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/961e82c3b3d1a150d24f26c2243242ef3254c9dcc117db0f399d3a04e838e90d?placeholderIfAbsent=true&apiKey=e3ddd6dd58b748b09fc1391939743920" />
                       </div>
                       <input
+                                            style={{height: "32px"}}
+
                         type="text"
                         placeholder="Search..."
                         value={searchTerm}
@@ -457,6 +459,7 @@ const getFilteredData = (data) => {
                       </button>
                     </div>
                   </div>
+                  <div className="table-container">
 
                   {getFilteredData(currencyData).length === 0 ? (
                     <div className="no-data-message">Data Not Found</div>
@@ -710,7 +713,7 @@ const getFilteredData = (data) => {
                       </tbody>
                     </table>
                   )}
-
+                  </div>
                   <div className="pagination">
                     <div className="entries-container">
                       <label htmlFor="numEntries">Show</label>
@@ -787,8 +790,9 @@ const getFilteredData = (data) => {
 
             {activeTab === "digitaltab" && (
               <div className="currencytab-section">
+                                  <h2 className="currencytab-title">Digital Assets Table</h2>
+
                 <div className="currencytab-card">
-                  <h2 className="currencytab-title">Digital Assets Table</h2>
      
 
                   <div className="table-header">
@@ -797,6 +801,7 @@ const getFilteredData = (data) => {
                       <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/961e82c3b3d1a150d24f26c2243242ef3254c9dcc117db0f399d3a04e838e90d?placeholderIfAbsent=true&apiKey=e3ddd6dd58b748b09fc1391939743920" />
                     </div>
                     <input
+                      style={{height: "32px"}}
                       type="text"
                       placeholder="Search..."
                       value={searchTerm}
@@ -823,7 +828,7 @@ const getFilteredData = (data) => {
                       </button>
                     </div>
                   </div>
-
+                  <div className="table-container">
                   {getFilteredData(cryptoData).length === 0 ? (
                     <div className="no-data-message">Data Not Found</div>
                   ) : (
@@ -1074,7 +1079,7 @@ const getFilteredData = (data) => {
                       </tbody>
                     </table>
                   )}
-
+                  </div>
                   <div className="pagination">
                     <div className="entries-container">
                       <label htmlFor="numEntries">Show</label>

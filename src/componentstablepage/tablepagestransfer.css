@@ -1,12 +1,5 @@
-.table-container {
-    margin: 20px;
-    padding: 20px;
-    border-radius: 8px;
-    overflow-x: auto;
-    background-color: #ffffff;
-    color: #333333;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
+ 
+
 
 .table-header {
     display: flex;
@@ -129,7 +122,8 @@
 .entries-container select,
 .dropdowntf-button,
 .date-filter-button,
-.clear-button, .add-button
+.clear-button,  .export-button,
+.add-button
 .table-filter-button {
     padding: 0 10px; /* Consistent padding */
     border-radius: 4px;
@@ -178,15 +172,13 @@ th, td {
  
 table {
     width: 100%;
-    border-collapse: separate; /* Ubah dari 'collapse' ke 'separate' untuk memungkinkan border-radius */
-    border-spacing: 0; /* Hilangkan jarak antar sel */
+     border-spacing: 0; /* Hilangkan jarak antar sel */
     min-width: 100%; /* Pastikan tabel mengambil lebar penuh di layar kecil */
     background-color: #ffffff; /* Warna latar belakang tabel */
-    border: 1px solid #dddddd; /* Border di sekitar tabel */
+    border: 1px solid #b4b2b2; /* Border di sekitar tabel */
     border-radius: 8px; /* Border radius untuk tabel */
     overflow: hidden; /* Pastikan konten tidak keluar dari border radius */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sedikit bayangan untuk memberi kesan depth */
-}
+ }
 
 .table-filter-button {
     background-color: #333333;
@@ -289,12 +281,7 @@ table {
   }
   
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-}
-
+ 
 th,
 td {
     padding: 8px 10px;
@@ -462,6 +449,7 @@ tbody tr:hover {
     .dropdowntf-button,
     .date-filter-button,
     .clear-button,
+    .export-button,
     .add-button,
     .table-filter-button {
         width: auto;
@@ -589,32 +577,73 @@ tbody tr:hover {
 
 
   
-@media (max-width: 480px) {
-    .search-container,
-    .date-filter-container,
-    .table-filter-container {
-      flex-direction: column; /* Stack vertically on very small screens */
-      align-items: flex-start; /* Align items to the left */
-    }
-  
-    .table-container {
-      padding: 5px;
-      margin: 5px;
-    }
-  
-    .search-container input[type="text"] {
-      width: 100%;
-    }
-  
-    .pagination {
-      flex-direction: column; /* Stack pagination buttons vertically */
-      align-items: center; /* Center align pagination */
-      gap: 5px; /* Add gap between pagination buttons */
-    }
-  
-    .pagination button {
-      width: 100%; /* Full width for pagination buttons */
-    }
-  }
-  
+@media (max-width: 768px) {
  
+
+  .entries-select,
+  .dropdowniqr-button,
+  .date-filter-button,
+  .clear-button,
+  .export-button,
+  .table-filter-button {
+      width: auto;
+      padding: 0 5px;
+      font-size: 0.8em;
+      height: 100%; /* Maintain height consistency on smaller screens */
+  }
+
+  .pagination {
+      justify-content: center;
+  }
+}
+
+.filter-icon img{
+  width: 10px;
+  margin-top: 5px;
+}
+
+
+@media (max-width: 480px) {
+
+  .th-container {
+    gap:10px;
+    justify-content: center;
+  }
+ 
+
+.date-filter-container,
+.table-filter-container,
+.search-container {
+  gap: 5px; /* Reduce gap further on smaller screens */
+}
+
+.clear-button,
+.export-button,
+.table-filter-button {
+  font-size: 0.7em; /* Even smaller font size */
+  padding: 4px; /* Reduce padding */
+}
+
+.pagination {
+  justify-content: center; /* Center pagination buttons */
+  gap: 2px; /* Further reduce gap */
+}
+
+.search-container input[type="text"]{
+  height: 30px;
+}
+
+.pagination button {
+  padding: 2px 6px; /* Minimize padding for buttons */
+  font-size: 0.7em; /* Smaller font size for buttons */
+}
+
+th,
+td {
+  font-size: 11px; /* Smaller font size for table data */
+  padding: 6px; /* Smaller padding for table cells */
+}
+}
+
+
+

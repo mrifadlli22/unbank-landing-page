@@ -400,10 +400,12 @@ function Beneficiary() {
 
             {activeTab === "banktab" && (
               <div className="banktab-section">
+                                  <h2 className="banktab-title">Bank Account Table</h2>
+
                 <div className="banktab-card">
-                  <h2 className="banktab-title">Bank Account Table</h2>
 
                   <div className="table-header">
+
                     <div className="search-container">
                       <div className="search-icon">
                         <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/961e82c3b3d1a150d24f26c2243242ef3254c9dcc117db0f399d3a04e838e90d?placeholderIfAbsent=true&apiKey=e3ddd6dd58b748b09fc1391939743920" />
@@ -424,6 +426,7 @@ function Beneficiary() {
                       </button>
                     </div>
                   </div>
+                  <div className="table-container">
 
                   {getFilteredData(bankData).length === 0 ? (
                     <div className="no-data-message">Data Not Found</div>
@@ -489,6 +492,7 @@ function Beneficiary() {
                       </tbody>
                     </table>
                   )}
+</div>
 
                   <div className="pagination">
                     <div className="entries-container">
@@ -560,8 +564,9 @@ function Beneficiary() {
 
             {activeTab === "unbanktab" && (
               <div className="banktab-section">
+                                  <h2 className="banktab-title">Unbank Account Table</h2>
+
                 <div className="banktab-card">
-                  <h2 className="banktab-title">Unbank Account Table</h2>
 
                   <div className="table-header">
                     <div className="search-container">
@@ -709,8 +714,9 @@ function Beneficiary() {
 
             {activeTab === "wallettab" && (
               <div className="banktab-section">
+                                  <h2 className="banktab-title">External Crypto Wallet Table</h2>
+
                 <div className="banktab-card">
-                  <h2 className="banktab-title">External Crypto Wallet Table</h2>
 
                   <div className="table-header">
                     <div className="search-container">
@@ -733,7 +739,7 @@ function Beneficiary() {
                       </button>
                     </div>
                   </div>
-
+                <div className="table-container">
                   {getFilteredData(cryptoWalletData).length === 0 ? (
                     <div className="no-data-message">Data Not Found</div>
                   ) : (
@@ -788,7 +794,7 @@ function Beneficiary() {
                       </tbody>
                     </table>
                   )}
-
+                </div>
                   <div className="pagination">
                     <div className="entries-container">
                       <label htmlFor="numEntries">Show</label>

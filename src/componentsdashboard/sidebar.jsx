@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import './app.css'; 
 import { FaTachometerAlt, FaExchangeAlt, FaShieldAlt, FaHistory, FaQuestionCircle, FaCog, FaBars, FaCaretDown, FaCaretRight } from 'react-icons/fa';
 
 function Sidebar({ isMobileMenuActive, toggleSidebar }) {
-  const [openDropdowns, setOpenDropdowns] = useState({}); // Object to manage multiple dropdown states
+  const [openDropdowns, setOpenDropdowns] = useState({});
+  const sidebarRef = useRef(null); // Ref for the sidebar
+  const burgerRef = useRef(null); // Ref for the burger menu icon
 
   const handleDropdownToggle = (index) => {
     setOpenDropdowns((prevOpenDropdowns) => ({
@@ -13,12 +15,37 @@ function Sidebar({ isMobileMenuActive, toggleSidebar }) {
     }));
   };
 
+  const handleClickOutside = (event) => {
+    // Check if the click was outside the sidebar and the burger icon
+    if (
+      sidebarRef.current && 
+      !sidebarRef.current.contains(event.target) && 
+      burgerRef.current && 
+      !burgerRef.current.contains(event.target)
+    ) {
+      toggleSidebar();
+    }
+  };
+
+  useEffect(() => {
+    // Add event listener to handle clicks outside
+    if (isMobileMenuActive) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isMobileMenuActive]);
+
   return (
-    <div className={`sidebar ${isMobileMenuActive ? 'active' : ''}`}>
+    <div ref={sidebarRef} className={`sidebar ${isMobileMenuActive ? 'active' : ''}`}>
       <div className="logo-items">
         <img src="./Images/unbank.jpeg" alt="Unbank Logo" />
-        <div className="divider2"></div>
       </div>
+      <div className="divider2"></div>
       <div className="menu">
         {/* Account Information Dropdown */}
         <div className="dropdown">
@@ -98,7 +125,7 @@ function Sidebar({ isMobileMenuActive, toggleSidebar }) {
           <FaCog style={{marginRight:"10px"}} className="icon" />{'Settings'}
         </NavLink>
       </div>
-      <div className="burger-menu sidebar-burger-menu" onClick={toggleSidebar}>
+      <div ref={burgerRef} className="burger-menu sidebar-burger-menu" onClick={toggleSidebar}>
         <FaBars />
       </div>
     </div>

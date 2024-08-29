@@ -235,8 +235,9 @@ function AccountState() {
 
             {activeTab === "currencytab" && (
               <div className="currencytab-section">
+                                  <h2 className="currencytab-title">Currency Statement</h2>
+
                 <div className="currencytab-card">
-                  <h2 className="currencytab-title">Currency Statement</h2>
 
                   <div className="table-header">
                     <div className="date-filter-container">
@@ -279,6 +280,7 @@ function AccountState() {
                       </button>
                     </div>
                   </div>
+                  <div className="table-container">
 
                   {getFilteredData(currencyData).length === 0 ? (
                     <div className="no-data-message">Data Not Found</div>
@@ -499,6 +501,7 @@ function AccountState() {
                       </tbody>
                     </table>
                   )}
+</div>
 
                   <div className="pagination">
                     <div className="entries-container">
@@ -576,9 +579,9 @@ function AccountState() {
 
             {activeTab === "digitaltab" && (
               <div className="currencytab-section">
-                <div className="currencytab-card">
-                  <h2 className="currencytab-title">Digital Assets Statement</h2>
+                                  <h2 className="currencytab-title">Digital Assets Statement</h2>
 
+                <div className="currencytab-card">
                   <div className="table-header">
                     <div className="date-filter-container">
                       <label>Select Month:</label>
@@ -620,6 +623,7 @@ function AccountState() {
                       </button>
                     </div>
                   </div>
+                  <div className="table-container">
 
                   {getFilteredData(cryptoData).length === 0 ? (
                     <div className="no-data-message">Data Not Found</div>
@@ -840,7 +844,7 @@ function AccountState() {
                       </tbody>
                     </table>
                   )}
-
+                  </div>
                   <div className="pagination">
                     <div className="entries-container">
                       <label htmlFor="numEntries">Show</label>

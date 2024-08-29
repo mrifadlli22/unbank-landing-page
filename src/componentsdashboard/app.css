@@ -16,7 +16,7 @@
   overflow-y: auto;
   z-index: 1100;
 }
-
+ 
 .divider2 {
   height: 1px;
   background-color: #cccccc58;
@@ -326,6 +326,122 @@
   color: #333; /* Adjust text color as needed */
 }
 
+
+
+/* Responsive Styles for Mobile Devices */
+@media (max-width: 768px) {
+  /* Header adjustments */
+ .verify-btn img{
+  display: none;
+ }
+
+  /* User Info adjustments */
+  .user-info {
+    max-width: 180px; /* Reduce width on mobile */
+    padding: 6px;
+  }
+
+  .user-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 4px;
+  }
+
+  .user-name {
+    font-size: 10px;
+  }
+
+  .user-id {
+    font-size: 8px;
+  }
+
+  .dropdown-icon {
+    font-size: 14px;
+  }
+
+  /* Dropdown Menu adjustments */
+  .dropdown-menu {
+    min-width: 120px; /* Smaller dropdown width */
+    font-size: 10px;
+    padding: 6px;
+  }
+
+  .dropdown-menu a {
+    padding: 6px 12px;
+  }
+
+  /* Actions adjustments */
+  .verify-btn, .logout-btn, .verifies-btn {
+    padding: 4px 8px;
+    font-size: 10px;
+    margin-left: 4px;
+    margin-right: 4px;
+  }
+
+  .logout-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .logout-text {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Further reduce padding and size on very small screens */
+ 
+
+  /* User Info adjustments */
+  .user-info {
+    max-width: 140px;
+    padding: 4px;
+  }
+
+  .user-icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .user-name {
+    font-size: 9px;
+  }
+
+  .user-id {
+    font-size: 7px;
+  }
+
+  .dropdown-icon {
+    font-size: 12px;
+  }
+
+  /* Dropdown Menu adjustments */
+  .dropdown-menu {
+    min-width: 100px;
+    font-size: 8px;
+    padding: 4px;
+  }
+
+  .dropdown-menu a {
+    padding: 4px 8px;
+  }
+
+  /* Actions adjustments */
+  .verify-btn, .logout-btn, .verifies-btn {
+    padding: 3px 6px;
+    font-size: 7px;
+  }
+
+  .logout-icon {
+    width: 14px;
+    height: 14px;
+  }
+
+  .logout-text {
+    font-size: 9px;
+  }
+}
+
 /* Dashboard layout */
 .dashboard {
   display: flex;
@@ -365,6 +481,10 @@
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
+
+  .logo-items img {
+    width: 165px;
+  }
 
   /* Burger menu button in sidebar */
   .sidebar-burger-menu {
@@ -582,18 +702,24 @@
 .containers {
   overflow-x: auto; /* Aktifkan scroll horizontal */
   overflow-y: hidden; /* Nonaktifkan scroll vertikal */
-  -webkit-overflow-scrolling: touch; /* Scrolling mulus di perangkat sentuh */
-  padding: 10px 0; /* Padding di sekitar konten */
+   padding: 10px 0; /* Padding di sekitar konten */
   display: flex; /* Atur kontainer sebagai flex container */
   flex-wrap: nowrap; /* Mencegah pembungkusan elemen */
 }
 
+.containers::-webkit-scrollbar {
+  display: none;
+}
 
 /* Kontainer untuk currency card dan tombol tambah */
 .currency-cards {
     display: flex; /* Atur elemen di dalamnya secara horizontal */
     flex-wrap: nowrap; /* Mencegah pembungkusan elemen */
     align-items: center; /* Vertikal align tengah */
+}
+
+.containers:-webkit-scrollbar {
+  display: none;
 }
 
 /* Style untuk currency card dan tombol tambah */
@@ -1271,6 +1397,7 @@ margin-left: 20px;
   align-items: center;
 }
 
+
 .support-image {
   width: 150px;
   height: 150px;
@@ -1626,6 +1753,18 @@ margin-left: 20px;
     padding: 20px; /* Kurangi padding agar sesuai dengan layar lebih kecil */
     margin-top: 20px; /* Kurangi margin atas */
   }
+
+  .support-card{
+    display: block;
+align-items: center;  }
+
+
+
+.support-content{
+  text-align: center;
+  margin-left: 0px;
+  margin-top: 10px;
+}
 
   .phone-verification-content {
     width: 100%; /* Buat konten sesuai dengan lebar container */
@@ -2263,6 +2402,9 @@ margin-left: 20px;
 /* Responsive styling */
 @media (max-width: 768px) {
  
+  .tfTab-container{
+    font-size: 14px;
+  }
 
   .coming-soon-title {
     font-size: 2em;
@@ -2411,7 +2553,7 @@ margin-left: 20px;
 }
 
 .currencytab-card {
-  background: #fff;
+  background-color: #fff;
   border: 1px solid #e0e0e0;
   border-radius: 8px;
   padding: 20px;
