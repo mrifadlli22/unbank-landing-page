@@ -322,7 +322,7 @@ function Settings() {
                           </span>
                         </p>
                         <p></p>
-                        <button class="verify-btn">Verify</button>
+                        <button class="verifyss-btn">Verify</button>
                       </div>
                       <div class="security-card">
                         <p>
@@ -331,7 +331,7 @@ function Settings() {
                             (Please verify your phone number)
                           </span>
                         </p>
-                        <button class="verify-btn">Verify</button>
+                        <button class="verifyss-btn">Verify</button>
                       </div>
                       <div class="security-card">
                         <p>

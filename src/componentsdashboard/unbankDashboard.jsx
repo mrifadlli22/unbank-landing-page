@@ -422,6 +422,7 @@ function UnbankDashboard() {
                     <i className="icon-info"></i>
                   </div>
                   <div className="no-transactions-text">
+                  <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/41b2b811ceff4d7de869164d340d415fbd6c5e25cc0c0698401bf035cfd17065?placeholderIfAbsent=true&apiKey=d04c07a3696b4df490c9872df5c4d2ba" alt="Icon" />
                     <h3>No transactions yet</h3>
                     <p>
                       You haven't made any transactions yet, but don't worry!
