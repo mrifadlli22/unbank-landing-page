@@ -22,7 +22,7 @@ const FAQItem = ({ question, answer }) => {
   );
 };
 
-function FAQ() {
+function FAQBusiness() {
   const faqData = [
     {
       question: "How can I apply for a Unbank business account online?",
@@ -90,4 +90,4 @@ function FAQ() {
 };
 
 
-export default FAQ;
+export default FAQBusiness;

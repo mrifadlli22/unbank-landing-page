@@ -4,8 +4,8 @@
  .hero {
   display: flex;
   width: 100%;
-  padding: 0 80px;
-  padding-bottom: 15px;
+   padding-bottom: 15px;
+   margin-top: 50px;
 }
 
 .heroContent {
@@ -16,8 +16,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 0 16px;
-  margin-top: 40px;
-}
+ }
 
 .textContent {
   flex: 1;
@@ -74,14 +73,18 @@
 
 @media (max-width: 991px) {
   .hero {
+    width: 100%; /* Footer elements also take full width */
+
     padding: 0 20px;
   }
 
   .heroContent {
-    flex-direction: column;
+    flex-direction: column-reverse;
+    padding-bottom: 20px;
   }
 
   .heading {
+    margin: 0px;    
     font-size: 40px;
     line-height: 47px;
   }

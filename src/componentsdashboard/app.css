@@ -1,0 +1,2766 @@
+/* Sidebar default (active) */
+.sidebar {
+  width: 240px;
+  height: 100vh;
+  background-color: #111;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  transition: left 0.3s ease;
+  overflow-y: auto;
+  z-index: 1100;
+}
+ 
+.divider2 {
+  height: 1px;
+  background-color: #cccccc58;
+  width: 100%;
+  margin: 10px 0;
+}
+
+.sidebar.hidden {
+  left: -240px;
+}
+
+.sidebar.active {
+  left: 0;
+}
+
+/* Burger menu button in sidebar */
+.sidebar-burger-menu {
+  bottom: 20px;
+  cursor: pointer;
+  font-size: 24px;
+  color: #fff;
+  display: none;
+}
+
+/* Logo */
+.logo-items img {
+  width: 200px;
+  transition: width 0.3s ease;
+}
+
+/* Menu items */
+.menu-item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 10px 20px;
+  color: #aaa;
+  text-decoration: none;
+  font-size: 15px;
+  transition: background-color 0.3s, color 0.3s;
+  position: relative; /* For positioning dropdown */
+}
+
+/* Menu item active state */
+.menu-item:hover, .menu-item.active {
+  background-color: #333;
+  color: #fff;
+}
+
+/* Dropdown button */
+.dropdown-btn {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 10px 20px;
+  color: #aaa;
+  background: none;
+  border: none;
+  text-align: left;
+  font-size: 15px;
+  transition: background-color 0.3s, color 0.3s;
+  position: relative; /* For positioning dropdown */
+  gap: 10px;
+  cursor: pointer;
+}
+
+/* Dropdown button active state */
+.dropdown-btn:hover,
+.dropdown-btn.active {
+  background-color: #333;
+  color: #fff;
+}
+
+/* Dropdown icon */
+.dropdown-icon {
+  margin-left: auto;
+  font-size: 16px;
+  transition: transform 0.3s ease;
+}
+
+/* Rotate icon when active */
+ 
+
+/* Dropdown container (hidden by default) */
+.dropdown-container {
+  max-height: 0;
+  overflow: hidden;
+  background-color: #262626;
+  padding-left: 8px;
+  transition: max-height 0.5s ease-out, padding 0.3s ease-out;
+}
+
+/* Show dropdown container */
+.dropdown-container.show {
+  max-height: 500px; /* Adjust this value as needed */
+  padding: 8px 0;
+}
+
+/* Dropdown menu items */
+.dropdown-item {
+  display: block;
+  padding: 10px 20px;
+  color: #aaa;
+  text-decoration: none;
+  transition: background-color 0.3s, color 0.3s;
+  font-size: 13px;
+}
+
+.dropdown-item:hover {
+  background-color: #333;
+  color: #fff;
+}
+
+
+
+/* Burger menu icon in header */
+.burger-menu-icon {
+  display: none; /* Hide by default */
+  cursor: pointer;
+  font-size: 24px;
+  color: #000;
+}
+
+/* Header */
+.header {
+  position: fixed; /* Membuat header tetap berada di atas viewport */
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 16px;
+  padding-left: 285px;
+  background-color: #fff;
+  border-bottom: 1px solid #ccc;
+  z-index: 1000;
+  height: 90px; /* Adjust header height */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: add shadow for better visibility */
+}
+
+/* User info */
+.user-info {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc; /* Border for the wrapper */
+  border-radius: 8px; /* Optional: rounded corners */
+  padding: 4px; /* Reduce padding */
+  background-color: #f9f9f9; /* Optional: background color */
+  max-width: 250px; /* Limit width to make it smaller */
+  overflow: hidden; /* Prevent overflow */
+}
+
+.user-info .user-details {
+  display: flex;
+  flex-direction: column; /* Stack user-name and user-id vertically */
+  margin-left: 8px; /* Reduce space between icon and text */
+}
+
+.user-details {
+  margin-right: 50px;
+}
+
+.user-icon {
+  width: 25px; /* Reduce icon size */
+  height: 25px; /* Reduce icon size */
+  border-radius: 50%;
+  margin-right: 8px; /* Reduce space between icon and text */
+  border: 1px solid #000; /* Border for the icon */
+}
+
+.user-name {
+  display: block;
+  font-size: 12px; /* Adjust font size */
+  color: #333;
+  white-space: nowrap; /* Prevent text overflow */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.user-id {
+  display: block;
+  font-size: 10px; /* Adjust font size */
+  color: #666;
+  white-space: nowrap; /* Prevent text overflow */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dropdown-icon {
+  font-size: 16px; /* Adjust icon size */
+}
+
+/* Dropdown menu */
+
+/* Container for user info and dropdown menu */
+.user-info-container {
+  position: relative; /* Positioning context for dropdown menu */
+  display: inline-block;
+}
+
+/* User Info Styles */
+.user-info {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  background-color: #f9f9f9; /* Optional: background color */
+  border-radius: 8px; /* Optional: rounded corners */
+  cursor: pointer;
+}
+
+/* Dropdown Menu Styles */
+.dropdown-menu {
+  display: none; /* Hide by default */
+  position: absolute;
+  top: 100%; /* Position it directly below the user-info container */
+  left: 0; /* Align it to the left edge of the user-info container */
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  min-width: 150px; /* Adjust width as needed */
+  padding: 8px;
+  opacity: 0; /* Start with hidden dropdown */
+  transform: scaleY(0); /* Start with a scale of 0 for smooth appearance */
+  transform-origin: top; /* Scale from the top */
+  transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth transition */
+  z-index: 1001; /* Ensure it is above other elements */
+  font-size: 12px;
+}
+
+.dropdown-menu.show {
+  display: block; /* Show the menu when toggled */
+  opacity: 1; /* Fade in */
+  transform: scaleY(1); /* Scale to full size */
+  width: 216px
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 8px 16px;
+  color: #333;
+  text-decoration: none;
+}
+
+.dropdown-menu a:hover {
+  background-color: #f0f0f0;
+}
+
+
+
+/* Actions */
+.actions {
+  display: flex;
+  align-items: center;
+}
+
+.verify-btn, .logout-btn {
+  padding: 6px 12px;
+  margin-left: 8px;
+  border: none;
+  background-color: #f0f0f0;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-size: 12px; /* Adjust font size */
+  border-radius: 8px;
+  background-color: transparent;
+}
+
+.verifies-btn{
+  padding: 9px 12px;
+  border-radius: 30px;
+  margin-left: 8px;
+  border: none;
+  background-color: #f0f0f0;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-size: 12px; /* Adjust font size */
+  border-radius: 8px;
+  background-color: transparent;
+  margin-right: 10px;
+  border: 1px solid #dddbdb;
+}
+
+.verify-btn {
+  margin-right: 10px;
+  border: 1px solid #dddbdb;
+}
+
+.verifies-btn:hover, .verify-btn:hover, .logout-btn:hover {
+  background-color: #e0e0e0;
+}
+
+/* Container for logout icon and text */
+.logout-container {
+  display: flex;
+  align-items: center; /* Align items vertically center */
+  cursor: pointer; /* Change cursor to pointer to indicate it’s clickable */
+}
+
+.logout-icon {
+  width: 20px; /* Adjust size as needed */
+  height: 20px; /* Adjust size as needed */
+  margin-right: 8px; /* Space between icon and text */
+}
+
+.logout-text {
+  font-size: 12px; /* Adjust font size as needed */
+  color: #333; /* Adjust text color as needed */
+}
+
+
+
+/* Responsive Styles for Mobile Devices */
+@media (max-width: 768px) {
+  /* Header adjustments */
+ .verify-btn img{
+  display: none;
+ }
+
+  /* User Info adjustments */
+  .user-info {
+    max-width: 180px; /* Reduce width on mobile */
+    padding: 6px;
+  }
+
+  .user-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 4px;
+  }
+
+  .user-name {
+    font-size: 10px;
+  }
+
+  .user-id {
+    font-size: 8px;
+  }
+
+  .dropdown-icon {
+    font-size: 14px;
+  }
+
+  /* Dropdown Menu adjustments */
+  .dropdown-menu {
+    min-width: 120px; /* Smaller dropdown width */
+    font-size: 10px;
+    padding: 6px;
+  }
+
+  .dropdown-menu a {
+    padding: 6px 12px;
+  }
+
+  /* Actions adjustments */
+  .verify-btn, .logout-btn, .verifies-btn {
+    padding: 4px 8px;
+    font-size: 12px;
+    margin-left: 4px;
+    margin-right: 4px;
+  }
+
+  .logout-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .logout-text {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Further reduce padding and size on very small screens */
+ 
+
+  /* User Info adjustments */
+  .user-info {
+    max-width: 140px;
+    padding: 4px;
+  }
+
+  .user-icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .user-name {
+    font-size: 9px;
+  }
+
+  .user-id {
+    font-size: 7px;
+  }
+
+  .dropdown-icon {
+    font-size: 12px;
+  }
+
+  /* Dropdown Menu adjustments */
+  .dropdown-menu {
+    min-width: 100px;
+    font-size: 8px;
+    padding: 4px;
+  }
+
+  .dropdown-menu a {
+    padding: 4px 8px;
+  }
+
+  /* Actions adjustments */
+  .verify-btn, .logout-btn, .verifies-btn {
+    padding: 3px 6px;
+    font-size: 7px;
+  }
+
+  .logout-icon {
+    width: 14px;
+    height: 14px;
+  }
+
+  .logout-text {
+    font-size: 9px;
+  }
+}
+
+/* Dashboard layout */
+.dashboard {
+  display: flex;
+  height: 100vh;
+   flex-direction: column;
+  transition: margin-left 0.3s ease; /* Smooth transition when sidebar collapses */
+}
+
+.dashboard .header {
+  margin-left: 0px;
+}
+
+.main {
+  padding-top: 90px; /* Adjust to match header height */
+  overflow-y: auto;
+  flex-grow: 1;
+}
+
+.content {
+  flex-grow: 1;
+  padding-top: 90px;
+  padding: 16px;
+  /* padding-left: 285px; */
+  padding-right: 0px;
+  padding-top: 0px;
+  background-color: #F4F6F9;
+  overflow-y: auto; /* Ensure content scrolls if it exceeds the viewport height */
+  width: 100%;
+  height: 100vh; /* Adjust height to fill the remaining space, accounting for the header height */
+}
+
+.contentdash {
+  padding-left: 285px;
+  padding-right: 59px;
+
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+
+  .logo-items img {
+    width: 165px;
+  }
+
+  /* Burger menu button in sidebar */
+  .sidebar-burger-menu {
+    display: block; /* Show burger menu on mobile */
+    position: absolute;
+    bottom: 20px;
+    font-size: 24px;
+    color: #fff;
+  }
+
+  .contentdash{
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+  
+
+  .sidebar.collapsed {
+    width: 180px; /* Adjust this width as needed */
+  }
+
+  .sidebar.collapsed .logo-items img {
+    width: 150px; /* Adjust this width as needed */
+  }
+
+  .header-burger-menu {
+    display: block; /* Show burger menu on mobile */
+  }
+  
+  .burger-menu-icon {
+    display: none; /* Hide burger menu icon in sidebar on mobile */
+  }
+
+  .sidebar {
+    width: 200px;
+    left: -200px; /* Hide sidebar by default on mobile */
+  }
+
+  .sidebar.active {
+    left: 0; /* Show sidebar when active */
+  }
+
+  .header {
+    padding-left: 10px;
+   }
+
+  .dashboard {
+    margin-left: 0; /* Reset margin when sidebar is hidden */
+  }
+
+  .content {
+    padding: 10px;
+  }
+}
+
+/* Hide header-burger-menu on desktop */
+@media (min-width: 769px) {
+  .header-burger-menu {
+    display: none; /* Hide burger menu on desktop */
+  }
+  
+}
+/* Currency Rates Container */
+.currency-rate-container {
+    display: flex;
+    flex-wrap: nowrap; /* Mengganti dari wrap ke nowrap untuk layar kecil */
+    gap: 10px;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+    width: 100%;
+    overflow-x: auto; /* Memungkinkan pengguliran horizontal */
+    box-sizing: border-box;
+    -webkit-overflow-scrolling: touch; /* Meningkatkan pengalaman scrolling pada iOS */
+  }
+  
+  /* Responsive adjustments for smaller screens */
+  @media (max-width: 768px) {
+    .currency-rate-box {
+      flex: 0 0 auto; /* Mencegah kotak menyusut atau tumbuh */
+      width: calc(50% - 10px); /* Lebar tetap untuk 2 kotak per baris */
+      min-width: 250px; /* Minimum lebar untuk memastikan konten dapat dibaca */
+    }
+  }
+  
+  
+.currency-rate-box, .overview-box, .currency-card {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    background-color: white;
+    padding: 15px;
+    margin-bottom: 10px;
+  }
+  
+  
+  .currency-rate-box {
+    flex: 1 1 calc(25% - 10px); /* Mengisi 4 dalam satu baris dengan memperhitungkan gap */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    background-color: #ecf8f8; /* Warna latar belakang biru muda */
+    border: 1px solid #b6e0dc; /* Border biru muda */    padding: 15px; /* Padding internal */
+    flex-direction: column; /* Anak-anak div disusun secara vertikal */
+    transition: box-shadow 0.3s ease; /* Transisi halus untuk perubahan box-shadow */
+
+    height: 150px
+
+  }
+
+  .ticker {
+    width: 100%;
+    background-color: #000; /* Sesuaikan dengan tema */
+    color: white; /* Sesuaikan dengan tema */
+    padding: 10px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+  }
+  
+  .ticker marquee {
+    font-size: 16px; /* Ukuran teks */
+    font-weight: bold;
+  }
+  
+  
+  
+  .currency-rate-box {
+  cursor: pointer; /* Membuat tahu pengguna bahwa kotak bisa diklik */
+ }
+
+.currency-rate-box:hover {
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2); /* Bayangan lebih besar saat hover */
+    z-index: 10; /* Memastikan kotak berada di atas kotak lain saat hover */
+}
+
+  .currency-rate-title {
+    color: #333; /* Warna teks gelap */
+    font-size: 16px; /* Ukuran font */
+    margin-bottom: 8px; /* Jarak antar teks */
+  }
+  
+  .currency-rate-percentage {
+    font-size: 32px; /* Ukuran font besar untuk persentase */
+    color: #25a18e; /* Warna hijau terang */
+    font-weight: bold; /* Tebal */
+  }
+  
+  .currency-rate-change {
+    color: #666; /* Warna teks lebih gelap */
+    font-size: 14px; /* Ukuran font lebih kecil */
+    margin-top: 8px; /* Jarak dari teks di atas */
+  }
+  
+  .currency-change-value {
+    color: green; /* Warna hijau untuk nilai positif */
+  }
+  
+  
+  /* Overview Box */
+  .overview-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #fff; /* Latar belakang putih */
+    border: 1px solid #ccc; /* Border tipis */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Bayangan untuk depth */
+    margin-bottom: 20px; /* Jarak dengan elemen berikutnya */
+  }
+  
+  .overview-icon {
+    color: red; /* Warna ikon merah */
+    margin-right: 20px; /* Jarak antara ikon dan teks */
+  }
+  
+  .overview-text {
+    flex-grow: 1; /* Mengambil ruang maksimum yang tersedia */
+  }
+  
+  .overview-title {
+    font-size: 18px; /* Ukuran font untuk judul */
+    font-weight: bold; /* Bold untuk judul */
+  }
+  
+  .overview-subtext {
+    font-size: 16px; /* Ukuran font lebih kecil untuk subteks */
+  }
+  
+.overview-button {
+  background-color: #000; /* Warna latar tombol */
+  color: #fff; /* Warna teks tombol */
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: bold;
+  outline: none;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Transition untuk smooth effect */
+}
+
+.overview-button:hover {
+  background-color: #333; /* Gelapkan tombol saat hover */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2); /* Tambahkan bayangan yang lebih menonjol */
+}
+
+  
+.currency-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Creates three columns, each fraction (fr) taking one part of the available space */
+  gap: 30px; /* This sets both row and column gaps */
+  margin-bottom: 16px;
+}
+
+ 
+.containers {
+  overflow-x: auto; /* Aktifkan scroll horizontal */
+  overflow-y: hidden; /* Nonaktifkan scroll vertikal */
+   padding: 10px 0; /* Padding di sekitar konten */
+  display: flex; /* Atur kontainer sebagai flex container */
+  flex-wrap: nowrap; /* Mencegah pembungkusan elemen */
+}
+
+.containers::-webkit-scrollbar {
+  display: none;
+}
+
+/* Kontainer untuk currency card dan tombol tambah */
+.currency-cards {
+    display: flex; /* Atur elemen di dalamnya secara horizontal */
+    flex-wrap: nowrap; /* Mencegah pembungkusan elemen */
+    align-items: center; /* Vertikal align tengah */
+}
+
+.containers:-webkit-scrollbar {
+  display: none;
+}
+
+/* Style untuk currency card dan tombol tambah */
+.currency-card, .add-card {
+    flex: 0 0 auto; /* Mencegah elemen menyusut atau tumbuh */
+    width: 340px; /* Lebar tetap seperti yang diinginkan */
+    height: 180px; /* Tinggi tetap seperti yang diinginkan */
+    margin-bottom: 0px;
+ }
+
+ 
+/* Container untuk avatar */
+/* Container untuk avatar */
+.currency-avatars {
+  position: absolute; /* Posisi absolut di dalam currency-card */
+  bottom: 10px; /* Jarak dari bagian bawah */
+  left: 10px; /* Jarak dari bagian kiri */
+  display: flex; /* Menyusun gambar secara horizontal */
+  gap: 5px; /* Jarak antar gambar */
+}
+
+.digital-avatars {
+  display: flex; /* Menyusun gambar secara horizontal */
+  gap: 5px; /* Jarak antar gambar */
+  margin-top:75px;
+}
+
+/* Gaya untuk gambar avatar */
+.avatar {
+  width: 30px; /* Ukuran gambar avatar */
+  height: 30px; /* Ukuran gambar avatar */
+  border-radius: 50%; /* Membuat gambar bulat */
+  object-fit: cover; /* Memastikan gambar tidak terdistorsi */
+  transition: box-shadow 0.3s ease, transform 0.3s ease; /* Smooth transition for hover effects */
+
+}
+
+.avatar:hover {
+  opacity: 0.8; /* Slight change on hover for all avatars */
+}
+
+.avatar-1,.avatar-2, .avatar-3 {
+  border: 2px solid #ccc; /* Optional: add a border for better visibility */
+}
+
+.avatar-1:hover,.avatar-2:hover, .avatar-3:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Add box shadow on hover */
+   cursor: pointer;
+}
+
+
+.currency-card:last-child {
+    border: 2px dashed #000; /* Border putus-putus */
+    background-color: #f0f0f0; /* Latar belakang yang sedikit berbeda */
+}
+
+.add-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+ 
+    background-color: transparent; /* Latar belakang abu-abu */
+    border: 2px dashed rgb(111, 109, 109); /* Border putus-putus */
+    border-radius: 8px; /* Sudut membulat */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Bayangan */
+    position: relative;
+    cursor: pointer; /* Pointer cursor untuk menunjukkan interaktivitas */
+    transition: box-shadow 0.3s ease; /* Transisi halus untuk perubahan box-shadow */
+
+}
+
+.add-card:hover {
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2); /* Bayangan lebih besar saat hover */
+  z-index: 10; /* Pastikan kartu berada di atas yang lain saat hover */
+}
+
+.add-card::before {
+    content: '+';
+    font-size: 32px; /* Ukuran font untuk tanda "+" */
+    color: #333; /* Warna tanda "+" */
+    position: absolute;
+    top: 50%; /* Posisi vertikal di tengah */
+    left: 50%; /* Posisi horizontal di tengah */
+    transform: translate(-50%, -50%); /* Mengatur posisi secara pusat */
+}
+
+
+.currency-card:hover {
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2); /* Bayangan lebih besar saat hover */
+    z-index: 10; /* Pastikan kartu berada di atas yang lain saat hover */
+}
+
+/* Gaya untuk container currency card */
+.currency-card {
+  position: relative; /* Untuk menempatkan elemen avatar di posisi relatif */
+  display: flex;
+  align-items: center; /* Center items vertically */
+  justify-content: flex-start; /* Align items to the start */
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  width: 340px; /* Lebar tetap seperti yang diinginkan */
+  height: 180px; /* Tinggi tetap seperti yang diinginkan */
+  transition: box-shadow 0.3s ease;
+}
+
+/* Container untuk detail mata uang */
+.currency-details {
+  display: block;
+  align-items: center; /* Center details vertically */
+  justify-content: flex-start; /* Align details to the start */
+  width: 100%; /* Ensures details take full width of the card */
+  margin-bottom: 145px;
+}
+
+/* Gaya untuk gambar bendera */
+.currency-flag {
+  width: 75px;
+  height: 75px;
+  margin-right: 20px; /* Space between flag and amount/label */
+  flex-shrink: 0; /* Prevent flag from shrinking */
+ }
+
+ 
+/* Gaya untuk keterangan mata uang */
+.currency-label {
+  margin-top:5px;
+   font-size: 0.8em; /* Ukuran font yang lebih kecil dari jumlah */
+  color: #666; /* Warna font untuk keterangan */
+}
+
+
+ 
+/* Gaya untuk jumlah mata uang */
+.currency-amount {
+  margin-top: 25px;
+  font-size: 18px; /* Ukuran font yang lebih besar jika diperlukan */
+  font-weight: bold; /* Membuat font lebih tebal */
+}
+
+.section {
+    margin-bottom: 20px; /* Jarak bawah dari section */
+}
+
+.section-header-container {
+    display: flex;
+    align-items: center; /* Vertikal center alignment */
+    width: 100%; /* Adjust width as needed */
+
+ }
+
+.section-header {
+    font-size: 20px; /* Ukuran font untuk header section */
+    font-weight: 500; /* Tebal */
+    color: #333; /* Warna teks */
+    margin-right: 20px; /* Jarak kanan dari header untuk memberi ruang bagi divider2 */
+    white-space: nowrap; /* Prevents text from wrapping */
+
+}
+
+/* digital */
+
+/* General settings for digital cards container */
+.Digital-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Creates three columns, each fraction (fr) taking one part of the available space */
+  gap: 30px; /* This sets both row and column gaps */
+  margin-bottom: 20px;
+ }
+
+
+/* Specific style for each digital card */
+.Digital-card {
+  display: flex;
+  align-items: center; /* Center items vertically */
+  justify-content: flex-start; /* Align items to the start */
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  width: 340px; /* Lebar tetap seperti yang diinginkan */
+  height: 180px; /* Tinggi tetap seperti yang diinginkan */
+  transition: box-shadow 0.3s ease;
+}
+
+.Digital-card:hover {
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2); /* Bayangan lebih besar saat hover */
+  z-index: 10; /* Pastikan kartu berada di atas yang lain saat hover */
+}
+
+.Digital-details {
+  display: block;
+  align-items: center; /* Center details vertically */
+  justify-content: flex-start; /* Align details to the start */
+  width: 100%; /* Ensures details take full width of the card */
+  height: 160px;
+ }
+ 
+/* Adjust the font size and margin for proper alignment */
+.Digital-amount {
+  margin-top: 5px;
+  font-size: 14px; /* Ukuran font yang lebih besar jika diperlukan */
+  font-weight: bold; /* Membuat font lebih tebal */
+   line-height: 1; /* Adjust line height to fit design */
+ }
+
+.Digital-label {
+  margin-top:5px;
+  font-size: 0.8em; /* Ukuran font yang lebih kecil dari jumlah */
+  color: #666; /* Warna font untuk keterangan */
+  margin-top: 4px; /* Adjust top margin for alignment */
+ }
+
+.Digital-description {
+  font-size: 15px; /* Font size for currency label */
+  color: #666; /* Color for text */
+  font-weight: bold;
+  margin-top: 0px; /* Adjust top margin for alignment */
+ }
+
+/* Adjust the font size and margin for proper alignment */
+.bank-amount {
+  font-size: 18px; /* Ukuran font yang lebih besar jika diperlukan */
+  font-weight: bold; /* Membuat font lebih tebal */
+   line-height: 1; /* Adjust line height to fit design */
+ }
+
+.bank-label {
+  margin-top:5px;
+  font-size: 0.8em; /* Ukuran font yang lebih kecil dari jumlah */
+  color: #666; /* Warna font untuk keterangan */
+  margin-top: 4px; /* Adjust top margin for alignment */
+ }
+
+.bank-description {
+  font-size: 15px; /* Font size for currency label */
+  color: #666; /* Color for text */
+  font-weight: bold;
+  margin-top: 105px; /* Adjust top margin for alignment */
+ }
+
+
+.Digital-flag {
+  width: 75px;
+  height: 75px;
+  margin-right: 20px; /* Space between flag and amount/label */
+  flex-shrink: 0; /* Prevent flag from shrinking */
+
+}
+
+
+.card-flag {
+  width: 75px;
+  height: 75px;
+  margin-right: 20px; /* Space between flag and amount/label */
+  flex-shrink: 0; /* Prevent flag from shrinking */
+  margin-top: 110px;
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+
+ 
+ /* Transaction */
+
+ .see-all-transactions-btn {
+  background-color: #f3f4f6;
+  border: 1px solid #ddd;
+  padding: 5px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #666;
+  transition: background-color 0.3s ease;
+  margin-left: 10px;
+}
+
+.see-all-transactions-btn:hover {
+  background-color: #e2e4e7;
+}
+
+.containers2 {
+  margin-top: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.no-transactions {
+  text-align: center;
+  color: #666;
+}
+
+.no-transactions-icon {
+  font-size: 50px;
+  color: #ccc;
+  margin-bottom: 10px;
+}
+
+.no-transactions-text h3 {
+  font-size: 20px;
+  margin: 0;
+  font-weight: bold;
+}
+
+.no-transactions-text p {
+  font-size: 14px;
+  color: #999;
+  margin-top: 5px;
+  max-width: 400px;
+  line-height: 1.5;
+}
+
+
+/* Settings */
+
+.settings-container {
+  padding: 20px;
+  padding-left: 35px;
+  padding-right: 35px
+}
+
+.settings-header {
+  display: flex;
+  justify-content: flex-start;
+  border-bottom: 1px solid #e0e0e0;
+  margin-bottom: 20px;
+}
+
+.settings-tabs {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  position: relative;
+}
+
+.settings-tabs li {
+  margin-right: 20px;
+  padding-bottom: 10px;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.3s ease; /* Optional: smooth color transition */
+}
+
+.settings-tabs .active-tab {
+  color: #000; /* Ensures active tab has the correct color */
+}
+
+.settings-tabs li::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background-color: transparent; /* Default to transparent when not active */
+  transition: background-color 0.3s ease, width 0.3s ease; /* Smooth transition */
+}
+
+.settings-tabs li.active-tab::after {
+  background-color: #000; /* Border color for active tab */
+  width: 100%;
+}
+
+
+/* Profile Section */
+.profile-section {
+  margin-top: 20px;
+}
+
+.profile-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.profile-card {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.profile-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 0; /* More padding for spacing */
+  border-bottom: 1px solid #e0e0e0;
+  align-items: flex-start; /* Align items to start to allow labels above values */
+}
+
+.profile-row:last-child {
+  border-bottom: none;
+}
+
+.profile-label,
+.profile-value {
+  display: block; /* Changed to block to stack label and value vertically */
+}
+
+.profile-label {
+  font-weight: bold;
+  color: #757575; /* Gray color for the labels */
+  margin-bottom: 5px; /* Space between label and value */
+}
+
+.profile-value {
+  display: flex;  /* Aligns children inline */
+  align-items: center;  /* Centers children vertically */
+  color: #212121;  /* Darker color for values */
+}
+
+
+.profile-row > div {
+  flex: 1; /* Ensures flex containers within rows take up equal space */
+  min-width: 0; /* Prevents flex items from growing too large */
+}
+
+.copy-icon {
+  margin-left: 5px;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+
+.copy-icon:hover {
+  opacity: 1;
+}
+
+.flag-icon {
+  width: 24px; /* Increased size for better visibility */
+  height: 24px;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.status-icon {
+  width: 12px; /* Slightly larger for better visibility */
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.not-verified {
+  background-color: #f44336; /* Red color for 'Not verified' status */
+}
+
+.user-id {
+  display: flex;
+  align-items: center;
+}
+
+.user-id .copy-icon {
+  margin-left: 5px;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+
+.user-id .copy-icon:hover {
+  opacity: 1;
+}
+
+/* Shared Sections */
+.profile-section, .support-section, .security-section {
+  margin-top: 20px;
+}
+
+.profile-title, .support-title, .security-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.first-section {
+  display: flex;
+  gap: 20px; /* Add spacing between the columns */
+}
+
+
+
+.security-cards {
+  flex: 1; /* Ensures equal width */
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.security-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #e0e0e0;
+  gap:15px
+}
+
+.security-card:last-child {
+  border-bottom: none; /* Remove border for last item */
+}
+
+.security-card p {
+  font-size: 16px;
+  font-weight: normal;
+  color: #333;
+}
+
+.note {
+   color: #333;
+}
+
+/* changes */
+.verify-btn, .verifyss-btn, .change-btn {
+  background-color: #f5f5f5;
+  color: #333;
+  padding: 8px 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.verify-btn:hover, .change-btn:hover {
+  background-color: #e0e0e0;
+}
+
+.security-info {
+  text-align: center;
+}
+
+.security-info h3 {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.security-icon img {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 10px;
+}
+
+.security-description {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.verification-btn {
+  background-color: #001f3f;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.verification-btn:hover {
+  background-color: #001a34;
+}
+
+
+.support-image {
+  width: 100%;
+  height: auto;
+}
+
+.support-content {
+margin-left: 20px;
+}
+
+.support-button {
+  background-color: #1b1b1b;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+
+
+.profile-card, .support-card, .security-cards, .device-section {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.profile-row, .security-card {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 0;
+  padding-bottom: 20px;
+   border-bottom: 1px solid #e0e0e0;
+}
+
+.profile-row:last-child, .security-card:last-child {
+  border-bottom: none;
+}
+
+.profile-label, .security-label {
+  font-weight: bold;
+}
+
+.profile-value, .security-value {
+  font-weight: normal;
+}
+
+.status-icon, .info-icon, .warning-icon {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.not-verified {
+  background-color: orange;
+}
+
+.flag-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+/* Styles for support notice */
+.support-notice {
+  display: flex;
+  align-items: center; /* Vertically align items */
+  background-color: #ffffff;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+
+}
+
+.info-icon img {
+  width: 24px; /* Adjust size as needed */
+  height: 24px;
+  margin-right: 20px; /* Space between image and text */
+  margin-top: 5px;
+}
+
+.support-notice p {
+  margin: 0;
+}
+
+
+.view-archived-btn {
+   background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.support-card {
+  display: flex;
+  align-items: center;
+}
+
+
+.support-image {
+  width: 150px;
+  height: 150px;
+}
+
+
+@media (max-width: 768px) {
+  .support-card {
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center; /* Center items horizontally */
+    text-align: center; /* Center text content */
+  }
+
+  .support-image {
+    margin: 0 auto; /* Center the image */
+   }
+
+   .first-section{
+    display: block !important;
+   }
+
+   .security-cards{
+    margin-top: 15px;
+   }
+
+  .support-content {
+    margin-top: 10px; /* Optional: add some space between image and content */
+  }
+}
+
+.support-content {
+  margin-left: 20px;
+}
+
+.support-button {
+  background-color: #1b1b1b;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+ }
+
+/* Styles for security alert */
+.security-alert {
+  display: flex;
+  align-items: center; /* Vertically align items */
+  background-color: #ffffff;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+
+}
+
+.security-alert img {
+  width: 24px; /* Adjust size as needed */
+  height: 24px;
+  margin-right: 10px; /* Space between image and text */
+}
+
+.security-alert div {
+  display: block;
+  border-left: 2px solid #333333; /* Vertical divider */
+  padding-left: 10px; /* Space between divider and text */
+}
+
+.security-alert p {
+  margin: 0;
+}
+
+
+.verify2-btn,  .phone-verification-btn {
+  background-color: transparent;
+  color: #000;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  border: 1px solid #000;
+  width: 150px; /* Set a fixed width */
+  text-align: center;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; /* Smooth transition */
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+/* Hover effect */
+.verify2-btn:hover,  .phone-verification-btn:hover {
+  background-color: #000; /* Change background color on hover */
+  color: #fff; /* Change text color to white on hover */
+  border-color: #000; /* Keep the border black */
+}
+
+@media (max-width: 600px) {
+  .verify2-btn,  .phone-verification-btn {
+    width: 100%; /* Set width to 100% for smaller screens */
+  }
+}
+
+
+.device-section {
+  margin-top: 30px;
+}
+
+.device-table-container {
+  width: 100%;
+  overflow-x: auto; /* Enable horizontal scrolling */
+}
+
+.device-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px; /* Set a minimum width so that the table doesn't shrink too much */
+}
+
+.device-table th, .device-table td {
+  border: 1px solid #e0e0e0;
+  padding: 10px;
+  text-align: left;
+  white-space: nowrap; /* Prevent text from wrapping in the cell */
+}
+
+
+/* Make sure each column has the same width */
+.device-table th, .device-table td {
+  width: 25%; /* Divide the width equally for four columns */
+}
+
+
+.deactivate-section-container {
+  background-color: #ffffff; /* White background for the container */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  margin-top: 20px; /* Add margin at the top to separate it from other content */
+}
+
+.deactivate-section {
+  display: flex;
+  justify-content: space-between; /* Ensure the text and button are at opposite ends */
+  align-items: center; /* Vertically center align the text and button */
+}
+
+.deactivate-section p {
+  font-size: 16px;
+  color: #333;
+  margin-right: 20px; /* Add spacing between text and button */
+  flex: 1; /* Make the text take up the available space */
+}
+
+.deactivate-btn {
+  background-color: #E93948;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  white-space: nowrap; /* Prevent button text from wrapping */
+}
+
+.deactivate-btn:hover {
+  background-color: #e60000;
+}
+
+
+/* Set padding default untuk semua ukuran layar */
+.contentsettings {
+  padding-left: 285px;
+  padding-right: 59px;
+}
+
+
+
+/* Hapus padding ketika layar lebar minimal 769px */
+@media (min-width: 769px) {
+  .contentsettings {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+/* verification */
+
+.verification-container {
+  max-width: 1200px;
+  width: 1120px;
+   padding: 40px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  margin-top: 90px;
+  display: flex; /* Tambahkan flexbox */
+  justify-content: center; /* Pusatkan konten secara horizontal */
+  align-items: center; /* Pusatkan konten secara vertikal */
+  min-height: 500px; /* Tentukan tinggi minimum yang sama untuk kedua section */
+
+}
+
+.progress-bar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+
+.step {
+  flex: 1;
+  text-align: center;
+  position: relative;
+  color: #999;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Pusatkan ikon dan teks secara horizontal */
+}
+
+.step.completed {
+  color: #28a745;
+}
+
+.step::before {
+  content: '';
+  width: 12px;
+  height: 12px;
+  background-color: #999;
+  border-radius: 50%;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+.step.completed::before {
+  background-color: #28a745;
+}
+
+.step + .step::after {
+  content: '';
+  width: 100%;
+  height: 2px;
+  background-color: #999;
+  position: absolute;
+  top: 6px;
+  left: -50%;
+  z-index: -1;
+}
+
+.step.completed + .step::after {
+  background-color: #28a745;
+}
+
+.welcome-section,
+.phone-verification-section, .identity-verification-section {
+  flex: 1; /* Membuat kedua section mengambil ruang yang sama */
+
+  text-align: center;
+}
+
+.welcome-content{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap:20px;
+  min-height: 200px; /* Tentukan tinggi minimum yang sama */
+  width: 100%; /* Pastikan kedua konten memiliki lebar yang sama */
+
+}
+
+.phone-verification-content {
+  display: block;
+  align-items: center;
+  justify-content: center;
+  gap:20px;
+  min-height: 200px; /* Tentukan tinggi minimum yang sama */
+  width: 100%; /* Pastikan kedua konten memiliki lebar yang sama */
+}
+
+.identity-verification-content {
+  display: block;
+  align-items: center;
+  justify-content: center;
+  gap:20px;
+  min-height: 200px; /* Tentukan tinggi minimum yang sama */
+  width: 100%; /* Pastikan kedua konten memiliki lebar yang sama */
+}
+
+
+.welcome-image {
+  width: 340px;
+}
+
+.welcome-text {
+  width: 330px;
+  text-align: left;
+  margin-right: 30px;
+}
+
+.welcome-text p {
+  margin-bottom: 20px;
+  font-size: 15px;
+}
+
+.btn {
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+   display: block;
+  width: 100%;
+}
+
+.start-verification-btn {
+  background-color: #001f3f;
+  color: #fff;
+  border: none;
+}
+
+.continue-later-btn {
+  background-color: #f5f5f5;
+  color: #333;
+  border: 1px solid #ddd;
+}
+
+.send-code-btn {
+  background-color: #6c757d;
+  color: #fff;
+  border: none;
+ }
+
+.phone-input-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.phone-flag {
+  padding: 10px;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 5px 0 0 5px;
+}
+
+.phone-input,
+.phone-number-input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 0 5px 5px 0;
+  outline: none;
+}
+
+.phone-input {
+  width: 80px;
+  background-color: #f5f5f5;
+  border-right: none;
+}
+
+.phone-number-input {
+  flex: 1;
+}
+
+.content2 {
+  flex-grow: 1;
+  padding-top: 90px;
+  padding: 16px;
+  /* padding-left: 285px; */
+  padding-right: 0px;
+  padding-top: 0px;
+  background-color: #F4F6F9;
+  overflow-y: auto; /* Ensure content scrolls if it exceeds the viewport height */
+  width: 100%;
+  height: 100vh; /* Adjust height to fill the remaining space, accounting for the header height */
+  height: 731px;
+}
+
+/* Untuk layar dengan lebar maksimum 768px (tablet dan ponsel) */
+@media (max-width: 768px) {
+  .verification-container {
+    width: 100%; /* Buat container menyesuaikan lebar layar */
+    padding: 20px; /* Kurangi padding agar sesuai dengan layar lebih kecil */
+    margin-top: 20px; /* Kurangi margin atas */
+  }
+
+  .support-card{
+    display: block;
+align-items: center;  }
+
+
+
+.support-content{
+  text-align: center;
+  margin-left: 0px;
+  margin-top: 10px;
+}
+
+  .phone-verification-content {
+    width: 100%; /* Buat konten sesuai dengan lebar container */
+    font-size: 14px; /* Sesuaikan ukuran font untuk layar kecil */
+  }
+
+  .welcome-content {
+    flex-direction: column; /* Susun gambar dan teks secara vertikal */
+    align-items: center; /* Pusatkan elemen secara horizontal */
+    text-align: center; /* Teks di tengah */
+    gap:10px;
+    max-width:100%;
+ 
+  }
+
+  .welcome-image, .welcome-text {
+    width: 100%; /* Buat elemen mengambil lebar penuh */
+    margin-right: 0; /* Hilangkan margin kanan */
+    margin-bottom: 20px; /* Tambahkan jarak di bawah gambar */
+  }
+
+  .btn {
+    font-size: 14px; /* Sesuaikan ukuran font tombol */
+    padding: 10px 20px; /* Sesuaikan padding tombol */
+  }
+ 
+}
+
+/* Transfer */
+
+.transfer-container {
+  margin-top: 30px;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.transfer-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+   text-align: center;
+}
+
+
+.transfer-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.transfer-info {
+  margin-left:38px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.flag-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+.balance-info {
+
+  display: flex;
+  flex-direction: column;
+  font-size: 20px;
+  gap: 5px;
+}
+
+ .equivalent, .label {
+  font-size: 14px;
+  color: #666;
+}
+
+.balance span, .equivalent span, .label span {
+  color: #333;
+}
+
+.settingsTransfer-container {
+  padding: 20px;
+  padding-left: 35px;
+  padding-right: 35px
+}
+
+.settingsTransfer-header {
+  display: flex;
+  justify-content: flex-start;
+  border-bottom: 1px solid #e0e0e0;
+  margin-bottom: 20px;
+}
+
+.settingsTransfer-tabs {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  position: relative;
+  gap:15px;
+}
+
+.settingsTransfer-tabs li {
+  cursor: pointer;
+  padding: 10px;
+  font-size: 16px;
+  color: #666;
+  transition: color 0.3s;
+}
+
+.settingsTransfer-tabs li.active-tab {
+  color: #333333;
+  border-bottom: 2px solid #333333;
+}
+
+.settingsTransfer-tabs li:hover {
+  color: #333333;
+}
+
+.receive-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.receive-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch; /* Ensure both sides stretch to the same height */
+}
+
+.left-section{
+  gap: 20px;
+}
+
+.left-section,
+.right-section {
+  flex: 1; /* Ensure both sections take equal space */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Distribute content evenly within the section */
+}
+
+.vertical-divider {
+  width: 1px;
+  background-color: #ccc;
+  margin: 0 20px; /* Space around the divider */
+}
+
+.qr-codes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1; /* Ensure the QR code section takes the full height */
+}
+
+.qr-codes img {
+  width: 250px;
+  height: 250px;
+  margin-bottom: 10px;
+}
+
+.qr-codes p {
+  text-align: center;
+  font-size: 14px;
+  color: #333;
+  margin-top: 0;
+}
+
+
+/* send content */
+
+.send-section {
+  margin-top: 20px;
+}
+
+.send-content {
+  display: flex;
+  justify-content: left; /* Center the left section */
+  align-items: flex-start;
+}
+
+.left-section {
+  flex: 1;
+  width: 100%; /* Set a maximum width for better alignment */
+}
+
+.vertical-divider {
+  width: 1px;
+  background-color: #ccc;
+  margin: 0 20px; /* Space around the divider */
+}
+
+.qr-code {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1; /* Ensure the QR code section takes the full height */
+}
+
+.qr-code img {
+  max-width: 150px;
+  max-height: 150px;
+  margin-bottom: 10px;
+}
+
+.qr-code p {
+  text-align: center;
+  font-size: 14px;
+  color: #333;
+  margin-top: 0;
+}
+
+.wallet-address .address-info input,
+.amount-send .amount-info input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.send-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.send-button {
+  padding: 10px 20px;
+  background-color: #333333;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.send-button:hover {
+  background-color: #000;
+}
+
+
+/* Custom select styles */
+.custom-select {
+  position: relative;
+  font-family: Arial;
+  width: 100%;
+  cursor: pointer;
+}
+
+.select-selected {
+  background-color: #f9f9f9;
+  color: #333;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.select-selected:after {
+  content: "";
+  position: absolute;
+  top: 16px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-color: #333 transparent transparent transparent;
+}
+
+.select-arrow-active:after {
+  border-color: transparent transparent #333 transparent;
+  top: 10px;
+}
+
+.select-items {
+  position: absolute;
+  background-color: #fff;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 99;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.select-items div {
+  color: #333;
+  padding: 10px;
+  cursor: pointer;
+  background-color: #fff;
+  border-bottom: 1px solid #eee;
+}
+
+.select-items div:hover {
+  background-color: #f1f1f1;
+}
+
+.same-as-selected {
+  background-color: #e6f7ff;
+}
+
+ 
+
+
+
+
+.wallet-address .address-info {
+  display: flex;
+  gap: 10px;
+}
+
+.wallet-address input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.wallet-address button {
+  padding: 10px;
+  background-color: #333333;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.wallet-address button:hover {
+  background-color: #333333;
+}
+
+.qr-code {
+  text-align: center;
+}
+
+.qr-code img {
+  width: 150px;
+  height: 150px;
+  margin-top: 10px;
+}
+
+.address-note {
+  background-color: #f8f9fa;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #666;
+  border-left: 4px solid #333333;
+ }
+
+.address-note ul {
+  padding-left: 20px;
+  list-style-type: disc; /* Default bullet point style */
+  color: #333;
+}
+
+.address-note ul li {
+  margin-bottom: 10px; /* Space between bullet points */
+  font-size: 16px; /* Adjust text size as needed */
+  line-height: 1.5;
+}
+
+/* trade section */
+/* Trade Section Styles */
+.trade-section {
+  margin-top: 20px;
+}
+
+.trade-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f5f7fa;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  padding: 15px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.trade-option:hover {
+  background-color: #e6f7ff;
+}
+
+.trade-option.active {
+  background-color: #e6f7ff;
+  border-left: 3px solid #1e90ff;
+}
+
+.trade-details {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.trade-title {
+  display: flex;
+  flex-direction: column;
+}
+
+.trade-title span:first-child {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.trade-title span:last-child {
+  font-size: 14px;
+  color: #888;
+}
+
+.trade-icon {
+  display: flex;
+  align-items: center;
+}
+
+.trade-icon img {
+  width: 24px;
+  height: 24px;
+  transition: transform 0.3s ease;
+}
+
+.trade-option:hover .trade-icon img {
+  transform: translateX(5px); /* Move icon to the right on hover */
+}
+
+/* Currency */
+/* Top-Up Section */
+.topup-section {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.topup-content {
+   width: 100%;
+   box-sizing: border-box; /* Include padding in the element's total width and height */
+ }
+
+.payment-method-selection,
+.amount-topup,
+.address-note {
+  margin-bottom: 20px;
+}
+
+.custom-select {
+  position: relative;
+  width: 100%;
+}
+
+.custom-select .select-selected {
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.custom-select .select-items {
+  position: absolute;
+  width: 100%;
+  background-color: white;
+  border: 1px solid #ccc;
+  z-index: 99;
+}
+
+.custom-select .select-items div {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.custom-select .select-items div:hover,
+.custom-select .same-as-selected {
+  background-color: #e6f7ff;
+}
+
+.amount-info input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.address-note ul {
+  padding-left: 20px;
+}
+
+.address-note li {
+  margin-bottom: 10px;
+}
+
+.topup-actions {
+  display: flex;
+  justify-content: center;
+}
+
+.topup-button {
+  padding: 10px 20px;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.topup-button:hover {
+  background-color: #0056b3;
+}
+
+
+
+/* Coming Soon Section */
+.coming-soon-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 300px;
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+.coming-soon-content h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.coming-soon-content p {
+  font-size: 18px;
+  color: #666;
+}
+
+/* Transfer Section */
+.transfer-section {
+  margin-top: 20px;
+}
+
+.transfer-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f5f7fa;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  padding: 15px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.transfer-option:hover {
+  background-color: #e6f7ff;
+}
+
+.transfer-details {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.transfer-title {
+  display: flex;
+  flex-direction: column;
+}
+
+.transfer-title span:first-child {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.transfer-title span:last-child {
+  font-size: 14px;
+  color: #888;
+}
+
+.transfer-icon {
+  display: flex;
+  align-items: center;
+}
+
+.transfer-icon i {
+  font-size: 24px;
+  color: #333;
+  transition: transform 0.3s ease;
+}
+
+.transfer-option:hover .transfer-icon i {
+  transform: translateX(5px);
+}
+
+
+@media screen and (max-width: 768px) {
+.coming-soon-content h2{
+  font-size: 20px;
+}
+
+.coming-soon-content p{
+  font-size: 13px;
+}
+
+.receive-content{
+  display: block;
+}
+}
+
+/* coming soon features */
+
+/* Coming soon section styling */
+.coming-soon {
+  padding: 20px;
+}
+
+.coming-soon-title {
+  font-size: 2.5em;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.coming-soon-text {
+  font-size: 1.2em;
+  color: #666;
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+ 
+  .tfTab-container{
+    font-size: 14px;
+  }
+
+  .coming-soon-title {
+    font-size: 2em;
+  }
+
+  .coming-soon-text {
+    font-size: 1em;
+  }
+}
+
+/* Tab Menu Table Iqr */
+
+.iqrTab-container {
+  padding: 20px;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-bottom: 0px;
+}
+
+.iqrTab-header {
+  display: flex;
+  justify-content: flex-start;
+  border-bottom: 1px solid #e0e0e0;
+  margin-bottom: 20px;
+}
+
+.iqrTab-tabs {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  position: relative;
+}
+
+.iqrTab-tabs li {
+  margin-right: 20px;
+  padding-bottom: 10px;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.3s ease; /* Optional: smooth color transition */
+}
+
+.iqrTab-tabs .active-tab {
+  color: #000; /* Ensures active tab has the correct color */
+}
+
+.iqrTab-tabs li::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background-color: transparent; /* Default to transparent when not active */
+  transition: background-color 0.3s ease, width 0.3s ease; /* Smooth transition */
+}
+
+.iqrTab-tabs li.active-tab::after {
+  background-color: #000; /* Border color for active tab */
+  width: 100%;
+}
+
+
+/* Tab Menu Table TF */
+
+.tfTab-container {
+  padding: 20px;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-bottom: 0px;
+}
+
+.tfTab-header {
+  display: flex;
+  justify-content: flex-start;
+  border-bottom: 1px solid #e0e0e0;
+  margin-bottom: 20px;
+}
+
+.tfTab-tabs {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  position: relative;
+}
+
+.tfTab-tabs li {
+  margin-right: 20px;
+  padding-bottom: 10px;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.3s ease; /* Optional: smooth color transition */
+}
+
+.tfTab-tabs .active-tab {
+  color: #000; /* Ensures active tab has the correct color */
+}
+
+.tfTab-tabs li::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background-color: transparent; /* Default to transparent when not active */
+  transition: background-color 0.3s ease, width 0.3s ease; /* Smooth transition */
+}
+
+.tfTab-tabs li.active-tab::after {
+  background-color: #000; /* Border color for active tab */
+  width: 100%;
+}
+
+/* Profile Section */
+.bank-section {
+  margin-top: 0px;
+}
+
+.banktab-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  margin-top: 0px;
+}
+
+.banktab-card {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Profile Section */
+.currencytab-section {
+  margin-top: 0px;
+}
+
+.currencytab-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  margin-top: 0px;
+}
+
+.currencytab-card {
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* app.css */
+
+.upgrade-transaction {
+  display: block;
+  align-items: center;
+  gap: 5px
+  }
+
+.submitup-btn {
+  margin-top: 5px;
+  background-color: #333333;
+  color: #fff;
+  border: none;
+  padding: 4px 10px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+  margin-left: 5px;
+}
+
+.submitup-btn:hover {
+  background-color: #333333;
+}
+
+/* Popup Overlay */
+.form-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+/* Popup Container */
+.form-container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+ 
+
+.limit-info {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.transaction-request-input {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.upgrade-btn, .cancel-btn {
+  background-color: #333;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+  margin-right: 10px;
+}
+
+.upgrade-btn:hover {
+  background-color: #333;
+}
+
+.cancel-btn {
+  background-color: #ccc;
+}
+
+.cancel-btn:hover {
+  background-color: #aaa;
+}
+
+ 
+
+.transaction-limit-input {
+  width: 100px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+ }
+
+.submitup-btn {
+  background-color: #333;
+  color: #fff;
+  border: none;
+  padding: 6px 16px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.submitup-btn:hover {
+  background-color: #333;
+}
+
+/* Popup Overlay */
+.form-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+/* Popup Container */
+.form-container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+ 
+
+.limit-info {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.transaction-request-input {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.upgrade-btn, .cancel-btn {
+  background-color: #333;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+  margin-right: 10px;
+}
+
+.upgrade-btn:hover {
+  background-color: #333;
+}
+
+.cancel-btn {
+  background-color: #ccc;
+}
+
+.cancel-btn:hover {
+  background-color: #aaa;
+}
+
+ 
+/* transfer responsive */
+
+

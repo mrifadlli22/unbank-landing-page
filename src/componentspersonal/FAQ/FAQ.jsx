@@ -22,17 +22,17 @@ const FAQItem = ({ question, answer }) => {
   );
 };
 
-const FAQ = () => {
+const FAQPersonal = () => {
   const faqData = [
     {
-      question: "How can I apply for a personal Bvnk account?",
+      question: "How can I apply for a personal Unbank account?",
       answer:
-        "You can apply for a personal Bvnk account by visiting our website and clicking on the 'Open Account' button. Follow the steps to provide the necessary information and documentation.",
+        "You can apply for a personal Unbank account by visiting our website and clicking on the 'Open Account' button. Follow the steps to provide the necessary information and documentation.",
     },
     {
-      question: "What kind of services will I get with my Bvnk account?",
+      question: "What kind of services will I get with my Unbank account?",
       answer:
-        "With a Bvnk account, you'll have access to crypto wallets, IBAN accounts, payment cards, and the ability to buy, sell, and exchange cryptocurrencies. You can also make instant transfers and use your crypto for everyday spending.",
+        "With a Unbank account, you'll have access to crypto wallets, IBAN accounts, payment cards, and the ability to buy, sell, and exchange cryptocurrencies. You can also make instant transfers and use your crypto for everyday spending.",
     },
     // Add more FAQ items here
   ];
@@ -41,7 +41,7 @@ const FAQ = () => {
     <section className={styles.faq} id="faq">
       <h2 className={styles.title}>FAQ</h2>
       <p className={styles.subtitle}>
-        All your questions about Bvnk answered.
+        All your questions about Unbank answered.
       </p>
       <div className={styles.faqList}>
         {faqData.map((item, index) => (
@@ -52,4 +52,4 @@ const FAQ = () => {
   );
 };
 
-export default FAQ;
+export default FAQPersonal;

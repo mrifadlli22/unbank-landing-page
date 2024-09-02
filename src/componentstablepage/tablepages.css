@@ -1,12 +1,4 @@
-.table-container {
-    margin: 20px;
-    padding: 20px;
-    border-radius: 8px;
-    overflow-x: auto; /* Ensures table is scrollable horizontally on smaller screens */
-    background-color: #ffffff; /* Light background as in the design */
-    color: #333333; /* Dark text for readability */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-}
+ 
 
 .table-header {
     display: flex;
@@ -42,7 +34,7 @@
 
 .pagination {
     display: flex;
-    justify-content: center;
+    justify-content: right;
     margin-top: 20px;
  }
 
@@ -172,17 +164,7 @@
     background-color: #ff6666; /* Slightly lighter shade on hover */
 }
 
-table {
-    width: 100%;
-    border-collapse: separate; /* Ubah dari 'collapse' ke 'separate' untuk memungkinkan border-radius */
-    border-spacing: 0; /* Hilangkan jarak antar sel */
-    min-width: 100%; /* Pastikan tabel mengambil lebar penuh di layar kecil */
-    background-color: #ffffff; /* Warna latar belakang tabel */
-    border: 1px solid #dddddd; /* Border di sekitar tabel */
-    border-radius: 8px; /* Border radius untuk tabel */
-    overflow: hidden; /* Pastikan konten tidak keluar dari border radius */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sedikit bayangan untuk memberi kesan depth */
-}
+ 
 
 th, td {
     padding: 12px 15px;
@@ -221,15 +203,14 @@ tr:hover {
     background-color: #f1f1f1; /* Lighter background on hover */
 }
 
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
     .table-header, .entries-container, .search-container, .dropdown-container, .date-filter-container {
-        flex-direction: column; /* Stack elements vertically on smaller screens */
-        align-items: stretch; /* Stretch elements to fill the width */
+        flex-direction: column;  
+        align-items: stretch;  
     }
 
     .search-container input[type="text"], .entries-select, .dropdown-button, .date-filter-button, .clear-button {
-        width: 100%; /* Full width for inputs and buttons on small screens */
-        margin-top: 5px; /* Add margin top for vertical stacking */
+        width: 100%;  
         margin-bottom: 5px;
     }
 
@@ -238,8 +219,8 @@ tr:hover {
     }
 
     .pagination button {
-        flex-grow: 1; /* Allow buttons to expand to fill the available space */
+        flex-grow: 1;  
         margin: 2px;
-        padding: 5px 10px; /* Increase padding for better touch target size */
+        padding: 5px 10px;
     }
-}
+} */

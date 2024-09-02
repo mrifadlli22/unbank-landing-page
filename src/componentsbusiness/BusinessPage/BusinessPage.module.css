@@ -159,7 +159,7 @@
   padding: 0 80px;
   align-items: center;
   justify-content: center;
-  margin-top: 90px;
+  margin-top: 50px;
 }
 
 @media (max-width: 991px) {
@@ -651,14 +651,22 @@
   .faqSection,
   .contactFormSection,
   .footer {
+    padding-top: 0px;
     padding-left: 20px;
     padding-right: 20px;
   }
 
+  .heroSection{
+     flex-direction: column-reverse;
+  }
+
   .financialPlatformContent,
-  .globalFinancialGatewayContent,
   .eCommerceSolutionsContent {
     flex-direction: column;
+  }
+
+  .globalFinancialGatewayContent {
+    flex-direction: column-reverse;
   }
 
   .financialPlatformImage,

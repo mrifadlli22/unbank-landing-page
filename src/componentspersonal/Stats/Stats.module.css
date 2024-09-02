@@ -49,9 +49,19 @@
 @media (max-width: 991px) {
   .stats {
     padding: 60px 20px;
+    width: 100%; /* Footer elements also take full width */
+    display: block;
   }
 
   .statsList {
     gap: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .affiliationItem {
+    order: -1; /* Posisikan item dengan gambar di paling atas */
   }
 }
+

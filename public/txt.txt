@@ -1,0 +1,684 @@
+/* Sidebar default (active) */
+.sidebar {
+    width: 200px;
+    height: 100vh;
+    background-color: #111;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    transition: width 0.3s ease, left 0.3s ease;
+    overflow-y: auto; /* Ensure content scrolls if it exceeds the viewport height */
+  }
+
+  .divider {
+    height: 2px;
+    background-color: #CCCCCC;
+    width: 100%;
+    margin: 10px 0;
+  }
+  
+  .sidebar.hidden {
+    left: -200px;
+  }
+  
+  .sidebar.active {
+    left: 0;
+  }
+  
+  /* Burger menu button in sidebar */
+  .sidebar-burger-menu {
+    position: absolute;
+    bottom: 20px;
+    cursor: pointer;
+    font-size: 24px;
+    color: #fff;
+  }
+  
+  /* Sidebar ketika dalam keadaan terlipat (collapsed) */
+  .sidebar.collapsed {
+    width: 80px; /* Adjust this width as needed */
+  }
+  
+  /* Logo */
+  .logo-items img {
+    width: 150px;
+    transition: width 0.3s ease;
+  }
+  
+  .sidebar.collapsed .logo-items img {
+    width: 50px; /* Adjust this width as needed */
+  }
+  
+  /* Menu items */
+  .menu-item {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 10px 20px;
+    color: #aaa;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background-color 0.3s, color 0.3s, padding 0.3s;
+  }
+  
+  .sidebar.collapsed .menu-item {
+    justify-content: center;
+    padding: 10px;
+  }
+  
+  .menu-item:hover, .menu-item.active {
+    background-color: #333;
+    color: #fff;
+  }
+  
+  .menu-item .icon {
+    margin-right: 10px;
+    font-size: 20px;
+  }
+  
+  .sidebar.collapsed .menu-item .icon {
+    margin-right: 0;
+  }
+  
+  /* Burger menu icon in header */
+  .burger-menu-icon {
+    display: none; /* Hide by default */
+    cursor: pointer;
+    font-size: 24px;
+    color: #000;
+  }
+  
+  /* Header */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 16px;
+    background-color: #fff;
+    border-bottom: 1px solid #ccc;
+    z-index: 1000;
+    height: 90px; /* Adjust header height */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: add shadow for better visibility */
+   }
+  
+  /* User info */
+  .user-info {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc; /* Border for the wrapper */
+    border-radius: 8px; /* Optional: rounded corners */
+    padding: 4px; /* Reduce padding */
+    background-color: #f9f9f9; /* Optional: background color */
+    max-width: 250px; /* Limit width to make it smaller */
+    overflow: hidden; /* Prevent overflow */
+  }
+  
+  .user-info .user-details {
+    display: flex;
+    flex-direction: column; /* Stack user-name and user-id vertically */
+    margin-left: 8px; /* Reduce space between icon and text */
+  }
+
+  .user-details{
+    margin-right: 50px;
+  }
+  
+  .user-icon {
+    width: 25px; /* Reduce icon size */
+    height: 25px; /* Reduce icon size */
+    border-radius: 50%;
+    margin-right: 8px; /* Reduce space between icon and text */
+    border: 1px solid #000; /* Border for the icon */
+  }
+  
+  .user-name {
+    display: block;
+    font-size: 12px; /* Adjust font size */
+    color: #333;
+    white-space: nowrap; /* Prevent text overflow */
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .user-id {
+    display: block;
+    font-size: 10px; /* Adjust font size */
+    color: #666;
+    white-space: nowrap; /* Prevent text overflow */
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .dropdown-icon {
+    font-size: 16px; /* Adjust icon size */
+  }
+  
+  /* Actions */
+  .actions {
+    display: flex;
+    align-items: center;
+  }
+  
+  .verify-btn, .logout-btn {
+    padding: 6px 12px;
+    margin-left: 8px;
+    border: none;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 12px; /* Adjust font size */
+    border-radius: 8px;
+    background-color: transparent;
+  }
+
+  .verify-btn{
+    margin-right: 10px;
+    border: 1px solid #dddbdb;
+  }
+  
+  .verify-btn:hover, .logout-btn:hover {
+    background-color: #e0e0e0;
+  }
+
+  /* Container for logout icon and text */
+.logout-container {
+  display: flex;
+  align-items: center; /* Align items vertically center */
+  cursor: pointer; /* Change cursor to pointer to indicate it’s clickable */
+}
+
+.logout-icon {
+  width: 20px; /* Adjust size as needed */
+  height: 20px; /* Adjust size as needed */
+  margin-right: 8px; /* Space between icon and text */
+}
+
+.logout-text {
+  font-size: 12px; /* Adjust font size as needed */
+  color: #333; /* Adjust text color as needed */
+}
+
+  
+  .logout-icon {
+    margin-right: 5px;
+  }
+  
+  /* Dashboard layout */
+  .dashboard {
+    display: flex;
+    height: 100vh;
+    margin-left: 200px; /* Initial margin to account for the full-width sidebar */
+    flex-direction: column;
+    transition: margin-left 0.3s ease; /* Smooth transition when sidebar collapses */
+  }
+  
+  .content {
+    flex-grow: 1;
+    padding: 16px;
+    background-color: #f0f0f0;
+    overflow-y: auto; /* Ensure content scrolls if it exceeds the viewport height */
+    width: 100%;
+    height: calc(100vh - 60px); /* Adjust height to fill the remaining space, accounting for the header height */
+  }
+  
+  /* Default styles for header burger menu */
+  .header-burger-menu {
+    display: none; /* Hide by default */
+    cursor: pointer;
+    font-size: 24px;
+    color: #000;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .header-burger-menu {
+      display: block; /* Show burger menu on mobile */
+    }
+    
+    .burger-menu-icon {
+      display: none; /* Hide burger menu icon in sidebar on mobile */
+    }
+  
+    .sidebar {
+      width: 200px;
+      left: -200px; /* Hide sidebar by default on mobile */
+    }
+    
+    .sidebar.active {
+      left: 0; /* Show sidebar when active */
+    }
+    
+    .dashboard {
+      margin-left: 0; /* Reset margin when sidebar is hidden */
+    }
+    
+    .content {
+      padding: 10px;
+    }
+  }
+
+  /* content */
+
+/* General Styles */
+
+/* Currency Rates Container */
+/* Currency Rates Container */
+.currency-rate-container {
+    display: flex;
+    flex-wrap: nowrap; /* Mengganti dari wrap ke nowrap untuk layar kecil */
+    gap: 10px;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+    width: 100%;
+    overflow-x: auto; /* Memungkinkan pengguliran horizontal */
+    box-sizing: border-box;
+    -webkit-overflow-scrolling: touch; /* Meningkatkan pengalaman scrolling pada iOS */
+  }
+  
+  /* Responsive adjustments for smaller screens */
+  @media (max-width: 768px) {
+    .currency-rate-box {
+      flex: 0 0 auto; /* Mencegah kotak menyusut atau tumbuh */
+      width: calc(50% - 10px); /* Lebar tetap untuk 2 kotak per baris */
+      min-width: 250px; /* Minimum lebar untuk memastikan konten dapat dibaca */
+    }
+  }
+  
+  
+.currency-rate-box, .overview-box, .currency-card {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    background-color: white;
+    padding: 15px;
+    margin-bottom: 10px;
+  }
+  
+  
+  .currency-rate-box {
+    flex: 1 1 calc(25% - 10px); /* Mengisi 4 dalam satu baris dengan memperhitungkan gap */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    background-color: #ecf8f8; /* Warna latar belakang biru muda */
+    border: 1px solid #b6e0dc; /* Border biru muda */    padding: 15px; /* Padding internal */
+    flex-direction: column; /* Anak-anak div disusun secara vertikal */
+    height: 150px
+    
+  }
+
+  .ticker {
+    background-color: black;
+    color: white;
+    padding: 5px;
+    margin-top: 5px; /* Jarak dari konten di atasnya */
+    white-space: nowrap; /* Pastikan teks berjalan dalam satu baris */
+    overflow: hidden; /* Sembunyikan overflow teks */
+  }
+  
+  .currency-rate-box {
+  cursor: pointer; /* Membuat tahu pengguna bahwa kotak bisa diklik */
+  transition: transform 0.3s ease; /* Transisi untuk efek hover */
+}
+
+.currency-rate-box:hover {
+  transform: scale(1.05); /* Membesarkan kotak saat di-hover */
+  z-index: 10; /* Memastikan kotak berada di atas kotak lain saat hover */
+}
+
+  .currency-rate-title {
+    color: #333; /* Warna teks gelap */
+    font-size: 16px; /* Ukuran font */
+    margin-bottom: 8px; /* Jarak antar teks */
+  }
+  
+  .currency-rate-percentage {
+    font-size: 32px; /* Ukuran font besar untuk persentase */
+    color: #25a18e; /* Warna hijau terang */
+    font-weight: bold; /* Tebal */
+  }
+  
+  .currency-rate-change {
+    color: #666; /* Warna teks lebih gelap */
+    font-size: 14px; /* Ukuran font lebih kecil */
+    margin-top: 8px; /* Jarak dari teks di atas */
+  }
+  
+  .currency-change-value {
+    color: green; /* Warna hijau untuk nilai positif */
+  }
+  
+  
+  /* Overview Box */
+  .overview-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #fff; /* Latar belakang putih */
+    border: 1px solid #ccc; /* Border tipis */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Bayangan untuk depth */
+    margin-bottom: 20px; /* Jarak dengan elemen berikutnya */
+  }
+  
+  .overview-icon {
+    color: red; /* Warna ikon merah */
+    margin-right: 20px; /* Jarak antara ikon dan teks */
+  }
+  
+  .overview-text {
+    flex-grow: 1; /* Mengambil ruang maksimum yang tersedia */
+  }
+  
+  .overview-title {
+    font-size: 18px; /* Ukuran font untuk judul */
+    font-weight: bold; /* Bold untuk judul */
+  }
+  
+  .overview-subtext {
+    font-size: 16px; /* Ukuran font lebih kecil untuk subteks */
+  }
+  
+.overview-button {
+  background-color: #000; /* Warna latar tombol */
+  color: #fff; /* Warna teks tombol */
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: bold;
+  outline: none;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Transition untuk smooth effect */
+}
+
+.overview-button:hover {
+  background-color: #333; /* Gelapkan tombol saat hover */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2); /* Tambahkan bayangan yang lebih menonjol */
+}
+
+  
+  /* Currency Card */
+  .currency-card {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 200px;
+  }
+  
+  .currency-amount {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .currency-flag {
+    width: 50px;
+    height: auto;
+  }
+  
+ 
+  
+  
+  / header
+import React from 'react';
+import { FaBars } from 'react-icons/fa';
+import './app.css';
+
+function Header({ toggleSidebar, isMobileMenuActive }) {
+  return (
+    <div className="header">
+              {!isMobileMenuActive && (
+        <div style={{marginRight:"10px"}} className="header-burger-menu" onClick={toggleSidebar}>
+          <FaBars />
+        </div>
+      )}
+      <div className="user-info">
+        <img src="/Images/username.png" alt="User" className="user-icon" />
+        <div className="user-details">
+          <span className="user-name">om ade</span>
+          <span className="user-id">Personal ID: KV42RX</span>
+        </div>
+        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/b276d5172728387905a21ca31a1be2042d61c310a67ebf5b3c460c0c59fec66a?placeholderIfAbsent=true&apiKey=e3ddd6dd58b748b09fc1391939743920" alt="Dropdown Icon" className="dropdown-icon" />
+      </div>
+      <div className="actions">
+        <button className="verify-btn">Verify Account</button>
+        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/4240512edae385f460dad25d3f570641caf3c3c3c38ab74b3f015256904eb332?placeholderIfAbsent=true&apiKey=e3ddd6dd58b748b09fc1391939743920" altText="Button icon" />
+        <button className="logout-btn">
+        <div class="logout-container">
+            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/a02ad958ff1e19dbae6570b2b39724a613c2de30e46b4710a6f1d3e01b50b7ea?placeholderIfAbsent=true&apiKey=e3ddd6dd58b748b09fc1391939743920" alt="Logout Icon" class="logout-icon" />
+            <span class="logout-text">Log out</span>
+            </div>
+
+         </button>
+      </div>
+
+    </div>
+  );
+}
+
+export default Header;
+
+/ sidebar
+
+import React, { useState, useEffect } from 'react';
+import './app.css';
+import { FaTachometerAlt, FaExchangeAlt, FaShieldAlt, FaHistory, FaBell, FaLock, FaQuestionCircle, FaCog, FaBars } from 'react-icons/fa';
+
+function Sidebar({ setSidebarWidth, isMobileMenuActive, toggleSidebar }) {
+  const [isCollapsed, setIsCollapsed] = useState(false);
+
+  useEffect(() => {
+    if (window.innerWidth > 768) {
+      setSidebarWidth(isCollapsed ? 80 : 200);
+    }
+  }, [isCollapsed, setSidebarWidth]);
+
+  const handleSidebarToggle = () => {
+    if (window.innerWidth <= 768) {
+      toggleSidebar();
+    } else {
+      setIsCollapsed(!isCollapsed);
+      setSidebarWidth(!isCollapsed ? 80 : 200); // Update sidebar width in parent
+    }
+  };
+
+  return (
+    <div className={`sidebar ${isCollapsed ? 'collapsed' : ''} ${isMobileMenuActive ? 'active' : ''}`}>
+      <div className="logo-items">
+        <img src="./Images/unbank.jpeg" alt="Unbank Logo" />
+        <div className="divider"></div> {/* Divider di bawah logo */}
+      </div>
+      <div className="menu">
+        <a href="#dashboard" className="menu-item active">
+          <FaTachometerAlt className="icon" />{(!isCollapsed || isMobileMenuActive) && 'Dashboard'}
+        </a>
+        <a href="#swap" className="menu-item">
+          <FaExchangeAlt className="icon" />{(!isCollapsed || isMobileMenuActive) && 'Swap'}
+        </a>
+        <a href="#xcrow" className="menu-item">
+          <FaShieldAlt className="icon" />{(!isCollapsed || isMobileMenuActive) && 'Xcrow'}
+        </a>
+        <a href="#history" className="menu-item">
+          <FaHistory className="icon" />{(!isCollapsed || isMobileMenuActive) && 'History'}
+        </a>
+        <a href="#notifications" className="menu-item">
+          <FaBell className="icon" />{(!isCollapsed || isMobileMenuActive) && 'Notification'}
+        </a>
+        <a href="#securities" className="menu-item">
+          <FaLock className="icon" />{(!isCollapsed || isMobileMenuActive) && 'Securities'}
+        </a>
+        <div className="divider"></div> {/* Divider di bawah Securities */}
+        <a href="#help" className="menu-item">
+          <FaQuestionCircle className="icon" />{(!isCollapsed || isMobileMenuActive) && 'Help'}
+        </a>
+        <a href="#settings" className="menu-item">
+          <FaCog className="icon" />{(!isCollapsed || isMobileMenuActive) && 'Settings'}
+        </a>
+      </div>
+      <div className="burger-menu sidebar-burger-menu" onClick={handleSidebarToggle}>
+        <FaBars />
+      </div>
+    </div>
+  );
+}
+
+export default Sidebar;
+
+
+/ dashboard
+
+import React, { useState, useEffect } from 'react';
+import Sidebar from './sidebar';
+import Header from './header';
+import './app.css'
+
+function Ticker({ message }) {
+    return (
+      <div className="ticker">
+        <marquee behavior="scroll" direction="left">{message}</marquee>
+      </div>
+    );
+  }
+  
+
+  function CurrencyRateBox({ title, rate, change, changeType, onBoxClick }) {
+    return (
+        <div className="currency-rate-box" onClick={onBoxClick}>
+            <div className="currency-rate-title">{title}</div>
+            <div className="currency-rate-main">
+                <span className="currency-rate-percentage">{rate}</span>
+            </div>
+            <div className="currency-rate-change">
+                from last week → <span className={`currency-change-value ${changeType}`}>{change}</span>
+            </div>
+        </div>
+    );
+}
+
+
+function OverviewBox() {
+    return (
+      <div className="overview-box">
+        <div className="overview-icon">
+            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/005ae3db4876b4ec59a2cdc6e9fb42efb39f1aea8bf81ffa16aa2dc92203d02e?placeholderIfAbsent=true&apiKey=e3ddd6dd58b748b09fc1391939743920" />
+        </div>
+        <div className="overview-text">
+          <div className="overview-title">Account verification not complete</div>
+          <div className="overview-subtext">Please verify your account to unlock all features.</div>
+        </div>
+        <button className="overview-button">Verify →</button>
+      </div>
+    );
+  }
+  
+
+
+function CurrencyCard({ amount, currency, flag }) {
+  return (
+    <div className="currency-card">
+      <div className="currency-amount">{amount}</div>
+      <img src={flag} alt={currency} className="currency-flag" />
+      <div className="currency-actions">
+        {/* Action icons here */}
+      </div>
+    </div>
+  );
+}
+
+
+  function UnbankDashboard() {
+    const [sidebarWidth, setSidebarWidth] = useState(window.innerWidth > 768 ? 200 : 0);
+    const [isMobileMenuActive, setIsMobileMenuActive] = useState(false);
+    const [selectedInfo, setSelectedInfo] = useState("Default message before any box is clicked.");
+
+
+    function handleBoxClick(info) {
+        setSelectedInfo(info);
+      }
+  
+    const toggleSidebar = () => {
+      setIsMobileMenuActive(!isMobileMenuActive);
+      setSidebarWidth(isMobileMenuActive ? 0 : 200);
+    };
+  
+    useEffect(() => {
+      const handleResize = () => {
+        if (window.innerWidth > 768) {
+          setSidebarWidth(200);
+          setIsMobileMenuActive(false);
+        } else {
+          setSidebarWidth(0);
+        }
+      };
+      window.addEventListener('resize', handleResize);
+      return () => {
+        window.removeEventListener('resize', handleResize);
+      };
+    }, [isMobileMenuActive]);
+  
+    return (
+      <div className="dashboard" style={{ marginLeft: `${sidebarWidth}px` }}>
+        <Header toggleSidebar={toggleSidebar} isMobileMenuActive={isMobileMenuActive} />
+        <Sidebar
+          setSidebarWidth={setSidebarWidth}
+          isMobileMenuActive={isMobileMenuActive}
+          toggleSidebar={toggleSidebar}
+        />
+        <div className="main">
+          <div className="content">
+          <div className="currency-rate-container">
+  <CurrencyRateBox 
+    title="USDT to IDR Rate" 
+    rate="85%" 
+    change="+7.85%" 
+    changeType="positive"
+    onBoxClick={() => handleBoxClick("Information related to USDT to IDR Rate")} 
+  />
+  <CurrencyRateBox 
+    title="IDR to USDT Rate" 
+    rate="30%" 
+    change="-7.85%" 
+    changeType="negative"
+    onBoxClick={() => handleBoxClick("Information related to IDR to USDT Rate")} 
+  />
+  <CurrencyRateBox 
+    title="BTC to IDR Rate" 
+    rate="20%" 
+    change="+5.00%" 
+    changeType="positive"
+    onBoxClick={() => handleBoxClick("Information related to BTC to IDR Rate")} 
+  />
+  <CurrencyRateBox 
+    title="BTC to USD Rate" 
+    rate="10%" 
+    change="-2.30%" 
+    changeType="negative"
+    onBoxClick={() => handleBoxClick("Information related to BTC to USD Rate")} 
+  />
+</div>
+ 
+
+             <Ticker message={selectedInfo} />
+
+             <h2>Overview</h2>
+            <OverviewBox />
+            <div className="currency-cards">
+            <CurrencyCard amount="€0.00" currency="EUR" flag="/path-to-eu-flag.png"/>
+            <CurrencyCard amount="€0.00" currency="EUR" flag="/path-to-eu-flag.png"/>
+              {/* Add more CurrencyCard components as needed */}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+  
+  export default UnbankDashboard;
+  

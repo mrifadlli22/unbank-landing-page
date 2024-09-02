@@ -16,7 +16,7 @@ const Hero = () => {
   };
 
   return (
-    <section className={styles.hero}>
+    <section style={{paddingRight:"0px", paddingLeft:"0px"}} className={styles.hero}>
       <div className={styles.heroContent}>
         <div className={styles.textContent}>
           <h1 className={styles.heading}>
