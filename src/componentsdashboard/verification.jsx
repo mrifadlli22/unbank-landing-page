@@ -18,7 +18,7 @@ function Verification() {
     };
 
     const handleContinueLater = () => {
-        navigate('/dashboard'); // Navigasi ke dashboard
+        navigate('/account-summary'); // Navigasi ke dashboard
     };
 
     const toggleSidebar = () => {
