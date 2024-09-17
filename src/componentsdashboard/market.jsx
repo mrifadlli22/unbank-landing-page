@@ -10,20 +10,67 @@ import {
 } from "@mui/icons-material";
 import { AccountBalanceWallet } from "@mui/icons-material"; // Placeholder for crypto icon
 import { TextField, InputAdornment } from "@mui/material"; // Import Material UI components
+import useMarketStore from "./useMarketStore"; // Import the Zustand store
 
 function Market() {
-  const [isMobileMenuActive, setIsMobileMenuActive] = useState(false);
-  const [activeTab, setActiveTab] = useState("USDT"); // State for active tab
-  const [showForm, setShowForm] = useState(false); // State to control the modal visibility
-  const [selectedOffer, setSelectedOffer] = useState(null); // To hold the selected offer for trade
-  const [tradeMyAmount, setTradeMyAmount] = useState(0); // For trade amount
-  const [forAmount, setForAmount] = useState(0); // For receiving amount
-  const [platformFee, setPlatformFee] = useState(0); // Platform fee is 0.5%
-  const [totalAmountDue, setTotalAmountDue] = useState(0); // Total amount due
-  const [selectedAsset, setSelectedAsset] = useState(""); // Initially empty for "Select Asset"
-  const [dropdownActive, setDropdownActive] = useState(false);
+  // Zustand store hooks
+  const {
+    activeTab,
+    setActiveTab,
+    showForm,
+    setShowForm,
+    selectedOffer,
+    setSelectedOffer,
+    tradeMyAmount,
+    setTradeMyAmount,
+    forAmount,
+    setForAmount,
+    platformFee,
+    setPlatformFee,
+    totalAmountDue,
+    setTotalAmountDue,
+    selectedAsset,
+    setSelectedAsset,
+    dropdownActive,
+    setDropdownActive,
+    addActiveOffer // Ensure this function exists to handle the addition of active offers
+  } = useMarketStore();
 
   const dropdownRef = useRef(null);
+  const [showPopup, setShowPopup] = useState(false); // State to manage the popup visibility
+
+  const [offersData, setOffersData] = useState([
+    {
+      id: 1,
+      date: "2023-09-01",
+      user: "jason",
+      desk: "Desk A",
+      userAvatar: "path_to_avatar/jason.png",
+      have: "50 BTC",
+      want: "USD",
+      minTrade: "1 BTC",
+      markup: 2,
+      custodianIcon: "./Images/1Asset 6.png",
+      custodian: "Tennet",
+      action: "Trade",
+      tradable: true, // Ensure tradable is true
+    },
+    {
+      id: 2,
+      date: "2023-09-02",
+      user: "HDC",
+      desk: "Desk B",
+      userAvatar: "path_to_avatar/HDC.png",
+      have: "70 BTC",
+      want: "IDR",
+      minTrade: "1 BTC",
+      markup: 1.5,
+      custodianIcon: "./Images/1Asset 6.png",
+      custodian: "Tennet",
+      action: "Trade",
+      tradable: true, // Ensure tradable is true
+    },
+  ]);
 
   // Toggle dropdown visibility
   const toggleDropdown = () => {
@@ -37,6 +84,35 @@ function Market() {
     }
   };
 
+  const handleConfirmTrade = () => {
+    if (selectedOffer) {
+      const updatedOffers = offersData.map((offer) =>
+        offer.id === selectedOffer.id
+          ? { ...offer, action: "Not Tradable", tradable: false } // Update status
+          : offer
+      );
+      setOffersData(updatedOffers);
+  
+      // Add to Zustand store
+      addActiveOffer({
+        ...selectedOffer,
+        tradeAmount: tradeMyAmount,
+        receiveAmount: forAmount,
+        platformFee,
+        totalAmountDue,
+        status: "Not Tradable", // Ensure status is "Not Tradable"
+        date: new Date().toLocaleString(),
+      });
+  
+      setShowForm(false);
+      setShowPopup(true);
+      setTimeout(() => {
+        setShowPopup(false);
+      }, 3000);
+    }
+  };
+  
+
   React.useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
@@ -49,38 +125,6 @@ function Market() {
     setSelectedAsset(asset);
     setDropdownActive(false);
   };
-
-  const offersData = [
-    {
-      id: 1,
-      date: "2023-09-01",
-      user: "jason",
-      desk: "Desk A",
-      userAvatar: "path_to_avatar/jason.png",
-      have: "50 BTC",
-      want: "USD",
-      minTrade: "1 BTC",
-      markup: 2, // Markup for the trade
-      custodianIcon: "./Images/1Asset 6.png",
-      custodian: "Tennet",
-      action: "Trade",
-    },
-    {
-      id: 2,
-      date: "2023-09-02",
-      user: "HDC",
-      desk: "Desk B",
-      userAvatar: "path_to_avatar/HDC.png",
-      have: "70 BTC",
-      want: "IDR",
-      minTrade: "1 BTC",
-      markup: 1.5, // Markup for the trade
-      custodianIcon: "./Images/1Asset 6.png",
-      custodian: "Tennet",
-      action: "Trade",
-    },
-    // Add similar `markup` values to all entries
-  ];
 
   // Function to handle tab switching
   const handleTabClick = (tab) => {
@@ -183,7 +227,7 @@ function Market() {
             <div className="table-container">
               <table className="custom-table">
                 <thead>
-                <tr>
+                  <tr>
                     <th style={{ textAlign: "center" }}>Date/User</th>
                     <th style={{ textAlign: "center" }}>Custodian</th>
                     <th style={{ textAlign: "center" }}>I Have</th>
@@ -208,13 +252,14 @@ function Market() {
                         </div>
                       </td>
                       <td>
-                      <div
+                        <div
                           className="custodian-info"
                           style={{
                             display: "flex",
                             justifyContent: "center", // Centers the content vertically
                             alignItems: "center", // Centers the content horizontally
-                          }}>
+                          }}
+                        >
                           <img
                             style={{ width: "25px" }}
                             src={row.custodianIcon}
@@ -225,9 +270,9 @@ function Market() {
                         </div>
                       </td>
                       <td>
-                      <div style={{ width: "auto" }} className="asset-info">
-                      <div className="icon-and-value">
-                            <img 
+                        <div style={{ width: "auto" }} className="asset-info">
+                          <div className="icon-and-value">
+                            <img
                               src={
                                 activeTab === "USDT"
                                   ? "Images/T.png"
@@ -257,33 +302,51 @@ function Market() {
                               alt={row.want.includes("USD") ? "USD" : "IDR"}
                               className="asset-icon"
                             />
-                            <span>{row.want} +{row.markup}%</span>
+                            <span>
+                              {row.want} +{row.markup}%
+                            </span>
                           </div>
                         </div>
                       </td>
                       <td
-  style={{
-    textAlign: "center", // Center horizontally
-    verticalAlign: "middle", // Center vertically
-    height: "60px", // Set a height to help with vertical alignment
-  }}
->
-  <button
-    className={
-      row.action === "Not Tradable" ? "disabled-btn" : "trade-btn"
-    }
-    disabled={row.action === "Not Tradable"}
-    onClick={() => handleTradeClick(row)} // Show form on click
-  >
-    {row.action}
-  </button>
-</td>
-
+                        style={{
+                          textAlign: "center", // Center horizontally
+                          verticalAlign: "middle", // Center vertically
+                          height: "60px", // Set a height to help with vertical alignment
+                        }}
+                      >
+                        <button
+                          className={row.tradable ? "trade-btn" : "disabled-btn"}
+                          disabled={!row.tradable}
+                          onClick={() => handleTradeClick(row)}
+                        >
+                          {row.action}
+                        </button>
+                      </td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
+
+            {showPopup && (
+              <div
+                style={{
+                  position: "fixed",
+                  top: "20%",
+                  left: "50%",
+                  transform: "translate(-50%, -50%)",
+                  backgroundColor: "rgba(0,0,0,0.8)",
+                  color: "white",
+                  padding: "20px",
+                  zIndex: 1000,
+                  borderRadius: "10px",
+                  textAlign: "center",
+                }}
+              >
+                Your data has been added to Active Offers!
+              </div>
+            )}
 
             {/* Show Trade Form Modal */}
             {showForm && selectedOffer && (
@@ -357,7 +420,8 @@ function Market() {
                         <strong>Min Trade:</strong> {selectedOffer.minTrade}
                       </p>
                       <p>
-                        <strong>Want:</strong> {selectedOffer.want} +{selectedOffer.markup}%
+                        <strong>Want:</strong> {selectedOffer.want} +
+                        {selectedOffer.markup}%
                       </p>
                     </div>
 
@@ -381,7 +445,9 @@ function Market() {
                       }}
                     >
                       <div style={{ marginBottom: "10px" }}>
-                        <label style={{ display: "block", marginBottom: "5px" }}></label>
+                        <label
+                          style={{ display: "block", marginBottom: "5px" }}
+                        ></label>
                         <div
                           className="dropdowntf-container"
                           ref={dropdownRef}
@@ -454,11 +520,15 @@ function Market() {
                             label="Trade My"
                             type="number"
                             value={tradeMyAmount}
-                            onChange={(e) => handleTradeMyAmountChange(e.target.value)}
+                            onChange={(e) =>
+                              handleTradeMyAmountChange(e.target.value)
+                            }
                             fullWidth
                             InputProps={{
                               endAdornment: (
-                                <InputAdornment position="end">{selectedAsset}</InputAdornment>
+                                <InputAdornment position="end">
+                                  {selectedAsset}
+                                </InputAdornment>
                               ),
                             }}
                           />
@@ -477,7 +547,9 @@ function Market() {
                             label="For"
                             type="number"
                             value={forAmount}
-                            onChange={(e) => handleForAmountChange(e.target.value)} // Max value logic here
+                            onChange={(e) =>
+                              handleForAmountChange(e.target.value)
+                            } // Max value logic here
                             fullWidth
                             InputProps={{
                               endAdornment: (
@@ -495,11 +567,12 @@ function Market() {
                           <strong>Markup:</strong> {selectedOffer.markup}%
                         </p>
                         <p>
-                          <strong>Platform Fee:</strong> {platformFee.toFixed(2)} {selectedAsset}
+                          <strong>Platform Fee:</strong>{" "}
+                          {platformFee.toFixed(2)} {selectedAsset}
                         </p>
                         <p>
-                          <strong>Total Amount Due:</strong> {totalAmountDue.toFixed(2)}{" "}
-                          {selectedAsset}
+                          <strong>Total Amount Due:</strong>{" "}
+                          {totalAmountDue.toFixed(2)} {selectedAsset}
                         </p>
                       </div>
 
@@ -524,6 +597,7 @@ function Market() {
                         }}
                       >
                         <button
+                          onClick={handleConfirmTrade} // Call handleConfirmTrade on confirmation
                           style={{
                             backgroundColor: "#333",
                             color: "white",
