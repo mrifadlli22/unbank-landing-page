@@ -1,194 +1,109 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import Sidebar from "./sidebar";
 import Header from "./header";
 import "./app.css";
-import "../componentstablepage/tablepagesiqr.css";
+import "../componentstablepage/tablepagesiqr2.css";
+import {
+  ArrowDropUp,
+  ArrowDropDown,
+  SwapHoriz as SwapHorizIcon,
+} from "@mui/icons-material";
+import { AccountBalanceWallet } from "@mui/icons-material"; // Placeholder for crypto icon
+import { TextField, InputAdornment } from "@mui/material"; // Import Material UI components
 
 function Market() {
   const [isMobileMenuActive, setIsMobileMenuActive] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [filters, setFilters] = useState({
-    date: "",
-    user: "",
-    have: "",
-    want: "",
-  });
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
-  const [entriesPerPage, setEntriesPerPage] = useState(5);
-  const [dropdownActive, setDropdownActive] = useState({
-    date: false,
-    user: false,
-    have: false,
-    want: false,
-  });
-  const [showForm, setShowForm] = useState(false); // State to handle form visibility
-  const [selectedOffer, setSelectedOffer] = useState(null); // State to handle selected offer
+  const [activeTab, setActiveTab] = useState("USDT"); // State for active tab
+  const [showForm, setShowForm] = useState(false); // State to control the modal visibility
+  const [selectedOffer, setSelectedOffer] = useState(null); // To hold the selected offer for trade
+  const [tradeMyAmount, setTradeMyAmount] = useState(0); // For trade amount
+  const [forAmount, setForAmount] = useState(0); // For receiving amount
+  const [platformFee, setPlatformFee] = useState(0); // Platform fee is 0.5%
+  const [totalAmountDue, setTotalAmountDue] = useState(0); // Total amount due
+  const [selectedAsset, setSelectedAsset] = useState(""); // Initially empty for "Select Asset"
+  const [dropdownActive, setDropdownActive] = useState(false);
 
-  const [tradeMyAmount, setTradeMyAmount] = useState("");
-  const [forAmount, setForAmount] = useState("");
-  const [platformFee, setPlatformFee] = useState(""); // Add state for platform fee
-  const [totalAmountDue, setTotalAmountDue] = useState(""); // Add state for total amount due
+  const dropdownRef = useRef(null);
 
-  const dropdownRefs = {
-    date: useRef(null),
-    user: useRef(null),
-    have: useRef(null),
-    want: useRef(null),
+  // Toggle dropdown visibility
+  const toggleDropdown = () => {
+    setDropdownActive(!dropdownActive);
   };
 
-  const toggleDropdown = (field) => {
-    setDropdownActive({
-      ...dropdownActive,
-      [field]: !dropdownActive[field],
-    });
-  };
-
-  const clearFilters = () => {
-    setFilters({
-      date: "",
-      user: "",
-      have: "",
-      want: "",
-    });
-    setStartDate("");
-    setEndDate("");
-    setSearchTerm("");
-  };
-
-  const handleDateChange = (type, value) => {
-    if (type === "start") {
-      setStartDate(value);
-    } else {
-      setEndDate(value);
+  // Close dropdown when clicked outside
+  const handleClickOutside = (e) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+      setDropdownActive(false);
     }
   };
 
-  const handlePageClick = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
-
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      Object.keys(dropdownRefs).forEach((field) => {
-        if (
-          dropdownRefs[field].current &&
-          !dropdownRefs[field].current.contains(event.target)
-        ) {
-          setDropdownActive((prev) => ({ ...prev, [field]: false }));
-        }
-      });
-    };
-
+  React.useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
 
-  // Dummy data for "All Offers" table
+  // Handle asset selection
+  const handleAssetSelect = (asset) => {
+    setSelectedAsset(asset);
+    setDropdownActive(false);
+  };
+
   const offersData = [
     {
       id: 1,
       date: "2023-09-01",
       user: "jason",
+      desk: "Desk A",
+      userAvatar: "path_to_avatar/jason.png",
       have: "50 BTC",
-      want: "USD +2%",
+      want: "USD",
+      minTrade: "1 BTC",
+      markup: 2, // Markup for the trade
+      custodianIcon: "./Images/1Asset 6.png",
+      custodian: "Tennet",
       action: "Trade",
     },
     {
       id: 2,
       date: "2023-09-02",
       user: "HDC",
-      have: "88.999 BTC +1.5%",
-      want: "USD",
+      desk: "Desk B",
+      userAvatar: "path_to_avatar/HDC.png",
+      have: "70 BTC",
+      want: "IDR",
+      minTrade: "1 BTC",
+      markup: 1.5, // Markup for the trade
+      custodianIcon: "./Images/1Asset 6.png",
+      custodian: "Tennet",
       action: "Trade",
     },
-    {
-      id: 3,
-      date: "2023-09-03",
-      user: "Social1998",
-      have: "50,000.00 USD",
-      want: "BTC",
-      action: "Trade",
-    },
-    {
-      id: 4,
-      date: "2023-09-04",
-      user: "Social1998",
-      have: "89 BTC",
-      want: "USD",
-      action: "Not Tradable",
-    },
-    {
-      id: 5,
-      date: "2023-09-05",
-      user: "jason",
-      have: "16,477 USD +0.5%",
-      want: "BTC",
-      action: "Trade",
-    },
-    // Add more offers as needed...
+    // Add similar `markup` values to all entries
   ];
 
-  const InputNumberBox = ({ value, onChange, label }) => (
-    <div style={{ marginBottom: "10px" }}>
-      <label>{label}</label>
-      <input
-        type="number"
-        value={value}
-        onChange={onChange}
-        style={{ width: "100%", padding: "10px" }}
-      />
-    </div>
-  );
-
-  const getFilteredData = (data) => {
-    return data.filter((item) => {
-      const searchTermLower = searchTerm.toLowerCase();
-      const searchTermCondition = Object.keys(item).some((key) =>
-        item[key]?.toString().toLowerCase().includes(searchTermLower)
-      );
-
-      const itemDate = item.date ? new Date(item.date) : new Date();
-      const startDateCondition = startDate
-        ? new Date(startDate) <= itemDate
-        : true;
-      const endDateCondition = endDate ? new Date(endDate) >= itemDate : true;
-
-      return (
-        searchTermCondition &&
-        startDateCondition &&
-        endDateCondition &&
-        (filters.date === "" ||
-          (item.date && item.date.includes(filters.date))) &&
-        (filters.user === "" ||
-          (item.user && item.user.includes(filters.user))) &&
-        (filters.have === "" ||
-          (item.have && item.have.includes(filters.have))) &&
-        (filters.want === "" || (item.want && item.want.includes(filters.want)))
-      );
-    });
+  // Function to handle tab switching
+  const handleTabClick = (tab) => {
+    setActiveTab(tab);
   };
 
-  const getUniqueValues = (data, field) => {
-    return [...new Set(data.map((item) => item[field]))];
-  };
+  // Filter data based on active tab (USDT or USDC)
+  const filteredData = offersData.map((offer) => ({
+    ...offer,
+    have:
+      activeTab === "USDT"
+        ? offer.have.replace("BTC", "USDT")
+        : offer.have.replace("BTC", "USDC"), // Change "Have" based on tab
+    want: offer.want.includes("USD") ? "USD" : "IDR", // Change "Want" to either USD or IDR
+  }));
 
-  const getPaginatedData = (data) => {
-    const indexOfLastEntry = currentPage * entriesPerPage;
-    const indexOfFirstEntry = indexOfLastEntry - entriesPerPage;
-    return data.slice(indexOfFirstEntry, indexOfLastEntry);
-  };
-
-  const toggleSidebar = () => {
-    setIsMobileMenuActive(!isMobileMenuActive);
-  };
-
-  const openTradeForm = (offer) => {
-    setSelectedOffer(offer); // Store the selected offer in state
+  const handleTradeClick = (offer) => {
+    setSelectedOffer(offer); // Set the selected offer
     setShowForm(true); // Show the form
+    setTradeMyAmount(0); // Reset trade amount
+    setForAmount(0); // Reset for amount
+    setPlatformFee(0); // Reset platform fee
+    setTotalAmountDue(0); // Reset total amount due
   };
 
   const closeTradeForm = () => {
@@ -196,483 +111,452 @@ function Market() {
     setSelectedOffer(null); // Reset the selected offer
   };
 
+  const handleTradeMyAmountChange = (value) => {
+    const amount = parseFloat(value) || 0;
+    setTradeMyAmount(amount);
+
+    const markupAmount = amount * (selectedOffer.markup / 100); // Calculate markup
+    const fee = (amount + markupAmount) * 0.005; // Calculate platform fee (0.5%)
+
+    setPlatformFee(fee);
+    setTotalAmountDue(amount + markupAmount + fee); // Calculate total amount due including markup and fee
+  };
+
+  const handleForAmountChange = (value) => {
+    // Get the value for HAVE and ensure max input for "For" amount
+    const haveAmount = parseFloat(selectedOffer.have.replace(/[^\d.]/g, "")); // Remove non-numeric chars
+    const inputValue = Math.min(parseFloat(value) || 0, haveAmount); // Ensure the user cannot exceed "have" amount
+    setForAmount(inputValue);
+  };
+
   return (
     <div className="dashboard">
-      <Header
-        toggleSidebar={toggleSidebar}
-        isMobileMenuActive={isMobileMenuActive}
-      />
-      <Sidebar
-        isMobileMenuActive={isMobileMenuActive}
-        toggleSidebar={toggleSidebar}
-      />
+      <Header />
+      <Sidebar />
       <div className="main">
         <div className="content">
           <div className="contentdash">
-            <div className="currencytab-section">
-              <h2 style={{ marginTop: "25px" }} className="currencytab-title">
-                All Offers
-              </h2>
+            <h2 className="page-title">All Offers</h2>
 
-              <div className="currencytab-card">
-                <div className="table-header">
-                  <div className="search-container">
-                    <input
-                      style={{ height: "32px" }}
-                      type="text"
-                      placeholder="Search..."
-                      value={searchTerm}
-                      onChange={(e) => setSearchTerm(e.target.value)}
-                    />
+            {/* Tab section */}
+            <div className="crypto-tabs">
+              <button
+                className={`crypto-tab ${activeTab === "USDT" ? "active" : ""}`}
+                onClick={() => handleTabClick("USDT")}
+              >
+                <div className="crypto-content">
+                  <div className="crypto-header">
+                    <div className="crypto-logo-section">
+                      <AccountBalanceWallet className="crypto-logo" />
+                      <span className="crypto-name">USDT</span>
+                    </div>
+                    <ArrowDropUp className="crypto-change-icon positive" />
                   </div>
-                  <div className="date-filter-container">
-                    <label>Start Date:</label>
-                    <input
-                      type="date"
-                      value={startDate}
-                      onChange={(e) =>
-                        handleDateChange("start", e.target.value)
-                      }
-                    />
-                    <label>End Date:</label>
-                    <input
-                      type="date"
-                      value={endDate}
-                      onChange={(e) => handleDateChange("end", e.target.value)}
-                    />
-                  </div>
-                  <div className="table-filter-container">
-                    <button className="clear-button" onClick={clearFilters}>
-                      Clear Filters
-                    </button>
+                  <div className="crypto-pricing">
+                    <div className="crypto-value">$1,131,123</div>
+                    <div className="crypto-change positive">(+0.01)</div>
                   </div>
                 </div>
+              </button>
 
-                <div className="table-container">
-                  {getFilteredData(offersData).length === 0 ? (
-                    <div className="no-data-message">Data Not Found</div>
-                  ) : (
-                    <table>
-                      <thead>
-                        <tr>
-                          <th>
-                            <div className="th-container">
-                              <span>Date</span>
-                              <span
-                                className="filter-icon"
-                                onClick={() => toggleDropdown("date")}
-                              >
-                                &#9660;
-                              </span>
-                            </div>
-                            {dropdownActive.date && (
-                              <div
-                                ref={dropdownRefs.date}
-                                className="dropdown-filter"
-                              >
-                                {getUniqueValues(offersData, "date").map(
-                                  (value) => (
-                                    <div
-                                      key={value}
-                                      className="dropdown-item"
-                                      onClick={() => {
-                                        setFilters({ ...filters, date: value });
-                                        setDropdownActive({
-                                          ...dropdownActive,
-                                          date: false,
-                                        });
-                                      }}
-                                    >
-                                      {value}
-                                    </div>
-                                  )
-                                )}
-                              </div>
-                            )}
-                          </th>
-                          <th>
-                            <div className="th-container">
-                              <span>User</span>
-                              <span
-                                className="filter-icon"
-                                onClick={() => toggleDropdown("user")}
-                              >
-                                &#9660;
-                              </span>
-                            </div>
-                            {dropdownActive.user && (
-                              <div
-                                ref={dropdownRefs.user}
-                                className="dropdown-filter"
-                              >
-                                {getUniqueValues(offersData, "user").map(
-                                  (value) => (
-                                    <div
-                                      key={value}
-                                      className="dropdown-item"
-                                      onClick={() => {
-                                        setFilters({ ...filters, user: value });
-                                        setDropdownActive({
-                                          ...dropdownActive,
-                                          user: false,
-                                        });
-                                      }}
-                                    >
-                                      {value}
-                                    </div>
-                                  )
-                                )}
-                              </div>
-                            )}
-                          </th>
-                          <th>Custodian</th>
-                          <th>
-                            <div className="th-container">
-                              <span>Have</span>
-                              <span
-                                className="filter-icon"
-                                onClick={() => toggleDropdown("have")}
-                              >
-                                &#9660;
-                              </span>
-                            </div>
-                            {dropdownActive.have && (
-                              <div
-                                ref={dropdownRefs.have}
-                                className="dropdown-filter"
-                              >
-                                {getUniqueValues(offersData, "have").map(
-                                  (value) => (
-                                    <div
-                                      key={value}
-                                      className="dropdown-item"
-                                      onClick={() => {
-                                        setFilters({ ...filters, have: value });
-                                        setDropdownActive({
-                                          ...dropdownActive,
-                                          have: false,
-                                        });
-                                      }}
-                                    >
-                                      {value}
-                                    </div>
-                                  )
-                                )}
-                              </div>
-                            )}
-                          </th>
-                          <th>
-                            <div className="th-container">
-                              <span>Want</span>
-                              <span
-                                className="filter-icon"
-                                onClick={() => toggleDropdown("want")}
-                              >
-                                &#9660;
-                              </span>
-                            </div>
-                            {dropdownActive.want && (
-                              <div
-                                ref={dropdownRefs.want}
-                                className="dropdown-filter"
-                              >
-                                {getUniqueValues(offersData, "want").map(
-                                  (value) => (
-                                    <div
-                                      key={value}
-                                      className="dropdown-item"
-                                      onClick={() => {
-                                        setFilters({ ...filters, want: value });
-                                        setDropdownActive({
-                                          ...dropdownActive,
-                                          want: false,
-                                        });
-                                      }}
-                                    >
-                                      {value}
-                                    </div>
-                                  )
-                                )}
-                              </div>
-                            )}
-                          </th>
-                          <th>Action</th>
-                        </tr>
-                      </thead>
-
-                      <tbody>
-                        {getPaginatedData(getFilteredData(offersData)).map(
-                          (row) => (
-                            <tr key={row.id}>
-                              <td>{row.date}</td>
-                              <td>{row.user}</td>
-                              <td>Prime Trust</td>
-                              <td>{row.have}</td>
-                              <td>{row.want}</td>
-                              <td>
-                                <button
-                                  style={{
-                                    backgroundColor:
-                                      row.action === "Not Tradable"
-                                        ? "#bdc3c7"
-                                        : "#333",
-                                    color: "white",
-                                    border: "none",
-                                    padding: "8px 16px",
-                                    borderRadius: "4px",
-                                    cursor:
-                                      row.action === "Not Tradable"
-                                        ? "not-allowed"
-                                        : "pointer",
-                                  }}
-                                  onClick={() => openTradeForm(row)} // Pass the selected offer to the form
-                                  disabled={row.action === "Not Tradable"}
-                                >
-                                  {row.action}
-                                </button>
-                              </td>
-                            </tr>
-                          )
-                        )}
-                      </tbody>
-                    </table>
-                  )}
+              <button
+                className={`crypto-tab ${activeTab === "USDC" ? "active" : ""}`}
+                onClick={() => handleTabClick("USDC")}
+              >
+                <div className="crypto-content">
+                  <div className="crypto-header">
+                    <div className="crypto-logo-section">
+                      <AccountBalanceWallet className="crypto-logo" />
+                      <span className="crypto-name">USDC</span>
+                    </div>
+                    <ArrowDropDown className="crypto-change-icon negative" />
+                  </div>
+                  <div className="crypto-pricing">
+                    <div className="crypto-value">$1,000,000</div>
+                    <div className="crypto-change negative">(-0.01)</div>
+                  </div>
                 </div>
+              </button>
+            </div>
 
-                <div className="pagination">
-                  <div className="entries-container">
-                    <label htmlFor="numEntries">Show</label>
+            {/* Table section */}
+            <div className="table-container">
+              <table className="custom-table">
+                <thead>
+                <tr>
+                    <th style={{ textAlign: "center" }}>Date/User</th>
+                    <th style={{ textAlign: "center" }}>Custodian</th>
+                    <th style={{ textAlign: "center" }}>I Have</th>
+                    <th style={{ textAlign: "center" }}>I Want</th>
+                    <th style={{ textAlign: "center" }}>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filteredData.map((row) => (
+                    <tr key={row.id}>
+                      <td>
+                        <div className="user-info">
+                          <img
+                            src={row.userAvatar}
+                            alt={row.user}
+                            className="user-avatar"
+                          />
+                          <div>
+                            <span className="user-name">{row.user}</span>
+                            <span className="user-date">{row.date}</span>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                      <div
+                          className="custodian-info"
+                          style={{
+                            display: "flex",
+                            justifyContent: "center", // Centers the content vertically
+                            alignItems: "center", // Centers the content horizontally
+                          }}>
+                          <img
+                            style={{ width: "25px" }}
+                            src={row.custodianIcon}
+                            alt={row.custodian}
+                            className="custodian-icon"
+                          />
+                          <span>{row.custodian}</span>
+                        </div>
+                      </td>
+                      <td>
+                      <div style={{ width: "auto" }} className="asset-info">
+                      <div className="icon-and-value">
+                            <img 
+                              src={
+                                activeTab === "USDT"
+                                  ? "Images/T.png"
+                                  : "Images/S.png"
+                              }
+                              alt={activeTab}
+                              className="asset-icon"
+                            />
+                            <div className="value-and-min">
+                              <span>{row.have}</span>
+                              <span className="min-value">
+                                min: {row.minTrade}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                      <td style={{ paddingLeft: "0px" }}>
+                        <div style={{ width: "auto" }} className="asset-info">
+                          <div className="icon-and-value">
+                            <img
+                              src={
+                                row.want.includes("USD")
+                                  ? "Images/usd.png"
+                                  : "Images/indoflag.png"
+                              }
+                              alt={row.want.includes("USD") ? "USD" : "IDR"}
+                              className="asset-icon"
+                            />
+                            <span>{row.want} +{row.markup}%</span>
+                          </div>
+                        </div>
+                      </td>
+                      <td
+  style={{
+    textAlign: "center", // Center horizontally
+    verticalAlign: "middle", // Center vertically
+    height: "60px", // Set a height to help with vertical alignment
+  }}
+>
+  <button
+    className={
+      row.action === "Not Tradable" ? "disabled-btn" : "trade-btn"
+    }
+    disabled={row.action === "Not Tradable"}
+    onClick={() => handleTradeClick(row)} // Show form on click
+  >
+    {row.action}
+  </button>
+</td>
+
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            {/* Show Trade Form Modal */}
+            {showForm && selectedOffer && (
+              <div
+                style={{
+                  position: "fixed", // Ensure the modal is fixed to the viewport
+                  top: 0,
+                  left: 0,
+                  width: "100%",
+                  height: "100%",
+                  backgroundColor: "rgba(0, 0, 0, 0.7)", // Slightly darker overlay
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  zIndex: 9999, // High z-index to ensure it is above other elements
+                }}
+              >
+                <div
+                  style={{
+                    backgroundColor: "white",
+                    padding: "20px",
+                    borderRadius: "10px",
+                    width: "800px", // Adjust width as needed
+                    height: "auto",
+                    maxHeight: "90vh",
+                    overflowY: "auto",
+                    zIndex: 10000, // Ensure the modal content is also on top
+                  }}
+                >
+                  <h2 style={{ marginBottom: "20px", textAlign: "center" }}>
+                    Trade
+                  </h2>
+                  <div className="divider2"></div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "stretch", // Ensures the divider stretches with content
+                      justifyContent: "space-between",
+                      marginBottom: "20px",
+                      minHeight: "200px", // Set a minimum height to ensure content stretches the divider
+                    }}
+                  >
+                    {/* Left Side with more details */}
                     <div
-                      className="dropdowntf-container"
-                      ref={dropdownRefs.date}
+                      style={{
+                        flex: "1",
+                        marginRight: "10px",
+                        backgroundColor: "#fff", // Correct format for background color
+                        padding: "15px",
+                        borderRadius: "10px",
+                        color: "#333",
+                        fontSize: "14px",
+                      }}
                     >
-                      <button
-                        className="dropdowntf-button"
-                        onClick={() => toggleDropdown("entries")}
-                      >
-                        {entriesPerPage} <span className="caret">&#9660;</span>
-                      </button>
-                      {dropdownActive.entries && (
-                        <div className="dropdowntf-content open">
-                          {[5, 10, 25, 50, 100].map((number) => (
+                      <p>
+                        <strong>Date/Time:</strong> {selectedOffer.date}
+                      </p>
+                      <p>
+                        <strong>User:</strong> {selectedOffer.user}
+                      </p>
+                      <p>
+                        <strong>Desk:</strong> {selectedOffer.desk}
+                      </p>
+                      <p>
+                        <strong>Custodian:</strong> {selectedOffer.custodian}
+                      </p>
+                      <p>
+                        <strong>Have:</strong> {selectedOffer.have}
+                      </p>
+                      <p>
+                        <strong>Min Trade:</strong> {selectedOffer.minTrade}
+                      </p>
+                      <p>
+                        <strong>Want:</strong> {selectedOffer.want} +{selectedOffer.markup}%
+                      </p>
+                    </div>
+
+                    {/* Vertical Divider */}
+                    <div
+                      style={{
+                        width: "1px",
+                        backgroundColor: "#ccc", // Gray line
+                        height: "auto", // Set to auto so it stretches with content
+                        margin: "0 10px",
+                      }}
+                    ></div>
+
+                    {/* Right Side with input fields and controls */}
+                    <div
+                      style={{
+                        flex: "2",
+                        marginLeft: "10px",
+                        padding: "15px",
+                        fontSize: "14px",
+                      }}
+                    >
+                      <div style={{ marginBottom: "10px" }}>
+                        <label style={{ display: "block", marginBottom: "5px" }}></label>
+                        <div
+                          className="dropdowntf-container"
+                          ref={dropdownRef}
+                          style={{
+                            width: "100%",
+                            position: "relative",
+                            marginBottom: "10px",
+                          }}
+                        >
+                          <button
+                            className="dropdowntf-button"
+                            onClick={toggleDropdown}
+                            style={{
+                              width: "100%",
+                              padding: "10px",
+                              textAlign: "left",
+                              border: "1px solid #ccc",
+                              backgroundColor: "#f0f0f0",
+                              cursor: "pointer",
+                              position: "relative",
+                              zIndex: 1,
+                            }}
+                          >
+                            {/* Display "Select Asset" if no asset is selected yet */}
+                            {selectedAsset ? selectedAsset : "Select Asset"}
+                            <span className="caret" style={{ float: "right" }}>
+                              &#9660;
+                            </span>
+                          </button>
+                          {dropdownActive && (
                             <div
-                              key={number}
-                              className="dropdown-item"
-                              onClick={() => {
-                                setEntriesPerPage(number);
-                                setCurrentPage(1);
-                                setDropdownActive({
-                                  ...dropdownActive,
-                                  entries: false,
-                                });
+                              className="dropdowntf-content open"
+                              style={{
+                                position: "absolute",
+                                top: "100%",
+                                width: "100%",
+                                backgroundColor: "#fff",
+                                boxShadow: "0px 8px 16px rgba(0, 0, 0, 0.2)",
+                                zIndex: 10,
                               }}
                             >
-                              {number}
+                              <div
+                                className="dropdown-item"
+                                onClick={() => handleAssetSelect("USD")}
+                                style={{
+                                  padding: "10px",
+                                  cursor: "pointer",
+                                }}
+                              >
+                                USD
+                              </div>
+                              <div
+                                className="dropdown-item"
+                                onClick={() => handleAssetSelect("IDR")}
+                                style={{
+                                  padding: "10px",
+                                  cursor: "pointer",
+                                }}
+                              >
+                                IDR
+                              </div>
                             </div>
-                          ))}
+                          )}
                         </div>
-                      )}
+                      </div>
+
+                      <div style={{ display: "flex", marginBottom: "20px" }}>
+                        <div style={{ flex: "1", marginRight: "10px" }}>
+                          <TextField
+                            label="Trade My"
+                            type="number"
+                            value={tradeMyAmount}
+                            onChange={(e) => handleTradeMyAmountChange(e.target.value)}
+                            fullWidth
+                            InputProps={{
+                              endAdornment: (
+                                <InputAdornment position="end">{selectedAsset}</InputAdornment>
+                              ),
+                            }}
+                          />
+                        </div>
+                        <div style={{ textAlign: "center", margin: "auto" }}>
+                          <SwapHorizIcon
+                            style={{
+                              cursor: "pointer",
+                              width: "24px",
+                              height: "24px",
+                            }}
+                          />
+                        </div>
+                        <div style={{ flex: "1", marginLeft: "10px" }}>
+                          <TextField
+                            label="For"
+                            type="number"
+                            value={forAmount}
+                            onChange={(e) => handleForAmountChange(e.target.value)} // Max value logic here
+                            fullWidth
+                            InputProps={{
+                              endAdornment: (
+                                <InputAdornment position="end">
+                                  {activeTab === "USDT" ? "USDT" : "USDC"}
+                                </InputAdornment>
+                              ),
+                            }}
+                          />
+                        </div>
+                      </div>
+
+                      <div style={{ marginBottom: "10px" }}>
+                        <p>
+                          <strong>Markup:</strong> {selectedOffer.markup}%
+                        </p>
+                        <p>
+                          <strong>Platform Fee:</strong> {platformFee.toFixed(2)} {selectedAsset}
+                        </p>
+                        <p>
+                          <strong>Total Amount Due:</strong> {totalAmountDue.toFixed(2)}{" "}
+                          {selectedAsset}
+                        </p>
+                      </div>
+
+                      <div style={{ marginBottom: "10px" }}>
+                        <TextField label="2FA Code" type="text" fullWidth />
+                      </div>
+
+                      <div style={{ marginBottom: "10px" }}>
+                        <input type="checkbox" id="agree" />
+                        <label htmlFor="agree" style={{ marginLeft: "10px" }}>
+                          I agree to the Terms and Conditions
+                        </label>
+                      </div>
+
+                      {/* Buttons */}
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "flex-end",
+                          gap: "10px",
+                          marginTop: "10px",
+                        }}
+                      >
+                        <button
+                          style={{
+                            backgroundColor: "#333",
+                            color: "white",
+                            padding: "10px 20px",
+                            border: "none",
+                            borderRadius: "5px",
+                            cursor: "pointer",
+                          }}
+                        >
+                          Confirm
+                        </button>
+                        <button
+                          onClick={closeTradeForm}
+                          style={{
+                            backgroundColor: "#e74c3c",
+                            color: "white",
+                            padding: "10px 20px",
+                            border: "none",
+                            borderRadius: "5px",
+                            cursor: "pointer",
+                          }}
+                        >
+                          Cancel
+                        </button>
+                      </div>
                     </div>
                   </div>
-                  <button
-                    onClick={() => handlePageClick(currentPage - 1)}
-                    disabled={currentPage === 1}
-                  >
-                    Previous
-                  </button>
-                  {Array.from(
-                    {
-                      length: Math.ceil(
-                        getFilteredData(offersData).length / entriesPerPage
-                      ),
-                    },
-                    (_, i) => i + 1
-                  ).map((page) => (
-                    <button
-                      key={page}
-                      onClick={() => handlePageClick(page)}
-                      className={page === currentPage ? "active" : ""}
-                    >
-                      {page}
-                    </button>
-                  ))}
-                  <button
-                    onClick={() => handlePageClick(currentPage + 1)}
-                    disabled={
-                      currentPage ===
-                      Math.ceil(
-                        getFilteredData(offersData).length / entriesPerPage
-                      )
-                    }
-                  >
-                    Next
-                  </button>
                 </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
       </div>
-
-      {/* Form Modal */}
-      {showForm && selectedOffer && (
-        <div
-          style={{
-            position: "fixed", // Ensure the modal is fixed to the viewport
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            backgroundColor: "rgba(0, 0, 0, 0.7)", // Slightly darker overlay
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            zIndex: 9999, // High z-index to ensure it is above other elements
-          }}
-        >
-          <div
-            style={{
-              backgroundColor: "white",
-              padding: "20px",
-              borderRadius: "10px",
-              width: "800px", // Adjust width as needed
-              height: "auto",
-              maxHeight: "90vh",
-              overflowY: "auto",
-              zIndex: 10000, // Ensure the modal content is also on top
-            }}
-          >
-            <h2 style={{ marginBottom: "20px" }}>Trade</h2>
-            <div className="divider2"></div>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                marginBottom: "20px",
-              }}
-            >
-              <div style={{ flex: "1", marginRight: "10px" }}>
-                <p>
-                  <strong>Date/Time:</strong> {selectedOffer.date}
-                </p>
-                <p>
-                  <strong>User:</strong> {selectedOffer.user}
-                </p>
-                <p>
-                  <strong>Custodian:</strong> Prime Trust
-                </p>
-                <p>
-                  <strong>Have:</strong> {selectedOffer.have}
-                </p>
-                <p>
-                  <strong>Want:</strong> {selectedOffer.want}
-                </p>
-              </div>
-
-              <div className="vertical-divider"></div>
-
-              <div style={{ flex: "2", marginLeft: "10px" }}>
-                <div style={{ marginBottom: "10px" }}>
-                  <label>Select Asset</label>
-                  <select
-                    style={{ width: "100%", padding: "10px", marginTop: "5px" }}
-                  >
-                    <option value="USDC">USDC</option>
-                    <option value="BTCT">USDT</option>
-                    <option value="IDR">IDR</option>
-                    <option value="USD">USD</option>
-                  </select>
-                </div>
-                <div style={{ display: "flex", marginBottom: "20px" }}>
-                  <div style={{ flex: "1", marginRight: "10px" }}>
-                    <InputNumberBox
-                      value={tradeMyAmount}
-                      onChange={(e) => setTradeMyAmount(e.target.value)}
-                      label="Trade My"
-                    />
-                  </div>
-                  <div style={{ textAlign: "center", margin: "auto" }}>
-                    <img
-                      src="swap-icon.png" // Replace with your swap icon path
-                      alt="Swap"
-                      style={{
-                        cursor: "pointer",
-                        width: "24px",
-                        height: "24px",
-                      }}
-                    />
-                  </div>
-                  <div style={{ flex: "1", marginLeft: "10px" }}>
-                    <InputNumberBox
-                      value={forAmount}
-                      onChange={(e) => setForAmount(e.target.value)}
-                      label="For"
-                    />
-                  </div>
-                </div>
-                <div style={{ marginBottom: "10px" }}>
-                  <p>
-                    <strong>Platform Fee:</strong> {platformFee}
-                  </p>
-                  <p>
-                    <strong>Total Amount Due:</strong> {totalAmountDue}
-                  </p>
-                </div>
-                <div style={{ marginBottom: "10px" }}>
-                  <label>Amount</label>
-                  <input
-                    type="number"
-                    style={{ width: "100%", padding: "10px" }}
-                    value={tradeMyAmount} // Update as needed
-                    onChange={(e) => setTradeMyAmount(e.target.value)}
-                  />
-                </div>
-                <div style={{ marginBottom: "10px" }}>
-                  <label>2FA Code</label>
-                  <input
-                    type="text"
-                    style={{ width: "100%", padding: "10px" }}
-                  />
-                </div>
-                <div style={{ marginBottom: "10px" }}>
-                  <input type="checkbox" id="agree" />
-                  <label htmlFor="agree" style={{ marginLeft: "10px" }}>
-                    I agree to the Terms and Conditions
-                  </label>
-                </div>
-              </div>
-            </div>
-            <button
-              style={{
-                backgroundColor: "#2ecc71",
-                color: "white",
-                padding: "10px 20px",
-                border: "none",
-                borderRadius: "5px",
-                cursor: "pointer",
-                width: "100%",
-              }}
-            >
-              Confirm
-            </button>
-            <button
-              onClick={closeTradeForm}
-              style={{
-                marginTop: "10px",
-                backgroundColor: "#e74c3c",
-                color: "white",
-                padding: "10px 20px",
-                border: "none",
-                borderRadius: "5px",
-                cursor: "pointer",
-                width: "100%",
-              }}
-            >
-              Cancel
-            </button>
-          </div>
-        </div>
-      )}
     </div>
   );
 }

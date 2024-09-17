@@ -84,16 +84,16 @@ function Sidebar({ isMobileMenuActive, toggleSidebar }) {
           <div
             className={`dropdown-container ${openDropdowns[1] ? "show" : ""}`}
           >
-            <NavLink to="/account-summary" className="dropdown-item">
+            <NavLink to="/account-summary" className="dropdown-item" activeClassName="active">
               Account Summary
             </NavLink>
-            <NavLink to="/transaction-inquiry" className="dropdown-item">
+            <NavLink to="/transaction-inquiry" className="dropdown-item" activeClassName="active">
               Transaction Inquiry
             </NavLink>
-            <NavLink to="/account-statement" className="dropdown-item">
+            <NavLink to="/account-statement" className="dropdown-item" activeClassName="active">
               Account Statement
             </NavLink>
-            <NavLink to="/beneficiary" className="dropdown-item">
+            <NavLink to="/beneficiary" className="dropdown-item" activeClassName="active">
               Beneficiary
             </NavLink>
           </div>
@@ -116,13 +116,13 @@ function Sidebar({ isMobileMenuActive, toggleSidebar }) {
           <div
             className={`dropdown-container ${openDropdowns[2] ? "show" : ""}`}
           >
-            <NavLink to="/topup" className="dropdown-item">
+            <NavLink to="/topup" className="dropdown-item" activeClassName="active">
               Topup
             </NavLink>
-            <NavLink to="/transfer-page" className="dropdown-item">
+            <NavLink to="/transfer-page" className="dropdown-item" activeClassName="active">
               Transfer
             </NavLink>
-            <NavLink to="/exchange" className="dropdown-item">
+            <NavLink to="/exchange" className="dropdown-item" activeClassName="active">
               Exchange
             </NavLink>
           </div>
@@ -145,19 +145,19 @@ function Sidebar({ isMobileMenuActive, toggleSidebar }) {
           <div
             className={`dropdown-container ${openDropdowns[3] ? "show" : ""}`}
           >
-            <NavLink to="/received" className="dropdown-item">
+            <NavLink to="/received" className="dropdown-item" activeClassName="active">
               Received
             </NavLink>
-            <NavLink to="/send" className="dropdown-item">
+            <NavLink to="/send" className="dropdown-item" activeClassName="active">
               Send
             </NavLink>
-            <NavLink to="/on-ramp" className="dropdown-item">
+            <NavLink to="/on-ramp" className="dropdown-item" activeClassName="active">
               On Ramp
             </NavLink>
-            <NavLink to="/off-ramp" className="dropdown-item">
+            <NavLink to="/off-ramp" className="dropdown-item" activeClassName="active">
               Off Ramp
             </NavLink>
-            <NavLink to="/swap" className="dropdown-item">
+            <NavLink to="/swap" className="dropdown-item" activeClassName="active">
               Swap
             </NavLink>
           </div>
@@ -180,16 +180,16 @@ function Sidebar({ isMobileMenuActive, toggleSidebar }) {
           <div
             className={`dropdown-container ${openDropdowns[4] ? "show" : ""}`}
           >
-            <NavLink to="/stacking" className="dropdown-item">
+            <NavLink to="/stacking" className="dropdown-item" activeClassName="active">
               Staking
             </NavLink>
-            <NavLink to="/guarantee" className="dropdown-item">
+            <NavLink to="/guarantee" className="dropdown-item" activeClassName="active">
               Guarantee
             </NavLink>
-            <NavLink to="/xcrow" className="dropdown-item">
+            <NavLink to="/xcrow" className="dropdown-item" activeClassName="active">
               Escrow
             </NavLink>
-            <NavLink to="/l-and-c" className="dropdown-item">
+            <NavLink to="/l-and-c" className="dropdown-item" activeClassName="active">
               L/C
             </NavLink>
           </div>
@@ -212,16 +212,16 @@ function Sidebar({ isMobileMenuActive, toggleSidebar }) {
           <div
             className={`dropdown-container ${openDropdowns[5] ? "show" : ""}`}
           >
-            <NavLink to="/market" className="dropdown-item">
+            <NavLink to="/market" className="dropdown-item" activeClassName="active">
               Market
             </NavLink>
-            <NavLink to="/new-offer" className="dropdown-item">
-              New Offer
+            <NavLink to="/new-offer" className="dropdown-item" activeClassName="active">
+              My Offer
             </NavLink>
-            <NavLink to="/active-offer" className="dropdown-item">
+            <NavLink to="/active-offer" className="dropdown-item" activeClassName="active">
               Active Offer
             </NavLink>
-            <NavLink to="/history-offer" className="dropdown-item">
+            <NavLink to="/history-offer" className="dropdown-item" activeClassName="active">
               History Offer
             </NavLink>
           </div>

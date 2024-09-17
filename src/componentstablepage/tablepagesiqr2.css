@@ -1,0 +1,196 @@
+.custom-table {
+  width: 100%;
+  border-collapse: collapse; /* Pastikan border-collapse tetap collapse */
+  background-color: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin: 20px 0;
+}
+
+.custom-table th,
+.custom-table td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid #dddddd; /* Hanya gunakan border-bottom untuk garis horizontal */
+  vertical-align: middle;
+  font-size: 14px;
+  border-right: none; /* Hilangkan border-right untuk memastikan tidak ada garis vertikal */
+}
+
+.custom-table th {
+  background-color: #f5f5f5;
+  font-weight: bold;
+  color: #333333;
+  border-right: none; /* Hilangkan border-right dari header kolom */
+}
+
+.custom-table tr {
+  border-right: none; /* Pastikan baris tabel tidak memiliki border-right */
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.user-name {
+  font-weight: bold;
+  display: block;
+  color: #333333;
+}
+
+.user-date {
+  color: #888888;
+  font-size: 12px;
+}
+
+.custodian-info {
+  display: flex;
+  align-items: center;
+}
+
+.custodian-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+}
+.crypto-tabs {
+  display: flex;
+  gap: 8px; /* Reduced gap between tabs */
+}
+
+.crypto-tab {
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 10px; /* Further reduced padding */
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* Slightly reduced shadow */
+  width: 180px; /* Reduced width */
+  cursor: pointer;
+  transition: background-color 0.3s, box-shadow 0.3s;
+  border: 1px solid #ccc;
+}
+
+.crypto-tab:hover {
+  background-color: #f5f5f5;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15); /* Slightly reduced hover shadow */
+}
+
+.crypto-tab.active {
+  background-color: #f0f0f0;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.crypto-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.crypto-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.crypto-logo-section {
+  display: flex;
+  align-items: center;
+  gap: 5px; /* Further reduced gap between logo and text */
+}
+
+.crypto-logo {
+  font-size: 20px; /* Smaller icon size */
+  color: #ffb74d; /* Placeholder logo color */
+}
+
+.crypto-name {
+  font-size: 12px; /* Smaller font size for the name */
+  font-weight: bold;
+  color: #333;
+}
+
+.crypto-change-icon {
+  font-size: 16px; /* Further reduced icon size */
+}
+
+.crypto-change-icon.positive {
+  color: #27ae60;
+}
+
+.crypto-change-icon.negative {
+  color: #e74c3c;
+}
+
+.crypto-pricing {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: 10px; /* Reduced space between components */
+  box-sizing: border-box;
+  font-size: 11px; /* Further reduced font size for pricing */
+}
+
+.crypto-value {
+  font-size: 14px; /* Further reduced font size for the value */
+  font-weight: bold;
+  color: #333;
+}
+
+.crypto-change {
+  font-size: 11px; /* Reduced font size for the change value */
+}
+
+.crypto-change.positive {
+  color: #27ae60;
+}
+
+.crypto-change.negative {
+  color: #e74c3c;
+}
+
+
+
+.asset-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.min-value {
+  color: #888888;
+  font-size: 12px;
+}
+
+.trade-btn,
+.disabled-btn {
+  background-color: #333;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 12px;
+  transition: background-color 0.3s ease;
+}
+
+.disabled-btn {
+  background-color: #bdc3c7;
+  cursor: not-allowed;
+}
+
+.trade-btn:hover {
+  background-color: #fff;
+  color: #333;
+}

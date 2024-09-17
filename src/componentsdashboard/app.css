@@ -130,6 +130,10 @@
   color: #fff;
 }
 
+.dropdown-item.active {
+  background-color: #333; /* Active background color */
+  color: white; /* Active text color */
+}
 
 
 /* Burger menu icon in header */
@@ -2171,6 +2175,7 @@ align-items: center;  }
   margin-top: 20px;
 }
 
+
 .trade-option {
   display: flex;
   align-items: center;
@@ -2612,6 +2617,32 @@ align-items: center;  }
 .submitup-btn:hover {
   background-color: #333333;
 }
+
+.asset-info {
+  display: flex;
+  align-items: center; /* Vertically centers the icon and text */
+}
+
+.icon-and-value {
+  display: flex;
+  align-items: center; /* Align icon and text horizontally */
+}
+
+.asset-icon {
+  width: 16px;
+  margin-right: 5px; /* Space between icon and text */
+}
+
+.value-and-min {
+  display: flex;
+  flex-direction: column; /* Stack the value and min text vertically */
+}
+
+.min-value {
+  font-size: 12px;
+  color: #888; /* Optional: change the style of the min value */
+}
+
 
 /* Popup Overlay */
 .form-overlay {
