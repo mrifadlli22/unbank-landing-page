@@ -36,9 +36,33 @@ function Market() {
     addActiveOffer // Ensure this function exists to handle the addition of active offers
   } = useMarketStore();
 
+  const resetForm = () => {
+    setSelectedOffer(null);
+    setTradeMyAmount(0);
+    setForAmount(0);
+    setPlatformFee(0);
+    setTotalAmountDue(0);
+    setSelectedAsset(null);
+    setFormattedTradeAmount(""); // Reset formatted value
+    setShowForm(false);
+  };
+
   const dropdownRef = useRef(null);
   const [showPopup, setShowPopup] = useState(false); // State to manage the popup visibility
+  const [formattedTradeAmount, setFormattedTradeAmount] = useState(""); // State untuk menyimpan nilai yang terformat
+  // Fungsi untuk memformat angka ke dalam format yang diinginkan
+// Fungsi untuk memformat angka ke dalam format yang diinginkan tanpa desimal .00
+const formatNumber = (value) => {
+  if (!value) return "";
+  const integerPart = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); // Tambah koma untuk pemisah ribuan
+  return integerPart; // Hanya mengembalikan angka dengan pemisah ribuan tanpa desimal
+};
 
+
+  // Fungsi untuk membersihkan format (menghapus koma)
+  const cleanNumber = (value) => {
+    return value.replace(/,/g, "");
+  };
   const [offersData, setOffersData] = useState([
     {
       id: 1,
@@ -96,11 +120,11 @@ function Market() {
       // Add to Zustand store
       addActiveOffer({
         ...selectedOffer,
-        tradeAmount: tradeMyAmount,
-        receiveAmount: forAmount,
+        tradeAmount: tradeMyAmount, // Nilai yang diinput di form
+        receiveAmount: forAmount,   // Nilai yang diinput di form
         platformFee,
         totalAmountDue,
-        status: "Not Tradable", // Ensure status is "Not Tradable"
+        status: "Ongoing", // Ensure status is "Not Tradable"
         date: new Date().toLocaleString(),
       });
   
@@ -109,7 +133,9 @@ function Market() {
       setTimeout(() => {
         setShowPopup(false);
       }, 3000);
+
     }
+
   };
   
 
@@ -122,9 +148,10 @@ function Market() {
 
   // Handle asset selection
   const handleAssetSelect = (asset) => {
-    setSelectedAsset(asset);
-    setDropdownActive(false);
+    setSelectedAsset(asset); // Simpan asset terpilih ke Zustand store
+    setDropdownActive(false); // Tutup dropdown setelah memilih aset
   };
+  
 
   // Function to handle tab switching
   const handleTabClick = (tab) => {
@@ -143,6 +170,7 @@ function Market() {
 
   const handleTradeClick = (offer) => {
     setSelectedOffer(offer); // Set the selected offer
+    setSelectedAsset(offer.want); // Set selectedAsset based on "WANT"
     setShowForm(true); // Show the form
     setTradeMyAmount(0); // Reset trade amount
     setForAmount(0); // Reset for amount
@@ -153,17 +181,24 @@ function Market() {
   const closeTradeForm = () => {
     setShowForm(false); // Hide the form
     setSelectedOffer(null); // Reset the selected offer
+    resetForm(); // Reset form setelah Confirm
+
   };
 
+ // Saat pengguna mengetik di text field
   const handleTradeMyAmountChange = (value) => {
-    const amount = parseFloat(value) || 0;
+    const cleanValue = cleanNumber(value); // Hapus koma agar bisa diparse
+    const amount = parseFloat(cleanValue) || 0;
     setTradeMyAmount(amount);
 
-    const markupAmount = amount * (selectedOffer.markup / 100); // Calculate markup
-    const fee = (amount + markupAmount) * 0.005; // Calculate platform fee (0.5%)
+    const markupAmount = amount * (selectedOffer?.markup / 100 || 0); // Hitung markup
+    const fee = (amount + markupAmount) * 0.005; // Hitung biaya platform (0.5%)
 
     setPlatformFee(fee);
-    setTotalAmountDue(amount + markupAmount + fee); // Calculate total amount due including markup and fee
+    setTotalAmountDue(amount + markupAmount + fee); // Hitung total harga termasuk markup dan biaya
+
+    // Format angka ketika pengguna mengetik
+    setFormattedTradeAmount(formatNumber(cleanValue));
   };
 
   const handleForAmountChange = (value) => {
@@ -191,7 +226,7 @@ function Market() {
                 <div className="crypto-content">
                   <div className="crypto-header">
                     <div className="crypto-logo-section">
-                      <AccountBalanceWallet className="crypto-logo" />
+                      <img style={{width:"20px"}} src="./Images/T.png" className="crypto-logo" />
                       <span className="crypto-name">USDT</span>
                     </div>
                     <ArrowDropUp className="crypto-change-icon positive" />
@@ -210,8 +245,8 @@ function Market() {
                 <div className="crypto-content">
                   <div className="crypto-header">
                     <div className="crypto-logo-section">
-                      <AccountBalanceWallet className="crypto-logo" />
-                      <span className="crypto-name">USDC</span>
+                    <img style={{width:"20px"}} src="./Images/S.png" className="crypto-logo" />
+                    <span className="crypto-name">USDC</span>
                     </div>
                     <ArrowDropDown className="crypto-change-icon negative" />
                   </div>
@@ -444,94 +479,27 @@ function Market() {
                         fontSize: "14px",
                       }}
                     >
-                      <div style={{ marginBottom: "10px" }}>
-                        <label
-                          style={{ display: "block", marginBottom: "5px" }}
-                        ></label>
-                        <div
-                          className="dropdowntf-container"
-                          ref={dropdownRef}
-                          style={{
-                            width: "100%",
-                            position: "relative",
-                            marginBottom: "10px",
-                          }}
-                        >
-                          <button
-                            className="dropdowntf-button"
-                            onClick={toggleDropdown}
-                            style={{
-                              width: "100%",
-                              padding: "10px",
-                              textAlign: "left",
-                              border: "1px solid #ccc",
-                              backgroundColor: "#f0f0f0",
-                              cursor: "pointer",
-                              position: "relative",
-                              zIndex: 1,
-                            }}
-                          >
-                            {/* Display "Select Asset" if no asset is selected yet */}
-                            {selectedAsset ? selectedAsset : "Select Asset"}
-                            <span className="caret" style={{ float: "right" }}>
-                              &#9660;
-                            </span>
-                          </button>
-                          {dropdownActive && (
-                            <div
-                              className="dropdowntf-content open"
-                              style={{
-                                position: "absolute",
-                                top: "100%",
-                                width: "100%",
-                                backgroundColor: "#fff",
-                                boxShadow: "0px 8px 16px rgba(0, 0, 0, 0.2)",
-                                zIndex: 10,
-                              }}
-                            >
-                              <div
-                                className="dropdown-item"
-                                onClick={() => handleAssetSelect("USD")}
-                                style={{
-                                  padding: "10px",
-                                  cursor: "pointer",
-                                }}
-                              >
-                                USD
-                              </div>
-                              <div
-                                className="dropdown-item"
-                                onClick={() => handleAssetSelect("IDR")}
-                                style={{
-                                  padding: "10px",
-                                  cursor: "pointer",
-                                }}
-                              >
-                                IDR
-                              </div>
-                            </div>
-                          )}
-                        </div>
-                      </div>
+                      <div style={{
+                      width: "1px",
+                      backgroundColor: "#ccc",
+                      height: "auto",
+                      margin: "0 10px",
+                    }}></div>
+
 
                       <div style={{ display: "flex", marginBottom: "20px" }}>
                         <div style={{ flex: "1", marginRight: "10px" }}>
-                          <TextField
-                            label="Trade My"
-                            type="number"
-                            value={tradeMyAmount}
-                            onChange={(e) =>
-                              handleTradeMyAmountChange(e.target.value)
-                            }
-                            fullWidth
-                            InputProps={{
-                              endAdornment: (
-                                <InputAdornment position="end">
-                                  {selectedAsset}
-                                </InputAdornment>
-                              ),
-                            }}
-                          />
+                        <TextField
+                  label="Trade My"
+                  value={formattedTradeAmount} // Menampilkan nilai terformat
+                  onChange={(e) => handleTradeMyAmountChange(e.target.value)} // Handle perubahan input
+                  fullWidth
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">{selectedAsset}</InputAdornment>
+                    ),
+                  }}
+                />
                         </div>
                         <div style={{ textAlign: "center", margin: "auto" }}>
                           <SwapHorizIcon
@@ -564,7 +532,7 @@ function Market() {
 
                       <div style={{ marginBottom: "10px" }}>
                         <p>
-                          <strong>Markup:</strong> {selectedOffer.markup}%
+                          <strong>Fee %:</strong> {selectedOffer.markup}%
                         </p>
                         <p>
                           <strong>Platform Fee:</strong>{" "}

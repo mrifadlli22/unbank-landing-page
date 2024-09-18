@@ -7,6 +7,11 @@ import useMarketStore from './useMarketStore';
 
 function ActiveOffer() {
   const [searchTerm, setSearchTerm] = useState("");
+// Fungsi untuk memformat angka dengan koma
+const formatNumber = (value) => {
+  if (!value) return "";
+  return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+};
 
   const {
     activeOffers,
@@ -73,31 +78,32 @@ function ActiveOffer() {
                       </tr>
                     </thead>
                     <tbody>
-                      {filteredOffers.length > 0 ? (
-                        filteredOffers.map((offer) => (
-                          <tr key={offer.id}>
-                            <td>{offer.date}</td>
-                            <td>{offer.user}</td>
-                            <td>
-                              {offer.tradeAmount} {selectedAsset}
-                            </td>
-                            <td>{offer.receiveAmount} {activeTab}</td>
-                            <td>Ongoing</td>
-                            <td>
-                              <button onClick={() => removeActiveOffer(offer.id)}>
-                                Cancel Offer
-                              </button>
-                            </td>
-                          </tr>
-                        ))
-                      ) : (
-                        <tr>
-                          <td colSpan="6" style={{ textAlign: "center" }}>
-                            No offers found.
-                          </td>
-                        </tr>
-                      )}
-                    </tbody>
+  {filteredOffers.length > 0 ? (
+    filteredOffers.map((offer) => (
+      <tr key={offer.id}>
+        <td>{offer.date}</td>
+        <td>{offer.user}</td>
+        <td>
+          {formatNumber(offer.tradeAmount)} {selectedAsset}
+        </td>
+        <td>{formatNumber(offer.receiveAmount)} {activeTab}</td>
+        <td>Ongoing</td>
+        <td>
+          <button onClick={() => removeActiveOffer(offer.id)}>
+            Cancel Offer
+          </button>
+        </td>
+      </tr>
+    ))
+  ) : (
+    <tr>
+      <td colSpan="6" style={{ textAlign: "center" }}>
+        No offers found.
+      </td>
+    </tr>
+  )}
+</tbody>
+
                   </table>
                 </div>
               </div>

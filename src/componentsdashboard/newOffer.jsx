@@ -235,6 +235,7 @@ function NewOffer() {
           <div className="contentdash">
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
               <h2 className="page-title">Create New Offers</h2>
+ 
               <button
                 style={{
                   padding: "5px 15px",
@@ -257,8 +258,8 @@ function NewOffer() {
                 <div className="crypto-content">
                   <div className="crypto-header">
                     <div className="crypto-logo-section">
-                      <AccountBalanceWallet className="crypto-logo" />
-                      <span className="crypto-name">USDT</span>
+                    <img style={{width:"20px"}} src="./Images/T.png" className="crypto-logo" />
+                    <span className="crypto-name">USDT</span>
                     </div>
                     <ArrowDropUp className="crypto-change-icon positive" />
                   </div>
@@ -273,8 +274,8 @@ function NewOffer() {
                 <div className="crypto-content">
                   <div className="crypto-header">
                     <div className="crypto-logo-section">
-                      <AccountBalanceWallet className="crypto-logo" />
-                      <span className="crypto-name">USDC</span>
+                    <img style={{width:"20px"}} src="./Images/S.png" className="crypto-logo" />
+                    <span className="crypto-name">USDC</span>
                     </div>
                     <ArrowDropDown className="crypto-change-icon negative" />
                   </div>
@@ -407,7 +408,7 @@ function NewOffer() {
                       <input id="minAmount" type="number" name="minAmount" value={newOffer.minAmount} onChange={handleInputChange} style={{ width: "100%", padding: "10px" }} />
                     </div>
                     <div style={{ flex: "1", marginLeft: "10px" }}>
-                      <label htmlFor="markup">Markup %</label>
+                      <label htmlFor="markup">Fee %</label>
                       <input id="markup" type="number" name="markup" value={newOffer.markup} onChange={handleInputChange} style={{ width: "100%", padding: "10px" }} />
                     </div>
                     <div style={{ flex: "1", marginLeft: "10px" }}>
@@ -451,7 +452,7 @@ function NewOffer() {
                       </div>
                     </div>
                     <div style={{ flex: "1", marginLeft: "10px" }}>
-                      <label htmlFor="wantMarkup">Markup %</label>
+                      <label htmlFor="wantMarkup">Fee %</label>
                       <input id="wantMarkup" type="number" name="wantMarkup" value={newOffer.wantMarkup} onChange={handleInputChange} style={{ width: "100%", padding: "10px" }} />
                     </div>
                     <div style={{ flex: "1", marginLeft: "10px" }}>

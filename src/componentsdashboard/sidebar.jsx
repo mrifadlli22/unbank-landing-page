@@ -12,6 +12,8 @@ import {
   FaCaretDown,
   FaCaretRight,
 } from "react-icons/fa";
+import { ShoppingCart, BusinessCenter } from "@mui/icons-material";
+
 
 function Sidebar({ isMobileMenuActive, toggleSidebar }) {
   const [openDropdowns, setOpenDropdowns] = useState(() => {
@@ -201,7 +203,7 @@ function Sidebar({ isMobileMenuActive, toggleSidebar }) {
             className={`dropdown-btn ${openDropdowns[5] ? "active" : ""}`}
             onClick={() => handleDropdownToggle(5)}
           >
-            <FaHistory className="icon" />
+            <ShoppingCart style={{width:"16px"}} className="icon" />
             {"OTC"}
             {openDropdowns[5] ? (
               <FaCaretDown className="dropdown-icon" />
