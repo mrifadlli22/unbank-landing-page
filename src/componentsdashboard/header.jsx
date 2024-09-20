@@ -16,6 +16,11 @@ function Header({ toggleSidebar, isMobileMenuActive }) {
     setDropdownVisible(false); // Hide the dropdown after navigation
   };
 
+  const handleLogout = () => {
+    // Perform any necessary logout logic here (e.g., clearing tokens, state, etc.)
+    navigate('/login'); // Navigate to the login page
+  };
+
   return (
     <div className="header">
       {!isMobileMenuActive && (
@@ -47,12 +52,12 @@ function Header({ toggleSidebar, isMobileMenuActive }) {
         </span>
         <span style={{ borderRadius: "30px", marginRight: "0px" }} className="verify-btn">
           <img
-            src="./Images/usd.png" alt="BTC Icon"
+            src="./Images/usd.png" alt="USD Icon"
             style={{ width: '20px', height: '20px', marginRight: '8px', verticalAlign: 'middle' }}
           />
           1 USD = Rp. 15.584,10
         </span>
-        <button className="logout-btn">
+        <button className="logout-btn" onClick={handleLogout}>
           <div className="logout-container">
             <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/a02ad958ff1e19dbae6570b2b39724a613c2de30e46b4710a6f1d3e01b50b7ea?placeholderIfAbsent=true&apiKey=e3ddd6dd58b748b09fc1391939743920" alt="Logout Icon" className="logout-icon" />
             <span className="logout-text">Log out</span>

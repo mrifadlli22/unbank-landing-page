@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Sidebar from "./sidebar";
 import Header from "./header";
 import "./app.css";
@@ -6,6 +6,24 @@ import "../componentstablepage/tablepagesiqr.css";
 import useMarketStore from './useMarketStore';
 
 function ActiveOffer() {
+
+  const [isMobileMenuActive, setIsMobileMenuActive] = useState(false);
+
+  const toggleSidebar = () => {
+    setIsMobileMenuActive(!isMobileMenuActive);
+  };
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 768) {
+        setIsMobileMenuActive(false);
+      }
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   const [searchTerm, setSearchTerm] = useState("");
 // Fungsi untuk memformat angka dengan koma
 const formatNumber = (value) => {
@@ -37,8 +55,14 @@ const formatNumber = (value) => {
 
   return (
     <div className="dashboard">
-      <Header />
-      <Sidebar />
+           <Header
+        toggleSidebar={toggleSidebar}
+        isMobileMenuActive={isMobileMenuActive}
+      />
+      <Sidebar
+        isMobileMenuActive={isMobileMenuActive}
+        toggleSidebar={toggleSidebar}
+      />
       <div className="main">
         <div className="content">
           <div className="contentdash">

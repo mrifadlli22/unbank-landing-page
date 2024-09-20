@@ -6,7 +6,10 @@ import "./app.css";
 import "../componentstablepage/tablepagesiqr.css";
 
 function HistoryOffer() {
-  const [isMobileMenuActive, setIsMobileMenuActive] = useState(false);
+
+  
+ 
+  
 
   // Tab menu state
   const location = useLocation();
@@ -253,9 +256,7 @@ function HistoryOffer() {
     return data.slice(indexOfFirstEntry, indexOfLastEntry);
   };
 
-  const toggleSidebar = () => {
-    setIsMobileMenuActive(!isMobileMenuActive);
-  };
+ 
 
   const openTradeForm = (offer) => {
     setSelectedOffer(offer); // Store the selected offer in state
@@ -267,10 +268,29 @@ function HistoryOffer() {
     setSelectedOffer(null); // Reset the selected offer
   };
 
+  const [isMobileMenuActive, setIsMobileMenuActive] = useState(false);
+
+  const toggleSidebar = () => {
+    setIsMobileMenuActive(!isMobileMenuActive);
+  };
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 768) {
+        setIsMobileMenuActive(false);
+      }
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+
   return (
     <div className="dashboard">
-      <Header
-        toggle Sidebar={toggleSidebar}
+           <Header
+        toggleSidebar={toggleSidebar}
         isMobileMenuActive={isMobileMenuActive}
       />
       <Sidebar

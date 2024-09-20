@@ -215,10 +215,25 @@
 /* Dropdown menu */
 
 /* Container for user info and dropdown menu */
+/* Default styling for the user-info-container */
+
+ 
+@media (max-width: 768px) {
+  /* Header adjustments */
+  .user-info-container {
+    position: absolute; /* Keeps the dropdown positioned relative to this container */
+    display: inline-block;
+    margin-left: auto; /* Push the user info to the right in a flex container */
+    padding-right: 15px; /* Optional: some padding on the right */
+  }
+}
 .user-info-container {
   position: relative; /* Positioning context for dropdown menu */
   display: inline-block;
+  transition: transform 0.3s ease; /* Smooth transition when moving */
 }
+
+ 
 
 /* User Info Styles */
 .user-info {
@@ -493,10 +508,10 @@
   /* Burger menu button in sidebar */
   .sidebar-burger-menu {
     display: block; /* Show burger menu on mobile */
-    position: absolute;
-    bottom: 20px;
     font-size: 24px;
     color: #fff;
+    margin: 20px 0; /* Add some spacing at the bottom */
+    text-align: center; /* Center the burger icon */
   }
 
   .contentdash{
@@ -550,6 +565,8 @@
   }
   
 }
+
+
 /* Currency Rates Container */
 .currency-rate-container {
     display: flex;

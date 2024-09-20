@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Sidebar from "./sidebar";
 import Header from "./header";
 import "./app.css";
@@ -226,10 +226,35 @@ function NewOffer() {
   // Filtered data based on the active tab (USDT or USDC)
   const filteredData = activeTab === "USDT" ? usdtOffersData : usdcOffersData;
 
+  const [isMobileMenuActive, setIsMobileMenuActive] = useState(false);
+
+  const toggleSidebar = () => {
+    setIsMobileMenuActive(!isMobileMenuActive);
+  };
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 768) {
+        setIsMobileMenuActive(false);
+      }
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  
   return (
     <div className="dashboard">
-      <Header />
-      <Sidebar />
+               <Header
+        toggleSidebar={toggleSidebar}
+        isMobileMenuActive={isMobileMenuActive}
+      />
+      <Sidebar
+        isMobileMenuActive={isMobileMenuActive}
+        toggleSidebar={toggleSidebar}
+      />
       <div className="main">
         <div className="content">
           <div className="contentdash">
@@ -313,7 +338,7 @@ function NewOffer() {
                       </td>
                       <td>
                         <div className="custodian-info" style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-                          <img style={{ width: "25px" }} src={row.custodianIcon} alt={row.custodian} className="custodian-icon" />
+                          <img style={{ width: "28px" }} src={row.custodianIcon} alt={row.custodian} className="custodian-icon" />
                           <span style={{ textAlign: "center" }}>{row.custodian}</span>
                         </div>
                       </td>
@@ -352,146 +377,331 @@ function NewOffer() {
 
             {/* New Offer Form */}
             {showForm && (
-              <div style={{ position: "fixed", top: 0, left: 0, width: "100%", height: "100%", backgroundColor: "rgba(0, 0, 0, 0.7)", display: "flex", justifyContent: "center", alignItems: "center", zIndex: 9999 }}>
-                <div style={{ backgroundColor: "white", padding: "20px", borderRadius: "10px", width: "800px", height: "auto", maxHeight: "90vh", overflowY: "auto", zIndex: 10000 }}>
-                  <h2 style={{ marginBottom: "20px", textAlign: "center" }}>{editMode ? "Edit Offer" : "Add New Offer"}</h2>
-                  <div className="divider2"></div>
+  <div
+    style={{
+      position: "fixed",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+      backgroundColor: "rgba(0, 0, 0, 0.7)",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      zIndex: 9999,
+    }}
+  >
+    <div
+      style={{
+        backgroundColor: "white",
+        padding: "20px",
+        borderRadius: "10px",
+        width: "800px",
+        height: "auto",
+        maxHeight: "90vh",
+        overflowY: "auto",
+        position: "relative",
+        zIndex: 10000,
+      }}
+    >
+      {/* Close Button */}
+      <button
+        onClick={closeNewOfferForm}
+        style={{
+          position: "absolute",
+          top: "10px",
+          right: "10px",
+          backgroundColor: "transparent",
+          border: "none",
+          fontSize: "20px",
+          cursor: "pointer",
+        }}
+      >
+        &times;
+      </button>
 
-                  {/* I HAVE Section */}
-                  <h3>I HAVE</h3>
-                  <div style={{ display: "flex", marginBottom: "20px" }}>
-                    <div style={{ display: "block" }}>
-                      <label style={{ display: "block" }}> Select Asset </label>
-                      <div style={{ marginBottom: "10px" }}>
-                        <div className="dropdowntf-container" ref={dropdownRefHave} style={{ width: "100%", position: "relative", height: "40px", borderRadius: "0px" }}>
-                          <button
-                            className="dropdowntf-button"
-                            onClick={editMode ? null : toggleDropdownHave}
-                            style={{
-                              width: "100%",
-                              padding: "10px",
-                              textAlign: "left",
-                              border: "1px solid #ccc",
-                              backgroundColor: "#fff",
-                              cursor: editMode ? "not-allowed" : "pointer",
-                              position: "relative",
-                              zIndex: 1,
-                              borderRadius: "2px",
-                            }}
-                            disabled={editMode}
-                          >
-                            {selectedAssetHave ? selectedAssetHave : "Select Asset"}
-                            <span className="caret" style={{ float: "right" }}>&#9660;</span>
-                          </button>
-                          {dropdownActiveHave && !editMode && (
-                            <div className="dropdowntf-content open" style={{ position: "absolute", top: "100%", width: "100%", backgroundColor: "#fff", boxShadow: "0px 8px 16px rgba(0, 0, 0, 0.2)", zIndex: 10 }}>
-                              <div className="dropdown-item" onClick={() => handleAssetSelectHave("USDT")} style={{ padding: "10px", cursor: "pointer" }}>USDT</div>
-                              <div className="dropdown-item" onClick={() => handleAssetSelectHave("USDC")} style={{ padding: "10px", cursor: "pointer" }}>USDC</div>
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                    <div style={{ flex: "1", marginLeft: "10px" }}>
-                      <label htmlFor="custody">Custody Account</label>
-                      <input id="custody" type="text" value="Tennet" disabled style={{ width: "100%", padding: "10px" }} />
-                    </div>
+      <h2 style={{ marginBottom: "20px", textAlign: "center" }}>
+        {editMode ? "Edit Offer" : "Add New Offer"}
+      </h2>
+      <div className="divider2"></div>
+
+      {/* I HAVE Section */}
+      <h3>I HAVE</h3>
+      <div style={{ display: "flex", marginBottom: "20px" }}>
+        <div style={{ display: "block" }}>
+          <label style={{ display: "block" }}>Select Asset</label>
+          <div style={{ marginBottom: "10px" }}>
+            <div
+              className="dropdowntf-container"
+              ref={dropdownRefHave}
+              style={{
+                width: "100%",
+                position: "relative",
+                height: "40px",
+                borderRadius: "0px",
+              }}
+            >
+              <button
+                className="dropdowntf-button"
+                onClick={editMode ? null : toggleDropdownHave}
+                style={{
+                  width: "100%",
+                  padding: "10px",
+                  textAlign: "left",
+                  border: "1px solid #ccc",
+                  backgroundColor: "#fff",
+                  cursor: editMode ? "not-allowed" : "pointer",
+                  position: "relative",
+                  zIndex: 1,
+                  borderRadius: "2px",
+                }}
+                disabled={editMode}
+              >
+                {selectedAssetHave ? selectedAssetHave : "Select Asset"}
+                <span className="caret" style={{ float: "right" }}>
+                  &#9660;
+                </span>
+              </button>
+              {dropdownActiveHave && !editMode && (
+                <div
+                  className="dropdowntf-content open"
+                  style={{
+                    position: "absolute",
+                    top: "100%",
+                    width: "100%",
+                    backgroundColor: "#fff",
+                    boxShadow: "0px 8px 16px rgba(0, 0, 0, 0.2)",
+                    zIndex: 10,
+                  }}
+                >
+                  <div
+                    className="dropdown-item"
+                    onClick={() => handleAssetSelectHave("USDT")}
+                    style={{ padding: "10px", cursor: "pointer" }}
+                  >
+                    USDT
                   </div>
-
-                  <div style={{ display: "flex", marginBottom: "20px" }}>
-                    <div style={{ flex: "1", marginRight: "10px" }}>
-                      <label htmlFor="haveAmount">Amount</label>
-                      <input id="haveAmount" type="number" name="haveAmount" value={newOffer.haveAmount} onChange={handleInputChange} style={{ width: "100%", padding: "10px" }} />
-                    </div>
-                    <div style={{ flex: "1", marginRight: "10px" }}>
-                      <label htmlFor="minAmount">Min Trade</label>
-                      <input id="minAmount" type="number" name="minAmount" value={newOffer.minAmount} onChange={handleInputChange} style={{ width: "100%", padding: "10px" }} />
-                    </div>
-                    <div style={{ flex: "1", marginLeft: "10px" }}>
-                      <label htmlFor="markup">Fee %</label>
-                      <input id="markup" type="number" name="markup" value={newOffer.markup} onChange={handleInputChange} style={{ width: "100%", padding: "10px" }} />
-                    </div>
-                    <div style={{ flex: "1", marginLeft: "10px" }}>
-                      <label htmlFor="value">Value</label>
-                      <input id="value" type="number" value={calculateTotalHave().toFixed(2)} disabled style={{ width: "100%", padding: "10px" }} />
-                    </div>
-                  </div>
-
-                  {/* I WANT Section */}
-                  <h3>I WANT</h3>
-                  <div style={{ display: "flex", marginBottom: "20px" }}>
-                    <div style={{ display: "block" }}>
-                      <label style={{ display: "block" }}> Select Asset </label>
-                      <div style={{ marginBottom: "10px" }}>
-                        <div className="dropdowntf-container" ref={dropdownRefWant} style={{ width: "100%", position: "relative", height: "40px", borderRadius: "0px" }}>
-                          <button
-                            className="dropdowntf-button"
-                            onClick={toggleDropdownWant}
-                            style={{
-                              width: "100%",
-                              padding: "10px",
-                              textAlign: "left",
-                              border: "1px solid #ccc",
-                              backgroundColor: "#fff",
-                              cursor: "pointer",
-                              position: "relative",
-                              zIndex: 1,
-                              borderRadius: "2px",
-                            }}
-                          >
-                            {selectedAssetWant ? selectedAssetWant : "Select Asset"}
-                            <span className="caret" style={{ float: "right" }}>&#9660;</span>
-                          </button>
-                          {dropdownActiveWant && (
-                            <div className="dropdowntf-content open" style={{ position: "absolute", top: "100%", width: "100%", backgroundColor: "#fff", boxShadow: "0px 8px 16px rgba(0, 0, 0, 0.2)", zIndex: 10 }}>
-                              <div className="dropdown-item" onClick={() => handleAssetSelectWant("USD")} style={{ padding: "10px", cursor: "pointer" }}>USD</div>
-                              <div className="dropdown-item" onClick={() => handleAssetSelectWant("IDR")} style={{ padding: "10px", cursor: "pointer" }}>IDR</div>
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                    <div style={{ flex: "1", marginLeft: "10px" }}>
-                      <label htmlFor="wantMarkup">Fee %</label>
-                      <input id="wantMarkup" type="number" name="wantMarkup" value={newOffer.wantMarkup} onChange={handleInputChange} style={{ width: "100%", padding: "10px" }} />
-                    </div>
-                    <div style={{ flex: "1", marginLeft: "10px" }}>
-                      <label htmlFor="estimatedValue">Estimated Value</label>
-                      <input id="estimatedValue" type="number" value={calculateTotalWant().toFixed(2)} disabled style={{ width: "100%", padding: "10px" }} />
-                    </div>
-                  </div>
-
-                  {/* 2 Factor Authentication */}
-                  <h3>2 FACTOR AUTHENTICATION</h3>
-                  <div style={{ display: "flex", marginBottom: "20px" }}>
-                    <TextField
-                      label="Enter 6 Digit Code"
-                      type="text"
-                      name="twoFactorCode"
-                      value={newOffer.twoFactorCode}
-                      onChange={handleInputChange}
-                      fullWidth
-                    />
-                  </div>
-
-                  {/* I Agree Checkbox */}
-                  <div style={{ marginBottom: "20px" }}>
-                    <input type="checkbox" id="agree" />
-                    <label htmlFor="agree" style={{ marginLeft: "10px" }}>I agree to the Terms and Conditions</label>
-                  </div>
-
-                  {/* Proceed Button */}
-                  <div style={{ display: "flex", justifyContent: "flex-end", gap: "10px" }}>
-                    <button style={{ backgroundColor: "#333", color: "white", padding: "10px 20px", border: "none", borderRadius: "5px", cursor: "pointer" }} onClick={handleSaveOffer}>
-                      {editMode ? "Save" : "Proceed"}
-                    </button>
-                    <button onClick={closeNewOfferForm} style={{ backgroundColor: "#e74c3c", color: "white", padding: "10px 20px", border: "none", borderRadius: "5px", cursor: "pointer" }}>
-                      Cancel
-                    </button>
+                  <div
+                    className="dropdown-item"
+                    onClick={() => handleAssetSelectHave("USDC")}
+                    style={{ padding: "10px", cursor: "pointer" }}
+                  >
+                    USDC
                   </div>
                 </div>
-              </div>
-            )}
+              )}
+            </div>
+          </div>
+        </div>
+        <div style={{ flex: "1", marginLeft: "10px" }}>
+          <label htmlFor="custody">Custody Account</label>
+          <input
+            id="custody"
+            type="text"
+            value="Tennet"
+            disabled
+            style={{ width: "100%", padding: "10px" }}
+          />
+        </div>
+      </div>
+
+      <div style={{ display: "flex", marginBottom: "20px" }}>
+        <div style={{ flex: "1", marginRight: "10px" }}>
+          <label htmlFor="haveAmount">Amount</label>
+          <input
+            id="haveAmount"
+            type="number"
+            name="haveAmount"
+            value={newOffer.haveAmount}
+            onChange={handleInputChange}
+            style={{ width: "100%", padding: "10px" }}
+          />
+        </div>
+        <div style={{ flex: "1", marginRight: "10px" }}>
+          <label htmlFor="minAmount">Min Trade</label>
+          <input
+            id="minAmount"
+            type="number"
+            name="minAmount"
+            value={newOffer.minAmount}
+            onChange={handleInputChange}
+            style={{ width: "100%", padding: "10px" }}
+          />
+        </div>
+        <div style={{ flex: "1", marginLeft: "10px" }}>
+          <label htmlFor="markup">Fee %</label>
+          <input
+            id="markup"
+            type="number"
+            name="markup"
+            value={newOffer.markup}
+            onChange={handleInputChange}
+            style={{ width: "100%", padding: "10px" }}
+          />
+        </div>
+        <div style={{ flex: "1", marginLeft: "10px" }}>
+          <label htmlFor="value">Value</label>
+          <input
+            id="value"
+            type="number"
+            value={calculateTotalHave().toFixed(2)}
+            disabled
+            style={{ width: "100%", padding: "10px" }}
+          />
+        </div>
+      </div>
+
+      {/* Calculation Container */}
+      <div
+        style={{
+          backgroundColor: "rgb(238 235 235 / 30%)",
+          width: "100%",
+          textAlign: "center",
+          padding: "10px 0",
+          marginBottom: "20px",
+        }}
+      >
+        {(() => {
+          const totalValue = calculateTotalHave();
+          const platformFee = totalValue * 0.005;
+          const totalReceive = totalValue - platformFee;
+          return `Total Value ($${totalValue.toFixed(2)}) - Platform Fee 0.5% ($${platformFee.toFixed(2)}) = Total receive ($${totalReceive.toFixed(2)})`;
+        })()}
+      </div>
+
+      {/* I WANT Section */}
+      <h3>I WANT</h3>
+      <div style={{ display: "flex", marginBottom: "20px" }}>
+        <div style={{ display: "block" }}>
+          <label style={{ display: "block" }}>Select Asset</label>
+          <div style={{ marginBottom: "10px" }}>
+            <div
+              className="dropdowntf-container"
+              ref={dropdownRefWant}
+              style={{
+                width: "100%",
+                position: "relative",
+                height: "40px",
+                borderRadius: "0px",
+              }}
+            >
+              <button
+                className="dropdowntf-button"
+                onClick={toggleDropdownWant}
+                style={{
+                  width: "100%",
+                  padding: "10px",
+                  textAlign: "left",
+                  border: "1px solid #ccc",
+                  backgroundColor: "#fff",
+                  cursor: "pointer",
+                  position: "relative",
+                  zIndex: 1,
+                  borderRadius: "2px",
+                }}
+              >
+                {selectedAssetWant ? selectedAssetWant : "Select Asset"}
+                <span className="caret" style={{ float: "right" }}>
+                  &#9660;
+                </span>
+              </button>
+              {dropdownActiveWant && (
+                <div
+                  className="dropdowntf-content open"
+                  style={{
+                    position: "absolute",
+                    top: "100%",
+                    width: "100%",
+                    backgroundColor: "#fff",
+                    boxShadow: "0px 8px 16px rgba(0, 0, 0, 0.2)",
+                    zIndex: 10,
+                  }}
+                >
+                  <div
+                    className="dropdown-item"
+                    onClick={() => handleAssetSelectWant("USD")}
+                    style={{ padding: "10px", cursor: "pointer" }}
+                  >
+                    USD
+                  </div>
+                  <div
+                    className="dropdown-item"
+                    onClick={() => handleAssetSelectWant("IDR")}
+                    style={{ padding: "10px", cursor: "pointer" }}
+                  >
+                    IDR
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+        <div style={{ flex: "1", marginLeft: "10px" }}>
+          <label htmlFor="wantMarkup">Fee %</label>
+          <input
+            id="wantMarkup"
+            type="number"
+            name="wantMarkup"
+            value={newOffer.wantMarkup}
+            onChange={handleInputChange}
+            style={{ width: "100%", padding: "10px" }}
+          />
+        </div>
+        <div style={{ flex: "1", marginLeft: "10px" }}>
+          <label htmlFor="estimatedValue">Estimated Value</label>
+          <input
+            id="estimatedValue"
+            type="number"
+            value={calculateTotalWant().toFixed(2)}
+            disabled
+            style={{ width: "100%", padding: "10px" }}
+          />
+        </div>
+      </div>
+
+      {/* 2 Factor Authentication */}
+      <h3>2 FACTOR AUTHENTICATION</h3>
+      <div style={{ display: "flex", marginBottom: "20px" }}>
+        <TextField
+          label="Enter 6 Digit Code"
+          type="text"
+          name="twoFactorCode"
+          value={newOffer.twoFactorCode}
+          onChange={handleInputChange}
+          fullWidth
+        />
+      </div>
+
+      {/* I Agree Checkbox */}
+      <div style={{ textAlign: "center", marginBottom: "20px" }}>
+        <input type="checkbox" id="agree" />
+        <label htmlFor="agree" style={{ marginLeft: "10px" }}>
+          I agree to the Terms and Conditions
+        </label>
+      </div>
+
+      {/* Proceed Button */}
+      <div style={{ marginBottom: "20px" }}>
+        <button
+          style={{
+            backgroundColor: "#333",
+            color: "white",
+            padding: "10px 20px",
+            border: "none",
+            borderRadius: "5px",
+            cursor: "pointer",
+            width: "100%",
+          }}
+          onClick={handleSaveOffer}
+        >
+          {editMode ? "Save" : "Proceed"}
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+
+
           </div>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Sidebar from "./sidebar";
 import Header from "./header";
 import "./app.css";
@@ -33,8 +33,10 @@ function Market() {
     setSelectedAsset,
     dropdownActive,
     setDropdownActive,
-    addActiveOffer // Ensure this function exists to handle the addition of active offers
+    addActiveOffer, // Ensure this function exists to handle the addition of active offers
   } = useMarketStore();
+
+  
 
   const resetForm = () => {
     setSelectedOffer(null);
@@ -50,51 +52,129 @@ function Market() {
   const dropdownRef = useRef(null);
   const [showPopup, setShowPopup] = useState(false); // State to manage the popup visibility
   const [formattedTradeAmount, setFormattedTradeAmount] = useState(""); // State untuk menyimpan nilai yang terformat
-  // Fungsi untuk memformat angka ke dalam format yang diinginkan
-// Fungsi untuk memformat angka ke dalam format yang diinginkan tanpa desimal .00
-const formatNumber = (value) => {
-  if (!value) return "";
-  const integerPart = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); // Tambah koma untuk pemisah ribuan
-  return integerPart; // Hanya mengembalikan angka dengan pemisah ribuan tanpa desimal
-};
 
-
-  // Fungsi untuk membersihkan format (menghapus koma)
-  const cleanNumber = (value) => {
-    return value.replace(/,/g, "");
-  };
-  const [offersData, setOffersData] = useState([
+  // Pisahkan data menjadi dua state: usdtOffersData dan usdcOffersData
+  const [usdtOffersData, setUsdtOffersData] = useState([
     {
       id: 1,
       date: "2023-09-01",
       user: "jason",
       desk: "Desk A",
       userAvatar: "path_to_avatar/jason.png",
-      have: "50 BTC",
+      have: "50 USDT",
       want: "USD",
-      minTrade: "1 BTC",
+      minTrade: "1 USDT",
       markup: 2,
       custodianIcon: "./Images/1Asset 6.png",
       custodian: "Tennet",
       action: "Trade",
-      tradable: true, // Ensure tradable is true
+      tradable: true,
     },
     {
-      id: 2,
-      date: "2023-09-02",
-      user: "HDC",
-      desk: "Desk B",
-      userAvatar: "path_to_avatar/HDC.png",
-      have: "70 BTC",
+      id: 3,
+      date: "2023-09-03",
+      user: "alice",
+      desk: "Desk C",
+      userAvatar: "path_to_avatar/alice.png",
+      have: "100 USDT",
       want: "IDR",
-      minTrade: "1 BTC",
-      markup: 1.5,
+      minTrade: "5 USDT",
+      markup: 1.8,
       custodianIcon: "./Images/1Asset 6.png",
       custodian: "Tennet",
       action: "Trade",
-      tradable: true, // Ensure tradable is true
+      tradable: true,
+    },
+    {
+      id: 4,
+      date: "2023-09-04",
+      user: "bob",
+      desk: "Desk D",
+      userAvatar: "path_to_avatar/bob.png",
+      have: "75 USDT",
+      want: "USD",
+      minTrade: "10 USDT",
+      markup: 2.5,
+      custodianIcon: "./Images/1Asset 6.png",
+      custodian: "Tennet",
+      action: "Trade",
+      tradable: true,
     },
   ]);
+
+  const [usdcOffersData, setUsdcOffersData] = useState([
+    {
+      id: 2,
+      date: "2023-09-02",
+      user: "jason",
+      desk: "Desk B",
+      userAvatar: "path_to_avatar/jason.png",
+      have: "88.999 USDC",
+      want: "IDR",
+      minTrade: "0.5 USDC",
+      custodianIcon: "./Images/1Asset 6.png",
+      custodian: "Tennet",
+      action: "Trade",
+      markup: 1.5,
+      tradable: true,
+    },
+    {
+      id: 5,
+      date: "2023-09-05",
+      user: "carol",
+      desk: "Desk E",
+      userAvatar: "path_to_avatar/carol.png",
+      have: "120 USDC",
+      want: "IDR",
+      minTrade: "2 USDC",
+      markup: 1.2,
+      custodianIcon: "./Images/1Asset 6.png",
+      custodian: "Tennet",
+      action: "Trade",
+      tradable: true,
+    },
+    {
+      id: 6,
+      date: "2023-09-06",
+      user: "dave",
+      desk: "Desk F",
+      userAvatar: "path_to_avatar/dave.png",
+      have: "200 USDC",
+      want: "USD",
+      minTrade: "20 USDC",
+      markup: 1.7,
+      custodianIcon: "./Images/1Asset 6.png",
+      custodian: "Tennet",
+      action: "Trade",
+      tradable: true,
+    },
+  ]);
+
+  // Fungsi untuk memformat angka ke dalam format yang diinginkan tanpa desimal .00
+  const formatNumber = (value) => {
+    if (!value) return "";
+    const integerPart = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); // Tambah koma untuk pemisah ribuan
+    return integerPart; // Hanya mengembalikan angka dengan pemisah ribuan tanpa desimal
+  };
+
+  function calculateQuotedPrice(offer) {
+    // Pastikan nilai 'have' dan 'markup' ada dan valid
+    const basePrice = parseFloat(offer.have);
+    const markup = parseFloat(offer.markup) / 100;
+
+    // Periksa apakah basePrice dan markup adalah angka
+    if (isNaN(basePrice) || isNaN(markup)) {
+      return "Invalid data"; // Atau pesan kesalahan lain yang sesuai
+    }
+
+    const quotedPrice = basePrice * (1 + markup);
+    return quotedPrice.toFixed(2); // Mengembalikan harga yang telah diformat
+  }
+
+  // Fungsi untuk membersihkan format (menghapus koma)
+  const cleanNumber = (value) => {
+    return value.replace(/,/g, "");
+  };
 
   // Toggle dropdown visibility
   const toggleDropdown = () => {
@@ -110,34 +190,38 @@ const formatNumber = (value) => {
 
   const handleConfirmTrade = () => {
     if (selectedOffer) {
-      const updatedOffers = offersData.map((offer) =>
+      const updatedOffers =
+        activeTab === "USDT" ? usdtOffersData : usdcOffersData;
+      const updatedOffersData = updatedOffers.map((offer) =>
         offer.id === selectedOffer.id
           ? { ...offer, action: "Not Tradable", tradable: false } // Update status
           : offer
       );
-      setOffersData(updatedOffers);
-  
+
+      if (activeTab === "USDT") {
+        setUsdtOffersData(updatedOffersData);
+      } else {
+        setUsdcOffersData(updatedOffersData);
+      }
+
       // Add to Zustand store
       addActiveOffer({
         ...selectedOffer,
         tradeAmount: tradeMyAmount, // Nilai yang diinput di form
-        receiveAmount: forAmount,   // Nilai yang diinput di form
+        receiveAmount: forAmount, // Nilai yang diinput di form
         platformFee,
         totalAmountDue,
         status: "Ongoing", // Ensure status is "Not Tradable"
         date: new Date().toLocaleString(),
       });
-  
+
       setShowForm(false);
       setShowPopup(true);
       setTimeout(() => {
         setShowPopup(false);
       }, 3000);
-
     }
-
   };
-  
 
   React.useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
@@ -151,7 +235,6 @@ const formatNumber = (value) => {
     setSelectedAsset(asset); // Simpan asset terpilih ke Zustand store
     setDropdownActive(false); // Tutup dropdown setelah memilih aset
   };
-  
 
   // Function to handle tab switching
   const handleTabClick = (tab) => {
@@ -159,14 +242,7 @@ const formatNumber = (value) => {
   };
 
   // Filter data based on active tab (USDT or USDC)
-  const filteredData = offersData.map((offer) => ({
-    ...offer,
-    have:
-      activeTab === "USDT"
-        ? offer.have.replace("BTC", "USDT")
-        : offer.have.replace("BTC", "USDC"), // Change "Have" based on tab
-    want: offer.want.includes("USD") ? "USD" : "IDR", // Change "Want" to either USD or IDR
-  }));
+  const filteredData = activeTab === "USDT" ? usdtOffersData : usdcOffersData;
 
   const handleTradeClick = (offer) => {
     setSelectedOffer(offer); // Set the selected offer
@@ -182,10 +258,9 @@ const formatNumber = (value) => {
     setShowForm(false); // Hide the form
     setSelectedOffer(null); // Reset the selected offer
     resetForm(); // Reset form setelah Confirm
-
   };
 
- // Saat pengguna mengetik di text field
+  // Saat pengguna mengetik di text field
   const handleTradeMyAmountChange = (value) => {
     const cleanValue = cleanNumber(value); // Hapus koma agar bisa diparse
     const amount = parseFloat(cleanValue) || 0;
@@ -200,23 +275,60 @@ const formatNumber = (value) => {
     // Format angka ketika pengguna mengetik
     setFormattedTradeAmount(formatNumber(cleanValue));
   };
-
   const handleForAmountChange = (value) => {
+    // Normalize the input by replacing commas with periods
+    const normalizedValue = value.replace(",", ".");
+
+    // Attempt to parse the normalized value as a float
+    const parsedValue = parseFloat(normalizedValue);
+
     // Get the value for HAVE and ensure max input for "For" amount
     const haveAmount = parseFloat(selectedOffer.have.replace(/[^\d.]/g, "")); // Remove non-numeric chars
-    const inputValue = Math.min(parseFloat(value) || 0, haveAmount); // Ensure the user cannot exceed "have" amount
-    setForAmount(inputValue);
+
+    // If the input is a valid number and not just a period or empty, enforce constraints
+    if (!isNaN(parsedValue) && !normalizedValue.endsWith(".")) {
+      // Ensure the user cannot exceed the "have" amount
+      const inputValue = Math.min(parsedValue, haveAmount);
+      // Convert back to string with comma if needed
+      setForAmount(inputValue.toString().replace(".", ","));
+    } else {
+      // If the input is not a valid number or is in the process of being typed, allow it
+      setForAmount(value);
+    }
   };
+
+  const [isMobileMenuActive, setIsMobileMenuActive] = useState(false);
+
+  const toggleSidebar = () => {
+    setIsMobileMenuActive(!isMobileMenuActive);
+  };
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 768) {
+        setIsMobileMenuActive(false);
+      }
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   return (
     <div className="dashboard">
-      <Header />
-      <Sidebar />
+      <Header
+        toggleSidebar={toggleSidebar}
+        isMobileMenuActive={isMobileMenuActive}
+      />
+      <Sidebar
+        isMobileMenuActive={isMobileMenuActive}
+        toggleSidebar={toggleSidebar}
+      />
       <div className="main">
         <div className="content">
           <div className="contentdash">
             <h2 className="page-title">All Offers</h2>
-
             {/* Tab section */}
             <div className="crypto-tabs">
               <button
@@ -226,7 +338,11 @@ const formatNumber = (value) => {
                 <div className="crypto-content">
                   <div className="crypto-header">
                     <div className="crypto-logo-section">
-                      <img style={{width:"20px"}} src="./Images/T.png" className="crypto-logo" />
+                      <img
+                        style={{ width: "20px" }}
+                        src="./Images/T.png"
+                        className="crypto-logo"
+                      />
                       <span className="crypto-name">USDT</span>
                     </div>
                     <ArrowDropUp className="crypto-change-icon positive" />
@@ -245,8 +361,12 @@ const formatNumber = (value) => {
                 <div className="crypto-content">
                   <div className="crypto-header">
                     <div className="crypto-logo-section">
-                    <img style={{width:"20px"}} src="./Images/S.png" className="crypto-logo" />
-                    <span className="crypto-name">USDC</span>
+                      <img
+                        style={{ width: "20px" }}
+                        src="./Images/S.png"
+                        className="crypto-logo"
+                      />
+                      <span className="crypto-name">USDC</span>
                     </div>
                     <ArrowDropDown className="crypto-change-icon negative" />
                   </div>
@@ -257,7 +377,6 @@ const formatNumber = (value) => {
                 </div>
               </button>
             </div>
-
             {/* Table section */}
             <div className="table-container">
               <table className="custom-table">
@@ -296,7 +415,7 @@ const formatNumber = (value) => {
                           }}
                         >
                           <img
-                            style={{ width: "25px" }}
+                            style={{ width: "28px" }}
                             src={row.custodianIcon}
                             alt={row.custodian}
                             className="custodian-icon"
@@ -338,11 +457,13 @@ const formatNumber = (value) => {
                               className="asset-icon"
                             />
                             <span>
-                              {row.want} +{row.markup}%
+                              {row.want}{" "}
+                              {row.want.includes("%") ? "" : `+${row.markup}%`}
                             </span>
                           </div>
                         </div>
                       </td>
+
                       <td
                         style={{
                           textAlign: "center", // Center horizontally
@@ -351,7 +472,9 @@ const formatNumber = (value) => {
                         }}
                       >
                         <button
-                          className={row.tradable ? "trade-btn" : "disabled-btn"}
+                          className={
+                            row.tradable ? "trade-btn" : "disabled-btn"
+                          }
                           disabled={!row.tradable}
                           onClick={() => handleTradeClick(row)}
                         >
@@ -363,7 +486,6 @@ const formatNumber = (value) => {
                 </tbody>
               </table>
             </div>
-
             {showPopup && (
               <div
                 style={{
@@ -382,21 +504,20 @@ const formatNumber = (value) => {
                 Your data has been added to Active Offers!
               </div>
             )}
-
             {/* Show Trade Form Modal */}
             {showForm && selectedOffer && (
               <div
                 style={{
-                  position: "fixed", // Ensure the modal is fixed to the viewport
+                  position: "fixed",
                   top: 0,
                   left: 0,
                   width: "100%",
                   height: "100%",
-                  backgroundColor: "rgba(0, 0, 0, 0.7)", // Slightly darker overlay
+                  backgroundColor: "rgba(0, 0, 0, 0.7)",
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
-                  zIndex: 9999, // High z-index to ensure it is above other elements
+                  zIndex: 9999,
                 }}
               >
                 <div
@@ -404,13 +525,28 @@ const formatNumber = (value) => {
                     backgroundColor: "white",
                     padding: "20px",
                     borderRadius: "10px",
-                    width: "800px", // Adjust width as needed
+                    width: "800px",
                     height: "auto",
                     maxHeight: "90vh",
                     overflowY: "auto",
-                    zIndex: 10000, // Ensure the modal content is also on top
+                    zIndex: 10000,
+                    position: "relative",
                   }}
                 >
+                  <button
+                    onClick={closeTradeForm}
+                    style={{
+                      position: "absolute",
+                      top: "10px",
+                      right: "10px",
+                      backgroundColor: "transparent",
+                      border: "none",
+                      fontSize: "20px",
+                      cursor: "pointer",
+                    }}
+                  >
+                    ×
+                  </button>
                   <h2 style={{ marginBottom: "20px", textAlign: "center" }}>
                     Trade
                   </h2>
@@ -418,10 +554,10 @@ const formatNumber = (value) => {
                   <div
                     style={{
                       display: "flex",
-                      alignItems: "stretch", // Ensures the divider stretches with content
+                      alignItems: "stretch",
                       justifyContent: "space-between",
                       marginBottom: "20px",
-                      minHeight: "200px", // Set a minimum height to ensure content stretches the divider
+                      minHeight: "200px",
                     }}
                   >
                     {/* Left Side with more details */}
@@ -429,46 +565,136 @@ const formatNumber = (value) => {
                       style={{
                         flex: "1",
                         marginRight: "10px",
-                        backgroundColor: "#fff", // Correct format for background color
+                        backgroundColor: "#f9f9f9",
                         padding: "15px",
                         borderRadius: "10px",
                         color: "#333",
                         fontSize: "14px",
                       }}
                     >
-                      <p>
-                        <strong>Date/Time:</strong> {selectedOffer.date}
-                      </p>
-                      <p>
-                        <strong>User:</strong> {selectedOffer.user}
-                      </p>
-                      <p>
-                        <strong>Desk:</strong> {selectedOffer.desk}
-                      </p>
-                      <p>
-                        <strong>Custodian:</strong> {selectedOffer.custodian}
-                      </p>
-                      <p>
-                        <strong>Have:</strong> {selectedOffer.have}
-                      </p>
-                      <p>
-                        <strong>Min Trade:</strong> {selectedOffer.minTrade}
-                      </p>
-                      <p>
-                        <strong>Want:</strong> {selectedOffer.want} +
-                        {selectedOffer.markup}%
-                      </p>
+                      {[
+                        { label: "Date/Time", value: selectedOffer.date },
+                        { label: "User", value: selectedOffer.user },
+                        { label: "Desk", value: selectedOffer.desk },
+                        {
+                          label: "Custodian",
+                          value: (
+                            <>
+                              <img
+                                src={selectedOffer.custodianIcon}
+                                alt={selectedOffer.custodian}
+                                style={{
+                                  width: "20px",
+                                  marginLeft: "5px",
+                                  marginRight: "5px",
+                                }}
+                              />
+                              {selectedOffer.custodian}
+                            </>
+                          ),
+                        },
+                        {
+                          label: "Have",
+                          value: (
+                            <>
+                              <img
+                                src={
+                                  activeTab === "USDT"
+                                    ? "Images/T.png"
+                                    : "Images/S.png"
+                                }
+                                alt={activeTab}
+                                style={{
+                                  width: "12px",
+                                  marginLeft: "5px",
+                                  marginRight: "5px",
+                                }}
+                              />
+                              {selectedOffer.have}
+                            </>
+                          ),
+                        },
+                        {
+                          label: "Min Trade",
+                          value: (
+                            <>
+                              <img
+                                src={
+                                  activeTab === "USDT"
+                                    ? "Images/T.png"
+                                    : "Images/S.png"
+                                }
+                                alt={activeTab}
+                                style={{
+                                  width: "12px",
+                                  marginLeft: "5px",
+                                  marginRight: "5px",
+                                }}
+                              />
+                              {selectedOffer.minTrade}
+                            </>
+                          ),
+                        },
+                        {
+                          label: "Want",
+                          value: (
+                            <>
+                              <img
+                                src={
+                                  selectedOffer.want.includes("USD")
+                                    ? "Images/usd.png"
+                                    : "Images/indoflag.png"
+                                }
+                                alt={
+                                  selectedOffer.want.includes("USD")
+                                    ? "USD"
+                                    : "IDR"
+                                }
+                                style={{
+                                  width: "12px",
+                                  marginLeft: "5px",
+                                  marginRight: "5px",
+                                }}
+                              />
+                              {selectedOffer.want}{" "}
+                              {selectedOffer.want.includes("%")
+                                ? ""
+                                : `+${selectedOffer.markup}%`}
+                            </>
+                          ),
+                        },
+                      ].map(({ label, value }) => (
+                        <div
+                          key={label}
+                          style={{
+                            display: "flex",
+                            marginBottom: "10px",
+                            alignItems: "center",
+                          }}
+                        >
+                          <div style={{ width: "120px" }}>
+                            <strong>{label}</strong>
+                          </div>
+                          <div style={{ flex: "1" }}>{value}</div>
+                        </div>
+                      ))}
+                      <div
+                        style={{
+                          borderTop: "1px solid #ccc",
+                          paddingTop: "10px",
+                          marginBottom: "10px",
+                        }}
+                      >
+                        <div style={{ display: "flex" }}>
+                          <div style={{ width: "120px" }}>
+                            <strong>Quoted Price</strong>
+                          </div>
+                          <div style={{ flex: "1" }}>
+                            {calculateQuotedPrice(selectedOffer)}
+                          </div>
+                        </div>
+                      </div>
                     </div>
-
-                    {/* Vertical Divider */}
-                    <div
-                      style={{
-                        width: "1px",
-                        backgroundColor: "#ccc", // Gray line
-                        height: "auto", // Set to auto so it stretches with content
-                        margin: "0 10px",
-                      }}
-                    ></div>
 
                     {/* Right Side with input fields and controls */}
                     <div
@@ -479,27 +705,39 @@ const formatNumber = (value) => {
                         fontSize: "14px",
                       }}
                     >
-                      <div style={{
-                      width: "1px",
-                      backgroundColor: "#ccc",
-                      height: "auto",
-                      margin: "0 10px",
-                    }}></div>
-
-
                       <div style={{ display: "flex", marginBottom: "20px" }}>
                         <div style={{ flex: "1", marginRight: "10px" }}>
-                        <TextField
-                  label="Trade My"
-                  value={formattedTradeAmount} // Menampilkan nilai terformat
-                  onChange={(e) => handleTradeMyAmountChange(e.target.value)} // Handle perubahan input
-                  fullWidth
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">{selectedAsset}</InputAdornment>
-                    ),
-                  }}
-                />
+                          <TextField
+                            label="Trade My"
+                            value={formattedTradeAmount}
+                            onChange={(e) =>
+                              handleTradeMyAmountChange(e.target.value)
+                            }
+                            fullWidth
+                            InputProps={{
+                              startAdornment: (
+                                <InputAdornment position="start">
+                                  <img
+                                    src={
+                                      selectedAsset.includes("USD")
+                                        ? "Images/usd.png"
+                                        : "Images/indoflag.png"
+                                    }
+                                    alt={selectedAsset}
+                                    style={{
+                                      width: "20px",
+                                      marginRight: "5px",
+                                    }}
+                                  />
+                                </InputAdornment>
+                              ),
+                              endAdornment: (
+                                <InputAdornment position="end">
+                                  {selectedAsset}
+                                </InputAdornment>
+                              ),
+                            }}
+                          />
                         </div>
                         <div style={{ textAlign: "center", margin: "auto" }}>
                           <SwapHorizIcon
@@ -513,13 +751,29 @@ const formatNumber = (value) => {
                         <div style={{ flex: "1", marginLeft: "10px" }}>
                           <TextField
                             label="For"
-                            type="number"
+                            type="text" // Change to text to allow float input
                             value={forAmount}
                             onChange={(e) =>
                               handleForAmountChange(e.target.value)
-                            } // Max value logic here
+                            }
                             fullWidth
                             InputProps={{
+                              startAdornment: (
+                                <InputAdornment position="start">
+                                  <img
+                                    src={
+                                      activeTab === "USDT"
+                                        ? "Images/T.png"
+                                        : "Images/S.png"
+                                    }
+                                    alt={activeTab}
+                                    style={{
+                                      width: "20px",
+                                      marginRight: "5px",
+                                    }}
+                                  />
+                                </InputAdornment>
+                              ),
                               endAdornment: (
                                 <InputAdornment position="end">
                                   {activeTab === "USDT" ? "USDT" : "USDC"}
@@ -530,21 +784,51 @@ const formatNumber = (value) => {
                         </div>
                       </div>
 
-                      <div style={{ marginBottom: "10px" }}>
-                        <p>
-                          <strong>Fee %:</strong> {selectedOffer.markup}%
-                        </p>
-                        <p>
-                          <strong>Platform Fee:</strong>{" "}
-                          {platformFee.toFixed(2)} {selectedAsset}
-                        </p>
-                        <p>
-                          <strong>Total Amount Due:</strong>{" "}
-                          {totalAmountDue.toFixed(2)} {selectedAsset}
-                        </p>
+                      <div style={{ marginBottom: "40px" }}>
+                        {[
+                          {
+                            label: "Fee %",
+                            value: `${Math.round(selectedOffer.markup)}%`,
+                          },
+                          {
+                            label: "Platform Fee",
+                            value: `${platformFee.toFixed(2)} ${selectedAsset}`,
+                          },
+                          {
+                            label: "Total Amount Due",
+                            value: `${totalAmountDue.toFixed(2)} ${selectedAsset}`,
+                          },
+                        ].map(({ label, value }) => (
+                          <div
+                            key={label}
+                            style={{
+                              display: "flex",
+                              justifyContent: "space-between",
+                              marginBottom: "10px",
+                              alignItems: "center",
+                            }}
+                          >
+                            <div style={{ flex: "1" }}>
+                              <strong>{label}</strong>
+                            </div>
+                            <div style={{ flex: "1", textAlign: "right" }}>
+                              {value}
+                            </div>
+                          </div>
+                        ))}
                       </div>
 
+                      <div
+                        style={{
+                          borderTop: "1px solid #ccc",
+                          paddingTop: "10px",
+                          marginBottom: "20px",
+                        }}
+                      ></div>
                       <div style={{ marginBottom: "10px" }}>
+                        <p style={{ fontWeight: "bold", marginBottom: "5px" }}>
+                          2 FACTOR AUTHENTICATION
+                        </p>
                         <TextField label="2FA Code" type="text" fullWidth />
                       </div>
 
@@ -555,40 +839,25 @@ const formatNumber = (value) => {
                         </label>
                       </div>
 
-                      {/* Buttons */}
+                      {/* Confirm Button */}
                       <div
                         style={{
-                          display: "flex",
-                          justifyContent: "flex-end",
-                          gap: "10px",
-                          marginTop: "10px",
+                          marginTop: "20px",
                         }}
                       >
                         <button
-                          onClick={handleConfirmTrade} // Call handleConfirmTrade on confirmation
+                          onClick={handleConfirmTrade}
                           style={{
+                            width: "100%",
                             backgroundColor: "#333",
-                            color: "white",
+                            color: "#fff",
                             padding: "10px 20px",
-                            border: "none",
+                            border: "2px solid #333",
                             borderRadius: "5px",
                             cursor: "pointer",
                           }}
                         >
                           Confirm
-                        </button>
-                        <button
-                          onClick={closeTradeForm}
-                          style={{
-                            backgroundColor: "#e74c3c",
-                            color: "white",
-                            padding: "10px 20px",
-                            border: "none",
-                            borderRadius: "5px",
-                            cursor: "pointer",
-                          }}
-                        >
-                          Cancel
                         </button>
                       </div>
                     </div>
