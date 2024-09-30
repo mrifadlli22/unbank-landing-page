@@ -1,13 +1,13 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import Sidebar from "./sidebar";
 import Header from "./header";
 import "./app.css";
 import "../componentstablepage/tablepagesiqr.css";
-import useMarketStore from './useMarketStore';
+import useMarketStore from "./useMarketStore";
 
 function ActiveOffer() {
-
   const [isMobileMenuActive, setIsMobileMenuActive] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const toggleSidebar = () => {
     setIsMobileMenuActive(!isMobileMenuActive);
@@ -24,19 +24,14 @@ function ActiveOffer() {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-  const [searchTerm, setSearchTerm] = useState("");
-// Fungsi untuk memformat angka dengan koma
-const formatNumber = (value) => {
-  if (!value) return "";
-  return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-};
 
-  const {
-    activeOffers,
-    removeActiveOffer,
-    activeTab,
-    selectedAsset,
-  } = useMarketStore();
+  // Format number with commas
+  const formatNumber = (value) => {
+    if (!value) return "";
+    return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
+
+  const { activeOffers, removeActiveOffer } = useMarketStore();
 
   // Filter activeOffers based on searchTerm
   const filteredOffers = activeOffers.filter((offer) => {
@@ -45,7 +40,8 @@ const formatNumber = (value) => {
       offer.date.toLowerCase().includes(searchTerm.toLowerCase()) ||
       offer.tradeAmount.toString().includes(searchTerm) ||
       offer.receiveAmount.toString().includes(searchTerm) ||
-      (offer.status && offer.status.toLowerCase().includes(searchTerm.toLowerCase()))
+      (offer.status &&
+        offer.status.toLowerCase().includes(searchTerm.toLowerCase()))
     );
   });
 
@@ -55,7 +51,7 @@ const formatNumber = (value) => {
 
   return (
     <div className="dashboard">
-           <Header
+      <Header
         toggleSidebar={toggleSidebar}
         isMobileMenuActive={isMobileMenuActive}
       />
@@ -88,7 +84,7 @@ const formatNumber = (value) => {
                     </button>
                   </div>
                 </div>
-                
+
                 <div className="table-container">
                   <table>
                     <thead>
@@ -102,32 +98,62 @@ const formatNumber = (value) => {
                       </tr>
                     </thead>
                     <tbody>
-  {filteredOffers.length > 0 ? (
-    filteredOffers.map((offer) => (
-      <tr key={offer.id}>
-        <td>{offer.date}</td>
-        <td>{offer.user}</td>
-        <td>
-          {formatNumber(offer.tradeAmount)} {selectedAsset}
-        </td>
-        <td>{formatNumber(offer.receiveAmount)} {activeTab}</td>
-        <td>Ongoing</td>
-        <td>
-          <button onClick={() => removeActiveOffer(offer.id)}>
-            Cancel Offer
-          </button>
-        </td>
-      </tr>
-    ))
-  ) : (
-    <tr>
-      <td colSpan="6" style={{ textAlign: "center" }}>
-        No offers found.
-      </td>
-    </tr>
-  )}
-</tbody>
-
+                      {filteredOffers.length > 0 ? (
+                        filteredOffers.map((offer) => (
+                          <tr key={offer.id}>
+                            <td>{offer.date}</td>
+                            <td>{offer.user}</td>
+                            <td>
+                              <img
+                                src={
+                                  offer.assetType.includes("USD")
+                                    ? "Images/usd.png"
+                                    : "Images/indoflag.png"
+                                }
+                                alt={offer.assetType}
+                                style={{
+                                  width: "15px",
+                                  marginRight: "5px",
+                                }}
+                              />
+                              {formatNumber(offer.tradeAmount)}{" "}
+                              {offer.assetType} + {offer.markup}%
+                            </td>
+                            <td>
+                            <img
+                                src={
+                                  offer.tabType === "USDT"
+                                    ? "Images/T.png"
+                                    : "Images/S.png"
+                                }
+                                alt={offer.tabType}
+                                style={{
+                                  width: "15px",
+                                  marginLeft: "5px",
+                                  marginRight: "5px",
+                                }}
+                              />
+                              {formatNumber(offer.receiveAmount)}{" "}
+                              {offer.tabType}
+                            </td>
+                            <td>{offer.status}</td>
+                            <td>
+                              <button
+                                onClick={() => removeActiveOffer(offer.id)}
+                              >
+                                Cancel Offer
+                              </button>
+                            </td>
+                          </tr>
+                        ))
+                      ) : (
+                        <tr>
+                          <td colSpan="6" style={{ textAlign: "center" }}>
+                            No offers found.
+                          </td>
+                        </tr>
+                      )}
+                    </tbody>
                   </table>
                 </div>
               </div>

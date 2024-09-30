@@ -13,9 +13,8 @@ import FAQ from "../FAQ/FAQ";
 import ContactForm from "../ContactForm/ContactForm";
 import Footer from "../Footer/Footer";
 import styles from "./App.module.css";
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate } from "react-router-dom";
 import FAQPersonal from "../FAQ/FAQ";
-
 
 const PersonalPage = () => {
   const cryptoWalletFeatures = [
@@ -25,11 +24,11 @@ const PersonalPage = () => {
     },
     {
       icon: "https://cdn.builder.io/api/v1/image/assets/TEMP/6360412bb79d423e07cbdb24f82ca0d187342d823346673f64def0b3e1bbed37?apiKey=e3ddd6dd58b748b09fc1391939743920&&apiKey=e3ddd6dd58b748b09fc1391939743920",
-      text: "Transfer crypto from third parties to store on swissmoney",
+      text: "Transfer crypto from third parties to store on Unbank",
     },
     {
       icon: "https://cdn.builder.io/api/v1/image/assets/TEMP/bf56d3d6814cda8197ab387affcee883e71db1a06318bb9a0c50b82b115e6021?apiKey=e3ddd6dd58b748b09fc1391939743920&&apiKey=e3ddd6dd58b748b09fc1391939743920",
-      text: "Instantl=y exchange crypto to fiat funds on your account",
+      text: "Instantly exchange crypto to fiat funds on your account",
     },
     {
       icon: "https://cdn.builder.io/api/v1/image/assets/TEMP/8599a2885c1fed1bdc2fcb540eee85f81445e541fa1e9ec4bb693cb7ba448f7b?apiKey=e3ddd6dd58b748b09fc1391939743920&&apiKey=e3ddd6dd58b748b09fc1391939743920",
@@ -70,7 +69,7 @@ const PersonalPage = () => {
   const businessAccountFeatures = [
     {
       icon: "https://cdn.builder.io/api/v1/image/assets/TEMP/ae83f5a84737de47da9990f62b4f1ec1a36f658f60bb707a87a4087bd72ea302?apiKey=e3ddd6dd58b748b09fc1391939743920&&apiKey=e3ddd6dd58b748b09fc1391939743920",
-      text: "Dedicated swissmoney specialists will work with you to streamline the onboarding process",
+      text: "Dedicated Unbank specialists will work with you to streamline the onboarding process",
     },
     {
       icon: "https://cdn.builder.io/api/v1/image/assets/TEMP/5068b9c0ddf40b23c755183799c1354761460261fc3ad9e052b6f43403ace80e?apiKey=e3ddd6dd58b748b09fc1391939743920&&apiKey=e3ddd6dd58b748b09fc1391939743920",
@@ -91,15 +90,15 @@ const PersonalPage = () => {
         <Stats />
         <Features />
         <SecurityFeatures />
-<ProductSection
-  id="services" // Tambahkan ID disini
-  title="Crypto Wallets"
-  description="Make payments with crypto by instantly exchanging it for fiat funds on your card."
-  features={cryptoWalletFeatures}
-  buttonText="Create Wallet"
-  imageSrc="https://cdn.builder.io/api/v1/image/assets/TEMP/0e2084a7bc9bc5a322c3edcee63422f5f645337bfb46d59d08af26600cabf290?apiKey=e3ddd6dd58b748b09fc1391939743920&&apiKey=e3ddd6dd58b748b09fc1391939743920"
-  imageAlt="Crypto Wallet Illustration"
-/>
+        <ProductSection
+          id="services" // Tambahkan ID disini
+          title="Crypto Wallets"
+          description="Make payments with crypto by instantly exchanging it for fiat funds on your card."
+          features={cryptoWalletFeatures}
+          buttonText="Create Wallet"
+          imageSrc="https://cdn.builder.io/api/v1/image/assets/TEMP/0e2084a7bc9bc5a322c3edcee63422f5f645337bfb46d59d08af26600cabf290?apiKey=e3ddd6dd58b748b09fc1391939743920&&apiKey=e3ddd6dd58b748b09fc1391939743920"
+          imageAlt="Crypto Wallet Illustration"
+        />
 
         <ProductSection
           title="Business Accounts"

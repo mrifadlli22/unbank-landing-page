@@ -36,7 +36,7 @@ function Market() {
     addActiveOffer, // Ensure this function exists to handle the addition of active offers
   } = useMarketStore();
 
-  
+ 
 
   const resetForm = () => {
     setSelectedOffer(null);
@@ -197,24 +197,26 @@ function Market() {
           ? { ...offer, action: "Not Tradable", tradable: false } // Update status
           : offer
       );
-
+  
       if (activeTab === "USDT") {
         setUsdtOffersData(updatedOffersData);
       } else {
         setUsdcOffersData(updatedOffersData);
       }
-
-      // Add to Zustand store
+  
+      // Add to Zustand store with explicit asset type
       addActiveOffer({
         ...selectedOffer,
-        tradeAmount: tradeMyAmount, // Nilai yang diinput di form
-        receiveAmount: forAmount, // Nilai yang diinput di form
+        tradeAmount: tradeMyAmount, // Value input in the form
+        receiveAmount: forAmount, // Value input in the form
         platformFee,
         totalAmountDue,
-        status: "Ongoing", // Ensure status is "Not Tradable"
+        status: "Ongoing",
         date: new Date().toLocaleString(),
+        assetType: selectedAsset, // Store the asset type explicitly
+        tabType: activeTab, // Store the active tab explicitly
       });
-
+  
       setShowForm(false);
       setShowPopup(true);
       setTimeout(() => {
@@ -222,6 +224,7 @@ function Market() {
       }, 3000);
     }
   };
+  
 
   React.useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
